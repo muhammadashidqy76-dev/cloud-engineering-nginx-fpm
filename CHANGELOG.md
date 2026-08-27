@@ -7,6 +7,7 @@ bukan per-commit (untuk itu lihat `git log`).
 ## [Unreleased]
 
 ### Added
+- `WorkExperienceSeeder`: seeder dengan 1 entri data dummy sementara untuk keperluan preview visual section Work Experience (perlu diganti data asli sebelum deploy).
 - Component `work-experience-section.blade.php`: section publik untuk pengalaman kerja & magang yang tersembunyi secara graceful jika belum ada entri berstatus published, terintegrasi pada `welcome.blade.php`.
 - `WorkExperienceController`: Resource Controller CRUD backend untuk data pengalaman kerja/magang (`index`, `store`, `show`, `update`, `destroy`) dan registrasi route resource `work-experience` di `routes/web.php`.
 - Form Requests `StoreWorkExperienceRequest` & `UpdateWorkExperienceRequest`: validasi `employment_type` (`in:internship,full_time,part_time,freelance`), `status` (`in:published,draft`), `start_date`, dan conditional validation untuk `end_date` (required jika `is_current` false).
