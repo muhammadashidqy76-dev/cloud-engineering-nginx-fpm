@@ -20,6 +20,7 @@
     <x-hero-section />
     <x-featured-projects />
     <x-tech-stack />
+    <x-work-experience-section />
     <x-journey-section />
     <x-learning-log-section />
     <x-footer />
