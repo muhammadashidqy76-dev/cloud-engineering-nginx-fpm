@@ -7,6 +7,7 @@ bukan per-commit (untuk itu lihat `git log`).
 ## [Unreleased]
 
 ### Added
+- Migration `create_work_experiences_table`: membuat tabel `work_experiences` dengan kolom `company_name`, `position`, `employment_type` (default `internship`), `start_date`, `end_date`, `is_current`, `description`, `location`, `display_order`, dan `status` (default `draft`).
 - Asset placeholder SVG logo issuer (`laracasts.svg`, `udemy.svg`, `bnsp.svg`, `default.svg`) di `public/images/issuer-logos/` sebagai aset dummy sementara.
 - Model `JourneyEntry`: tambah accessor `getIssuerLogoAttribute()` untuk me-mapping nama `source` ke path asset logo SVG di `public/images/issuer-logos/` dengan fallback ke `default.svg`.
 - Favicon `public/images/logo-web.svg` diterapkan ke semua layout (`welcome.blade.php`, `layouts/app.blade.php`, `layouts/guest.blade.php`, `errors/layout.blade.php`) via `<link rel="icon" type="image/svg+xml">`.
