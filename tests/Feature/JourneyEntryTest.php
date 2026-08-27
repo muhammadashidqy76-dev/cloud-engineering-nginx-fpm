@@ -115,4 +115,37 @@ class JourneyEntryTest extends TestCase
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['credential_type', 'certificate_file_path']);
     }
+
+    public function test_journey_section_renders_both_narrative_and_non_narrative_entries(): void
+    {
+        JourneyEntry::create([
+            'course_name' => 'Laravel Database Transactions & Concurrency Handling',
+            'credential_type' => 'course',
+            'source' => 'Laracasts',
+            'learned' => 'Mempelajari penggunaan DB::transaction()',
+            'result' => 'Mencegah terjadinya stok minus',
+            'status' => 'published',
+        ]);
+
+        JourneyEntry::create([
+            'course_name' => 'Sertifikasi BNSP Pemrograman Web',
+            'credential_type' => 'certification',
+            'source' => 'BNSP LSP Telematika',
+            'learned' => null,
+            'result' => null,
+            'certificate_file_path' => 'certificates/bnsp.pdf',
+            'verification_url' => 'https://bnsp.go.id/verify',
+            'status' => 'published',
+        ]);
+
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee('Laravel Database Transactions &amp; Concurrency Handling', false);
+        $response->assertSee('Mempelajari penggunaan DB::transaction()');
+        $response->assertSee('Sertifikasi BNSP Pemrograman Web');
+        $response->assertSee('BNSP LSP Telematika');
+        $response->assertSee('Verifikasi Online');
+        $response->assertSee('Lihat Dokumen');
+    }
 }

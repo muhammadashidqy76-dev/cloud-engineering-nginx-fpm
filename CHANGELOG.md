@@ -16,6 +16,8 @@ bukan per-commit (untuk itu lihat `git log`).
 - `TechStackItemRequest`: tambah validasi `status` (`required`, `in:not_started,in_progress,finished`) — validasi di Form Request, bukan di level database, sesuai konvensi project.
 
 ### Changed
+- `journey-section.blade.php`: mendukung badge `credential_type` (Course, Certification, Diploma) serta rendering kondisional — jika `has_narrative` bernilai true menampilkan layout 3 pilar (learned → applied → result), dan jika false menampilkan card ringkas (issuer, tanggal, tombol lihat dokumen/sertifikat, dan link verifikasi online).
+- `JourneyEntrySeeder.php` & `JourneyEntryFactory.php`: diperbarui untuk menyertakan `credential_type`, `certificate_file_path`, dan `verification_url` serta contoh data riwayat sertifikasi resmi (BNSP).
 - `tech-stack.blade.php`: badge pill kini fully dynamic — background, border, warna icon SVG, dan warna teks label semuanya dari `$item->status_badge_classes` (emerald=finished, amber=in_progress, rose=not_started). Radius, padding, dan spacing badge tidak berubah. Fallback aman ke rose array saat data dari placeholder.
 - Factories dan Seeders untuk Project, TechStackItem, JourneyEntry, dan LearningLogEntry serta konfigurasi DatabaseSeeder.
 - Resource Controllers, Form Requests, dan Resource Routes untuk CRUD backend (Project, TechStackItem, JourneyEntry, LearningLogEntry).
