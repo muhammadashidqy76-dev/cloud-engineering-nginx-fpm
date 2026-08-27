@@ -36,6 +36,7 @@ class JourneyEntry extends Model
 
     protected $appends = [
         'has_narrative',
+        'issuer_logo',
     ];
 
     public function appliedProject(): BelongsTo
@@ -46,6 +47,33 @@ class JourneyEntry extends Model
     public function getHasNarrativeAttribute(): bool
     {
         return !empty(trim($this->learned ?? '')) && !empty(trim($this->result ?? ''));
+    }
+
+    public function getIssuerLogoAttribute(): string
+    {
+        $mapping = [
+            'laracasts' => 'laracasts.svg',
+            'udemy' => 'udemy.svg',
+            'bnsp' => 'bnsp.svg',
+            'badan nasional sertifikasi profesi' => 'bnsp.svg',
+            'lsp telematika' => 'bnsp.svg',
+        ];
+
+        $sourceKey = strtolower(trim($this->source ?? ''));
+        $file = 'default.svg';
+
+        if (isset($mapping[$sourceKey])) {
+            $file = $mapping[$sourceKey];
+        } else {
+            foreach ($mapping as $key => $logo) {
+                if (str_contains($sourceKey, $key)) {
+                    $file = $logo;
+                    break;
+                }
+            }
+        }
+
+        return asset('images/issuer-logos/' . $file);
     }
 
     public function scopePublished(Builder $query): Builder

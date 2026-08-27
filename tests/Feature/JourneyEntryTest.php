@@ -147,5 +147,20 @@ class JourneyEntryTest extends TestCase
         $response->assertSee('BNSP LSP Telematika');
         $response->assertSee('Verifikasi Online');
         $response->assertSee('Lihat Dokumen');
+        $response->assertSee('images/issuer-logos/laracasts.svg');
+        $response->assertSee('images/issuer-logos/bnsp.svg');
+    }
+
+    public function test_issuer_logo_accessor_maps_source_to_svg_logo_with_fallback(): void
+    {
+        $laracasts = new JourneyEntry(['source' => 'Laracasts']);
+        $udemy = new JourneyEntry(['source' => 'Udemy Online']);
+        $bnsp = new JourneyEntry(['source' => 'Badan Nasional Sertifikasi Profesi (BNSP)']);
+        $unknown = new JourneyEntry(['source' => 'Unknown University']);
+
+        $this->assertStringContainsString('images/issuer-logos/laracasts.svg', $laracasts->issuer_logo);
+        $this->assertStringContainsString('images/issuer-logos/udemy.svg', $udemy->issuer_logo);
+        $this->assertStringContainsString('images/issuer-logos/bnsp.svg', $bnsp->issuer_logo);
+        $this->assertStringContainsString('images/issuer-logos/default.svg', $unknown->issuer_logo);
     }
 }

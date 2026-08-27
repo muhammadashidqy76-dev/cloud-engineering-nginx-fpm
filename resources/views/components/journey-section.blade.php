@@ -188,25 +188,21 @@
 
                                 <!-- Issuer / Provider Info Pill -->
                                 <div class="flex items-center gap-3 p-3 rounded-lg bg-[#080d14] border border-slate-800/80">
-                                    <div class="w-8 h-8 shrink-0 rounded-lg border flex items-center justify-center {{ $iconBoxClass }}">
-                                        @if($credentialType === 'certification')
-                                            <!-- Certification Badge Icon -->
-                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                            </svg>
-                                        @elseif($credentialType === 'diploma')
-                                            <!-- Academic / Diploma Icon -->
-                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14v7" />
-                                            </svg>
-                                        @else
-                                            <!-- Course / Learning Code Icon -->
-                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                            </svg>
-                                        @endif
+                                    <div class="w-8 h-8 shrink-0 rounded-lg overflow-hidden border border-slate-800/80 bg-slate-950 flex items-center justify-center p-0.5">
+                                        @php
+                                            $logoUrl = is_object($entry) && isset($entry->issuer_logo)
+                                                ? $entry->issuer_logo
+                                                : asset('images/issuer-logos/' . match(strtolower(trim($entry->source ?? ''))) {
+                                                    'laracasts' => 'laracasts.svg',
+                                                    'udemy' => 'udemy.svg',
+                                                    'bnsp', 'badan nasional sertifikasi profesi (bnsp)', 'badan nasional sertifikasi profesi' => 'bnsp.svg',
+                                                    default => 'default.svg'
+                                                });
+                                        @endphp
+                                        <img src="{{ $logoUrl }}"
+                                             alt="{{ $entry->source ?? 'Issuer' }}"
+                                             class="w-full h-full object-contain rounded"
+                                             loading="lazy" />
                                     </div>
                                     <div class="flex flex-col min-w-0">
                                         <span class="text-xs font-semibold text-slate-200 truncate">
