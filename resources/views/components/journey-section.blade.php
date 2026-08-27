@@ -198,10 +198,12 @@
                                                 default => 'default.svg'
                                             });
                                     @endphp
-                                    <img src="{{ $logoUrl }}"
-                                         alt="{{ $entry->source ?? 'Issuer' }}"
-                                         class="w-8 h-8 shrink-0 object-contain rounded-md bg-slate-950 border border-slate-800/80 p-1"
-                                         loading="lazy" />
+                                    <div class="w-8 h-8 shrink-0 rounded-lg bg-slate-950 border border-slate-800/80 flex items-center justify-center p-1.5 overflow-hidden">
+                                        <img src="{{ $logoUrl }}"
+                                             alt="{{ $entry->source ?? 'Issuer' }}"
+                                             class="w-full h-full object-contain"
+                                             loading="lazy" />
+                                    </div>
                                     <div class="flex flex-col min-w-0">
                                         <span class="text-xs font-semibold text-slate-200 truncate">
                                             {{ $entry->source ?: 'Official Learning Provider' }}
