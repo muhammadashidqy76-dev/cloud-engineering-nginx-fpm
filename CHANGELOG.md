@@ -7,6 +7,7 @@ bukan per-commit (untuk itu lihat `git log`).
 ## [Unreleased]
 
 ### Added
+- Model `WorkExperience`: fillables, casts, constants (`TYPE_INTERNSHIP/FULL_TIME/PART_TIME/FREELANCE`, `STATUS_PUBLISHED/DRAFT`), scopes (`scopePublished`, `scopeCurrent`, `scopeChronological`), dan accessors (`duration_label`, `employment_type_badge_classes`, `employment_type_label`).
 - Migration `create_work_experiences_table`: membuat tabel `work_experiences` dengan kolom `company_name`, `position`, `employment_type` (default `internship`), `start_date`, `end_date`, `is_current`, `description`, `location`, `display_order`, dan `status` (default `draft`).
 - Asset placeholder SVG logo issuer (`laracasts.svg`, `udemy.svg`, `bnsp.svg`, `default.svg`) di `public/images/issuer-logos/` sebagai aset dummy sementara.
 - Model `JourneyEntry`: tambah accessor `getIssuerLogoAttribute()` untuk me-mapping nama `source` ke path asset logo SVG di `public/images/issuer-logos/` dengan fallback ke `default.svg`.
