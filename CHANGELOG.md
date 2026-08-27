@@ -18,6 +18,9 @@ bukan per-commit (untuk itu lihat `git log`).
 - Model `TechStackItem`: tambah accessor `getStatusBadgeClassesAttribute()` — mengembalikan array `['text', 'bg', 'border']` berisi Tailwind class badge pill per status (emerald/amber/rose-400, opacity-10/20 untuk bg dan border).
 - `TechStackItemRequest`: tambah validasi `status` (`required`, `in:not_started,in_progress,finished`) — validasi di Form Request, bukan di level database, sesuai konvensi project.
 
+### Fixed
+- fix: seragamkan ukuran logo issuer di card Journey (`w-8 h-8`, `shrink-0`, `object-contain`, `rounded-md`) agar konsisten untuk semua tipe card dan resolusi gambar.
+
 ### Changed
 - `journey-section.blade.php`: menyederhanakan tampilan card untuk semua tipe kredensial (termasuk `course`) menjadi format ringkas 3-kolom grid (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3`) sejajar (badge tipe, judul kredensial, issuer/source, tanggal, tombol dokumen/verifikasi) dan menghapus rendering blok narasi 3-kolom (Learned/Applied/Result) dari UI agar lebih cepat di-scan recruiter (perubahan visual saja, kolom data `learned`, `applied_project_id`, dan `result` tetap tersimpan aman di database).
 - `JourneyEntrySeeder.php` & `JourneyEntryFactory.php`: diperbarui untuk menyertakan `credential_type`, `certificate_file_path`, dan `verification_url` serta contoh data riwayat sertifikasi resmi (BNSP).
