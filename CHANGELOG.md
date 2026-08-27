@@ -9,6 +9,7 @@ bukan per-commit (untuk itu lihat `git log`).
 ### Added
 - Asset placeholder SVG logo issuer (`laracasts.svg`, `udemy.svg`, `bnsp.svg`, `default.svg`) di `public/images/issuer-logos/` sebagai aset dummy sementara.
 - Model `JourneyEntry`: tambah accessor `getIssuerLogoAttribute()` untuk me-mapping nama `source` ke path asset logo SVG di `public/images/issuer-logos/` dengan fallback ke `default.svg`.
+- Favicon `public/images/logo-web.svg` diterapkan ke semua layout (`welcome.blade.php`, `layouts/app.blade.php`, `layouts/guest.blade.php`, `errors/layout.blade.php`) via `<link rel="icon" type="image/svg+xml">`.
 - Migration `add_credential_fields_to_journey_entries_table`: menambahkan kolom `credential_type` (default `course`), `certificate_file_path`, dan `verification_url`, serta mengubah kolom narasi `learned` dan `result` menjadi nullable.
 - Model `JourneyEntry`: tambah `credential_type`, `certificate_file_path`, dan `verification_url` ke `$fillable`, constants `TYPE_COURSE/CERTIFICATION/DIPLOMA`, accessor `has_narrative`, dan query scopes `scopeCourses()`, `scopeCertifications()`, `scopeDiplomas()`.
 - `JourneyEntryRequest`: tambah validasi `credential_type` (`in:course,certification,diploma`), jadikan `learned`, `result`, `applied_project_id` nullable, validasi format gambar/pdf `certificate_file_path`, dan format URL `verification_url`.
