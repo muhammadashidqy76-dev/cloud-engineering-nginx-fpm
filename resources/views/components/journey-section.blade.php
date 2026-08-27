@@ -61,7 +61,7 @@
     }
 @endphp
 
-<section id="journey" class="relative bg-[#0b0f19] text-slate-100 py-20 lg:py-28 overflow-hidden border-t border-slate-800/60">
+<section id="journey" class="relative bg-[#0b0f19] text-slate-100 pt-8 pb-12 lg:pt-10 lg:pb-16 overflow-hidden border-t border-slate-800/60">
     <!-- Ambient Background Lighting -->
     <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
     <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none translate-y-1/2 -translate-x-1/3"></div>
@@ -69,15 +69,15 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         <!-- ─── Section Header ─── -->
-        <div class="mb-12 max-w-2xl">
-            <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-red-400 mb-3">
-                <span class="w-4 h-px bg-red-400/80 rounded"></span>
-                Learning Journey &amp; Credentials
-            </span>
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight">
+        <div class="mb-10 max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-slate-400 mb-4">
+                <span class="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
+                <span>Section 01 &bull; Learning Journey &amp; Credentials</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight tracking-tight">
                 Timeline Pembelajaran &amp; Kredensial
             </h2>
-            <p class="mt-3 text-slate-400 text-sm leading-relaxed">
+            <p class="mt-2 text-sm sm:text-base text-slate-400 leading-relaxed">
                 Pengganti pengalaman kerja formal &mdash; pembuktian kompetensi melalui siklus belajar terstruktur, sertifikasi resmi, aplikasi project nyata, dan hasil terukur.
             </p>
         </div>
