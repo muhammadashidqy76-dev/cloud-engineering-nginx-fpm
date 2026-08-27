@@ -7,6 +7,7 @@ bukan per-commit (untuk itu lihat `git log`).
 ## [Unreleased]
 
 ### Added
+- Feature tests `WorkExperienceTest.php`: validasi model, accessors (`duration_label`, badge classes), scopes (`published`, `current`, `chronological`), form requests, CRUD API endpoints, dan graceful frontend visibility pada welcome page.
 - `WorkExperienceSeeder`: seeder dengan 1 entri data dummy sementara untuk keperluan preview visual section Work Experience (perlu diganti data asli sebelum deploy).
 - Component `work-experience-section.blade.php`: section publik untuk pengalaman kerja & magang yang tersembunyi secara graceful jika belum ada entri berstatus published, terintegrasi pada `welcome.blade.php`.
 - `WorkExperienceController`: Resource Controller CRUD backend untuk data pengalaman kerja/magang (`index`, `store`, `show`, `update`, `destroy`) dan registrasi route resource `work-experience` di `routes/web.php`.

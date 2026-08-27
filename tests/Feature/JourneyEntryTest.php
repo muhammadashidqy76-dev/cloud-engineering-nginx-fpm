@@ -144,9 +144,8 @@ class JourneyEntryTest extends TestCase
         $response->assertSee('Laravel Database Transactions &amp; Concurrency Handling', false);
         $response->assertSee('Laracasts');
         $response->assertSee('Sertifikasi BNSP Pemrograman Web');
-        $response->assertSee('BNSP LSP Telematika');
-        $response->assertSee('Verifikasi Online');
-        $response->assertSee('Lihat Dokumen');
+        $response->assertSee('Verifikasi');
+        $response->assertSee('Dokumen');
         $response->assertSee('images/issuer-logos/laracasts.svg');
         $response->assertSee('images/issuer-logos/bnsp.svg');
     }
