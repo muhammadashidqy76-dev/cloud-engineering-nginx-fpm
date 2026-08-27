@@ -9,6 +9,7 @@ bukan per-commit (untuk itu lihat `git log`).
 ### Added
 - Migration `add_credential_fields_to_journey_entries_table`: menambahkan kolom `credential_type` (default `course`), `certificate_file_path`, dan `verification_url`, serta mengubah kolom narasi `learned` dan `result` menjadi nullable.
 - Model `JourneyEntry`: tambah `credential_type`, `certificate_file_path`, dan `verification_url` ke `$fillable`, constants `TYPE_COURSE/CERTIFICATION/DIPLOMA`, accessor `has_narrative`, dan query scopes `scopeCourses()`, `scopeCertifications()`, `scopeDiplomas()`.
+- `JourneyEntryRequest`: tambah validasi `credential_type` (`in:course,certification,diploma`), jadikan `learned`, `result`, `applied_project_id` nullable, validasi format gambar/pdf `certificate_file_path`, dan format URL `verification_url`.
 - Migration `add_status_to_tech_stack_items_table`: menambahkan kolom `status` (constrained string, default `not_started`, nilai valid: `not_started`/`in_progress`/`finished`) ke tabel `tech_stack_items`.
 - Model `TechStackItem`: tambah `status` ke `$fillable`, constants `STATUS_FINISHED/IN_PROGRESS/NOT_STARTED`, accessor `getStatusColorClassAttribute()` (mapping ke Tailwind class emerald/amber/rose-400), dan scopes `scopeFinished()`, `scopeInProgress()`, `scopeNotStarted()`.
 - Model `TechStackItem`: tambah accessor `getStatusBadgeClassesAttribute()` — mengembalikan array `['text', 'bg', 'border']` berisi Tailwind class badge pill per status (emerald/amber/rose-400, opacity-10/20 untuk bg dan border).

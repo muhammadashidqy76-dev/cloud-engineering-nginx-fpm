@@ -73,4 +73,46 @@ class JourneyEntryTest extends TestCase
         $this->assertEquals(1, JourneyEntry::certifications()->count());
         $this->assertEquals(1, JourneyEntry::diplomas()->count());
     }
+
+    public function test_can_create_certification_without_narrative(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->postJson(route('journey.store'), [
+            'course_name' => 'Sertifikasi BNSP Junior Web Developer',
+            'credential_type' => 'certification',
+            'source' => 'BNSP LSP Telematika',
+            'learned' => null,
+            'result' => null,
+            'certificate_file_path' => 'certificates/bnsp-cert.pdf',
+            'verification_url' => 'https://bnsp.go.id/verify/12345',
+            'completed_at' => '2026-06-01',
+            'status' => 'published',
+        ]);
+
+        $response->assertStatus(201)
+            ->assertJsonPath('data.credential_type', 'certification')
+            ->assertJsonPath('data.has_narrative', false);
+
+        $this->assertDatabaseHas('journey_entries', [
+            'course_name' => 'Sertifikasi BNSP Junior Web Developer',
+            'credential_type' => 'certification',
+            'certificate_file_path' => 'certificates/bnsp-cert.pdf',
+        ]);
+    }
+
+    public function test_rejects_invalid_credential_type_or_invalid_file_extension(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->postJson(route('journey.store'), [
+            'course_name' => 'Invalid Test',
+            'credential_type' => 'bootcamp_invalid',
+            'certificate_file_path' => 'certificates/cert.exe',
+            'status' => 'published',
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['credential_type', 'certificate_file_path']);
+    }
 }
