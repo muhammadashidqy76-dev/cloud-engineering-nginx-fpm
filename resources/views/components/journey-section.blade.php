@@ -117,7 +117,7 @@
                 </div>
             </button>
 
-            <!-- Collapsible Content -->
+            <!-- Collapsible Content (3-Column Grid Layout) -->
             <div x-show="open"
                  x-cloak
                  x-transition:enter="transition ease-out duration-200"
@@ -126,7 +126,7 @@
                  x-transition:leave="transition ease-in duration-150"
                  x-transition:leave-start="opacity-100 translate-y-0"
                  x-transition:leave-end="opacity-0 -translate-y-2"
-                 class="mt-8 space-y-6">
+                 class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 @foreach($items as $entry)
                     @php
@@ -155,109 +155,105 @@
                         };
                     @endphp
 
-                    <!-- Window Mockup Card for Journey Entry (Uniform Concise Fast-Scan Card) -->
-                    <article class="group flex flex-col rounded-xl bg-slate-900/70 border border-slate-800 hover:border-slate-700/80 transition-all duration-200 hover:-translate-y-0.5 overflow-hidden">
+                    <!-- Window Mockup Card for Journey Entry (Uniform 3-Column Card) -->
+                    <article class="group flex flex-col justify-between rounded-xl bg-slate-900/70 border border-slate-800 hover:border-slate-700/80 transition-all duration-200 hover:-translate-y-0.5 overflow-hidden h-full">
                         
-                        <!-- Window Mockup Header Bar (3 colored dots & badges) -->
-                        <div class="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800/60 flex-wrap gap-2">
-                            <div class="flex items-center gap-2">
-                                <div class="flex items-center gap-1.5">
-                                    <span class="w-2 h-2 rounded-full bg-rose-500/70"></span>
-                                    <span class="w-2 h-2 rounded-full bg-amber-400/70"></span>
-                                    <span class="w-2 h-2 rounded-full bg-emerald-400/70"></span>
-                                </div>
-                                <span class="font-mono text-[10px] font-semibold uppercase px-2 py-0.5 rounded border {{ $typeBadgeClass }}">
-                                    {{ $typeLabel }}
-                                </span>
-                            </div>
-                            
-                            <div class="flex items-center gap-2">
-                                @if(!empty($entry->source))
-                                    <span class="font-mono text-[10px] text-slate-400 bg-slate-950/60 px-2.5 py-0.5 rounded border border-slate-800 truncate max-w-[200px] sm:max-w-none">
-                                        {{ $entry->source }}
+                        <div>
+                            <!-- Window Mockup Header Bar (3 colored dots & badges) -->
+                            <div class="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800/60 gap-2">
+                                <div class="flex items-center gap-2">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-full bg-rose-500/70"></span>
+                                        <span class="w-2 h-2 rounded-full bg-amber-400/70"></span>
+                                        <span class="w-2 h-2 rounded-full bg-emerald-400/70"></span>
+                                    </div>
+                                    <span class="font-mono text-[10px] font-semibold uppercase px-2 py-0.5 rounded border {{ $typeBadgeClass }}">
+                                        {{ $typeLabel }}
                                     </span>
-                                @endif
+                                </div>
+                                
                                 @if($completedDate)
-                                    <span class="font-mono text-[10px] text-rose-300/80 bg-red-500/10 border border-red-500/20 px-2.5 py-0.5 rounded">
+                                    <span class="font-mono text-[10px] text-rose-300/80 bg-red-500/10 border border-red-500/20 px-2 py-0.5 rounded shrink-0">
                                         {{ $completedDate }}
                                     </span>
                                 @endif
                             </div>
-                        </div>
 
-                        <!-- Card Body (Concise Layout for Fast Recruiter Scanning) -->
-                        <div class="p-5 sm:p-6 flex flex-col gap-4">
-                            <!-- Course / Credential Title -->
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                                <h3 class="text-base font-bold text-white group-hover:text-red-400 transition-colors leading-snug">
+                            <!-- Card Body -->
+                            <div class="p-5 flex flex-col gap-3.5">
+                                <!-- Course / Credential Title -->
+                                <h3 class="text-[15px] font-bold text-white group-hover:text-red-400 transition-colors leading-snug">
                                     {{ $entry->course_name }}
                                 </h3>
-                            </div>
 
-                            <!-- Detail Pill & Action Links -->
-                            <div class="p-4 rounded-lg bg-[#080d14] border border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                <div class="flex items-center gap-3.5 min-w-0">
-                                    <div class="w-10 h-10 shrink-0 rounded-lg border flex items-center justify-center {{ $iconBoxClass }}">
+                                <!-- Issuer / Provider Info Pill -->
+                                <div class="flex items-center gap-3 p-3 rounded-lg bg-[#080d14] border border-slate-800/80">
+                                    <div class="w-8 h-8 shrink-0 rounded-lg border flex items-center justify-center {{ $iconBoxClass }}">
                                         @if($credentialType === 'certification')
                                             <!-- Certification Badge Icon -->
-                                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                             </svg>
                                         @elseif($credentialType === 'diploma')
                                             <!-- Academic / Diploma Icon -->
-                                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 14v7" />
                                             </svg>
                                         @else
                                             <!-- Course / Learning Code Icon -->
-                                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                             </svg>
                                         @endif
                                     </div>
-                                    <div class="flex flex-col gap-0.5 min-w-0">
+                                    <div class="flex flex-col min-w-0">
                                         <span class="text-xs font-semibold text-slate-200 truncate">
                                             {{ $entry->source ?: 'Official Learning Provider' }}
                                         </span>
-                                        <span class="text-[11px] text-slate-400">
+                                        <span class="text-[10px] text-slate-400 truncate">
                                             @if($credentialType === 'certification')
-                                                Sertifikasi Profesi &bull; {{ $completedDate ? 'Terbit ' . $completedDate : 'Terdaftar' }}
+                                                Sertifikasi Profesi
                                             @elseif($credentialType === 'diploma')
-                                                Kredensial Akademik &bull; {{ $completedDate ? 'Lulus ' . $completedDate : 'Terdaftar' }}
+                                                Kredensial Akademik
                                             @else
-                                                Self-Directed Course &bull; {{ $completedDate ? 'Selesai ' . $completedDate : 'Completed' }}
+                                                Self-Directed Course
                                             @endif
                                         </span>
                                     </div>
                                 </div>
-
-                                <div class="flex items-center gap-2.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-800/60 flex-wrap shrink-0">
-                                    @if(!empty($entry->certificate_file_path))
-                                        <a href="{{ asset($entry->certificate_file_path) }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 bg-slate-900 border border-slate-800 hover:border-slate-700 hover:text-white transition-colors">
-                                            <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                            </svg>
-                                            <span>Lihat Dokumen</span>
-                                        </a>
-                                    @endif
-
-                                    @if(!empty($entry->verification_url))
-                                        <a href="{{ $entry->verification_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-red-400 bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 hover:text-red-300 transition-colors">
-                                            <span>Verifikasi Online</span>
-                                            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                            </svg>
-                                        </a>
-                                    @endif
-                                </div>
                             </div>
-
                         </div>
+
+                        <!-- Card Footer / Actions -->
+                        @if(!empty($entry->certificate_file_path) || !empty($entry->verification_url))
+                            <div class="px-5 pb-5 pt-0 mt-auto flex items-center justify-between gap-2 border-t border-slate-800/60 pt-3.5 flex-wrap">
+                                @if(!empty($entry->certificate_file_path))
+                                    <a href="{{ asset($entry->certificate_file_path) }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-300 bg-slate-900 border border-slate-800 hover:border-slate-700 hover:text-white transition-colors">
+                                        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                        <span>Dokumen</span>
+                                    </a>
+                                @endif
+
+                                @if(!empty($entry->verification_url))
+                                    <a href="{{ $entry->verification_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-red-400 bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 hover:text-red-300 transition-colors ml-auto">
+                                        <span>Verifikasi</span>
+                                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                        </svg>
+                                    </a>
+                                @endif
+                            </div>
+                        @endif
+
                     </article>
                 @endforeach
+
+            </div>
 
             </div>
         </div>
