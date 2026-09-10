@@ -5,8 +5,8 @@
 
     <div class="code-hint">
         <div><span class="prompt">$</span><span class="output">php artisan down --status=503</span></div>
-        <div style="margin-top:6px"><span class="output">  <span style="color:#fb923c">INFO</span>   Application is now in maintenance mode</span></div>
-        <div style="margin-top:4px"><span class="output">  Retry-After: <span class="accent">soon™</span></span></div>
+        <div class="gc-1"><span class="output">  <span class="503-1">INFO</span>   Application is now in maintenance mode</span></div>
+        <div class="gc-3"><span class="output">  Retry-After: <span class="accent">soon™</span></span></div>
     </div>
 
     <a href="{{ url('/') }}" class="btn-home">

@@ -3,7 +3,7 @@
             scrolled: false,
             activeSection: '',
             init() {
-                const sectionIds = ['projects', 'tech-stack', 'journey', 'learning-log'];
+                const sectionIds = ['projects', 'tech-stack', 'experience'];
                 const observedElements = sectionIds
                     .map(id => document.getElementById(id))
                     .filter(Boolean);
@@ -111,22 +111,13 @@
                     Tech Stack
                 </a>
 
-                <!-- Journey -->
-                <a href="#journey"
+                <!-- Experience -->
+                <a href="#experience"
                    class="px-3 py-2 lg:px-3.5 lg:py-2 rounded-lg text-xs transition-all duration-200 border"
-                   :class="activeSection === 'journey'
+                   :class="activeSection === 'experience'
                        ? 'text-red-400 bg-red-500/10 border-red-500/20 font-semibold shadow-sm'
                        : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border-transparent font-medium'">
-                    Journey
-                </a>
-
-                <!-- Learning Log -->
-                <a href="#learning-log"
-                   class="px-3 py-2 lg:px-3.5 lg:py-2 rounded-lg text-xs transition-all duration-200 border"
-                   :class="activeSection === 'learning-log'
-                       ? 'text-red-400 bg-red-500/10 border-red-500/20 font-semibold shadow-sm'
-                       : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border-transparent font-medium'">
-                    Learning Log
+                    Experience
                 </a>
             </nav>
 
@@ -199,26 +190,15 @@
                 <span class="font-mono text-[10px]" :class="activeSection === 'tech-stack' ? 'text-red-400 font-bold' : 'text-slate-500'">02</span>
             </a>
 
-            <!-- Mobile Journey -->
-            <a href="#journey"
+            <!-- Mobile Experience -->
+            <a href="#experience"
                @click="mobileOpen = false"
                class="px-3.5 py-2.5 rounded-lg text-sm transition-colors flex items-center justify-between border-l-2"
-               :class="activeSection === 'journey'
+               :class="activeSection === 'experience'
                    ? 'text-red-400 bg-red-500/10 border-red-500 font-semibold'
                    : 'text-slate-300 hover:bg-slate-800/80 hover:text-white border-transparent font-medium'">
-                <span>Journey &amp; Background</span>
-                <span class="font-mono text-[10px]" :class="activeSection === 'journey' ? 'text-red-400 font-bold' : 'text-slate-500'">03</span>
-            </a>
-
-            <!-- Mobile Learning Log -->
-            <a href="#learning-log"
-               @click="mobileOpen = false"
-               class="px-3.5 py-2.5 rounded-lg text-sm transition-colors flex items-center justify-between border-l-2"
-               :class="activeSection === 'learning-log'
-                   ? 'text-red-400 bg-red-500/10 border-red-500 font-semibold'
-                   : 'text-slate-300 hover:bg-slate-800/80 hover:text-white border-transparent font-medium'">
-                <span>Learning Log</span>
-                <span class="font-mono text-[10px]" :class="activeSection === 'learning-log' ? 'text-red-400 font-bold' : 'text-slate-500'">04</span>
+                <span>Experience</span>
+                <span class="font-mono text-[10px]" :class="activeSection === 'experience' ? 'text-red-400 font-bold' : 'text-slate-500'">03</span>
             </a>
 
             <div class="pt-3 mt-2 border-t border-slate-800">

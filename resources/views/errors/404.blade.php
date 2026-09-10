@@ -6,8 +6,8 @@
     <!-- Terminal-style stack trace flavour -->
     <div class="code-hint">
         <div><span class="prompt">$</span><span class="output">php artisan route:list --path=<span class="accent">{{ request()->path() }}</span></span></div>
-        <div style="margin-top:6px"><span class="output">  <span style="color:#ef4444">ERROR</span>  Route not found: <span class="accent">GET /{{ request()->path() }}</span></span></div>
-        <div style="margin-top:4px"><span class="output">  No matching route definition in routes/web.php</span></div>
+        <div class="gc-1"><span class="output">  <span class="gc-2">ERROR</span>  Route not found: <span class="accent">GET /{{ request()->path() }}</span></span></div>
+        <div class="gc-3"><span class="output">  No matching route definition in routes/web.php</span></div>
     </div>
 
     <a href="{{ url('/') }}" class="btn-home">

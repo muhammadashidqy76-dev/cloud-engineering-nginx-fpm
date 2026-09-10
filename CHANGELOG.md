@@ -7,7 +7,7 @@ bukan per-commit (untuk itu lihat `git log`).
 ## [Unreleased]
 
 ### Added
-- Mekanisme collapse/expand di level halaman utama untuk menyembunyikan section Journey & Learning Log secara default, dengan trigger toggle tunggal di antara section Experience dan Footer serta animasi staggered (Journey expand lebih dulu dan Learning Log menyusul; saat collapse Learning Log menutup lebih dulu sebelum Journey).
+- Feature tests `FeaturedProjectsTest.php`: validasi query data published projects dari database, relasi tech stack items, complexity order, dan rendering mock-up API.
 - Feature tests `WorkExperienceTest.php`: validasi model, accessors (`duration_label`, badge classes), scopes (`published`, `current`, `chronological`), form requests, CRUD API endpoints, dan graceful frontend visibility pada welcome page.
 - `WorkExperienceSeeder`: seeder dengan 1 entri data dummy sementara untuk keperluan preview visual section Work Experience (perlu diganti data asli sebelum deploy).
 - Component `work-experience-section.blade.php`: section publik untuk pengalaman kerja & magang yang tersembunyi secara graceful jika belum ada entri berstatus published, terintegrasi pada `welcome.blade.php`.
@@ -30,6 +30,7 @@ bukan per-commit (untuk itu lihat `git log`).
 - fix: seragamkan ukuran logo issuer di card Journey (`w-8 h-8`, `shrink-0`, `object-contain`, `rounded-md`) agar konsisten untuk semua tipe card dan resolusi gambar.
 
 ### Changed
+- `featured-projects.blade.php`: mengambil dan me-render data Featured Projects secara dinamis dari tabel `projects` dan relasi `tech_stack_items` di database via Eloquent (`Project::published()->with('techStackItems')->orderedByComplexity()`) dengan fallback graceful.
 - `journey-section.blade.php`: menyederhanakan tampilan card untuk semua tipe kredensial (termasuk `course`) menjadi format ringkas 3-kolom grid (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3`) sejajar (badge tipe, judul kredensial, issuer/source, tanggal, tombol dokumen/verifikasi) dan menghapus rendering blok narasi 3-kolom (Learned/Applied/Result) dari UI agar lebih cepat di-scan recruiter (perubahan visual saja, kolom data `learned`, `applied_project_id`, dan `result` tetap tersimpan aman di database).
 - `JourneyEntrySeeder.php` & `JourneyEntryFactory.php`: diperbarui untuk menyertakan `credential_type`, `certificate_file_path`, dan `verification_url` serta contoh data riwayat sertifikasi resmi (BNSP).
 - `tech-stack.blade.php`: badge pill kini fully dynamic — background, border, warna icon SVG, dan warna teks label semuanya dari `$item->status_badge_classes` (emerald=finished, amber=in_progress, rose=not_started). Radius, padding, dan spacing badge tidak berubah. Fallback aman ke rose array saat data dari placeholder.

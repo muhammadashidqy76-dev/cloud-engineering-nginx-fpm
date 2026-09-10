@@ -40,6 +40,36 @@ class ProjectSeeder extends Seeder
                 'preview_image_path' => 'projects/portfolio-cms.jpg',
                 'status' => 'published',
             ],
+            [
+                'title' => 'PayPulse — Multi-Gateway Payment Webhook Handler',
+                'slug' => 'paypulse-payment-webhook-handler',
+                'complexity_order' => 4,
+                'problem_statement' => 'Mengatasi isu data race condition dan duplicate webhooks dari payment gateway (Midtrans, Xendit, Stripe) dengan verifikasi signature idempotency.',
+                'architecture_decision_summary' => "1. Idempotency Key & Redis Lock: Memastikan satu payload webhook hanya dieksekusi tepat satu kali (exactly-once processing).\n2. Retry Mechanism & Dead Letter Queue: Menangani kegagalan transient network saat callback ke sistem internal.",
+                'impact_metric' => 'Memproses 10,000+ payload webhook per hari dengan zero duplicate transaction error',
+                'preview_image_path' => null,
+                'status' => 'published',
+            ],
+            [
+                'title' => 'CacheForge — High-Throughput Redis Cache Engine',
+                'slug' => 'cacheforge-redis-cache-engine',
+                'complexity_order' => 5,
+                'problem_statement' => 'Mengurangi beban query berat pada database relasional saat traffic spike dengan arsitektur multi-layer caching dan cache invalidation strategy.',
+                'architecture_decision_summary' => "1. Cache Tagging & Stamped Lock: Mencegah cache stampede (dog-piling effect) saat key populer expired.\n2. Automatic Warmup Worker: Background worker otomatis melakukan pre-fetch query sebelum jam sibuk.",
+                'impact_metric' => 'Menurunkan latensi response database dari 280ms menjadi < 15ms (94% offload)',
+                'preview_image_path' => null,
+                'status' => 'published',
+            ],
+            [
+                'title' => 'EventStream — Event-Driven Microservices Hub',
+                'slug' => 'eventstream-microservices-hub',
+                'complexity_order' => 6,
+                'problem_statement' => 'Sinkronisasi state antar microservice independen tanpa tightly-coupled HTTP synchronous dependency yang rentan cascade failure.',
+                'architecture_decision_summary' => "1. Pub/Sub Architecture: Menggunakan Redis Pub/Sub dan Laravel Event Broadcasting untuk komunikasi asinkron.\n2. Circuit Breaker Pattern: Otomatis mendegradasi request saat salah satu service downstream sedang downtime.",
+                'impact_metric' => 'Uptime reliability meningkat hingga 99.98% tanpa blocking antar layanan',
+                'preview_image_path' => 'projects/eventstream.jpg',
+                'status' => 'published',
+            ],
         ];
 
         foreach ($projects as $projectData) {

@@ -5,8 +5,8 @@
 
     <div class="code-hint">
         <div><span class="prompt">$</span><span class="output">curl -I {{ request()->url() }}</span></div>
-        <div style="margin-top:6px"><span class="output">  HTTP/1.1 <span style="color:#ef4444">403 Forbidden</span></span></div>
-        <div style="margin-top:4px"><span class="output">  X-Policy: authorization check failed</span></div>
+        <div class="gc-1"><span class="output">  HTTP/1.1 <span class="gc-2">403 Forbidden</span></span></div>
+        <div class="gc-3"><span class="output">  X-Policy: authorization check failed</span></div>
     </div>
 
     <a href="{{ url('/') }}" class="btn-home">

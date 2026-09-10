@@ -64,5 +64,29 @@ class DatabaseSeeder extends Seeder
                 array_filter([$laravel?->id, $php?->id, $mysql?->id, $blade?->id, $tailwind?->id, $git?->id])
             );
         }
+
+        // Project 4: PayPulse — Multi-Gateway Payment Webhook Handler
+        $p4 = Project::where('slug', 'paypulse-payment-webhook-handler')->first();
+        if ($p4) {
+            $p4->techStackItems()->syncWithoutDetaching(
+                array_filter([$laravel?->id, $php?->id, $restApi?->id, $mysql?->id, $redis?->id])
+            );
+        }
+
+        // Project 5: CacheForge — High-Throughput Redis Cache Engine
+        $p5 = Project::where('slug', 'cacheforge-redis-cache-engine')->first();
+        if ($p5) {
+            $p5->techStackItems()->syncWithoutDetaching(
+                array_filter([$laravel?->id, $php?->id, $redis?->id, $mysql?->id])
+            );
+        }
+
+        // Project 6: EventStream — Event-Driven Microservices Hub
+        $p6 = Project::where('slug', 'eventstream-microservices-hub')->first();
+        if ($p6) {
+            $p6->techStackItems()->syncWithoutDetaching(
+                array_filter([$laravel?->id, $php?->id, $restApi?->id, $redis?->id, $git?->id])
+            );
+        }
     }
 }

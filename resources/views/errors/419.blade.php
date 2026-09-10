@@ -5,9 +5,9 @@
 
     <div class="code-hint">
         <div><span class="prompt">$</span><span class="output">artisan session:status</span></div>
-        <div style="margin-top:6px"><span class="output">  <span style="color:#ef4444">WARNING</span>  CSRF token mismatch detected</span></div>
-        <div style="margin-top:4px"><span class="output">  Token lifetime: <span class="accent">expired</span> (max 120min)</span></div>
-        <div style="margin-top:4px"><span class="output">  Hint: refresh the page to get a fresh token</span></div>
+        <div class="gc-1"><span class="output">  <span class="gc-2">WARNING</span>  CSRF token mismatch detected</span></div>
+        <div class="gc-3"><span class="output">  Token lifetime: <span class="accent">expired</span> (max 120min)</span></div>
+        <div class="gc-3"><span class="output">  Hint: refresh the page to get a fresh token</span></div>
     </div>
 
     <a href="{{ url('/') }}" class="btn-home">

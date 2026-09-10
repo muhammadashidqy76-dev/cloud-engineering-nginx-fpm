@@ -5,9 +5,9 @@
 
     <div class="code-hint">
         <div><span class="prompt">$</span><span class="output">tail -f storage/logs/laravel.log</span></div>
-        <div style="margin-top:6px"><span class="output">  [<span class="accent">{{ now()->format('Y-m-d H:i:s') }}</span>] production.ERROR</span></div>
-        <div style="margin-top:4px"><span class="output">  <span style="color:#ef4444">Unhandled exception</span> — details logged server-side</span></div>
-        <div style="margin-top:4px"><span class="output">  If this persists, please contact the administrator</span></div>
+        <div class="gc-1"><span class="output">  [<span class="accent">{{ now()->format('Y-m-d H:i:s') }}</span>] production.ERROR</span></div>
+        <div class="gc-3"><span class="output">  <span class="gc-2">Unhandled exception</span> — details logged server-side</span></div>
+        <div class="gc-3"><span class="output">  If this persists, please contact the administrator</span></div>
     </div>
 
     <a href="{{ url('/') }}" class="btn-home">

@@ -5,9 +5,9 @@
 
     <div class="code-hint">
         <div><span class="prompt">$</span><span class="output">curl -I {{ request()->url() }}</span></div>
-        <div style="margin-top:6px"><span class="output">  HTTP/1.1 <span style="color:#ef4444">429 Too Many Requests</span></span></div>
-        <div style="margin-top:4px"><span class="output">  Retry-After: <span class="accent">60s</span></span></div>
-        <div style="margin-top:4px"><span class="output">  X-RateLimit-Limit: 60  X-RateLimit-Remaining: <span style="color:#ef4444">0</span></span></div>
+        <div class="gc-1"><span class="output">  HTTP/1.1 <span class="gc-2">429 Too Many Requests</span></span></div>
+        <div class="gc-3"><span class="output">  Retry-After: <span class="accent">60s</span></span></div>
+        <div class="gc-3"><span class="output">  X-RateLimit-Limit: 60  X-RateLimit-Remaining: <span class="gc-2">0</span></span></div>
     </div>
 
     <a href="{{ url('/') }}" class="btn-home">

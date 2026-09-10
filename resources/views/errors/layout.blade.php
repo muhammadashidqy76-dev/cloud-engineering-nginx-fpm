@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark layout-2">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -147,9 +147,9 @@
 
             <div class="brand">
                 <div class="dots-sm">
-                    <span class="dot-sm" style="background:rgba(244,63,94,0.7)"></span>
-                    <span class="dot-sm" style="background:rgba(251,191,36,0.7)"></span>
-                    <span class="dot-sm" style="background:rgba(52,211,153,0.7)"></span>
+                    <span class="dot-sm"></span>
+                    <span class="dot-sm layout-3"></span>
+                    <span class="dot-sm layout-4"></span>
                 </div>
                 <span>&lt;<span class="brand-name">Ashidqy</span>/&gt;</span>
             </div>
