@@ -92,10 +92,7 @@
              }
          }"
          @keydown.escape.window="closeModal()"
-         class="relative bg-carbon-950 text-slate-100 py-20 lg:py-28 overflow-hidden border-b border-carbon-800/80">
-
-    <!-- Matrix Grid Overlay Pattern -->
-    <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f293d15_1px,transparent_1px),linear-gradient(to_bottom,#1f293d15_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_70%_50%_at_50%_30%,#000_60%,transparent_100%)] pointer-events-none"></div>
+         class="relative bg-carbon-950/60 text-slate-100 py-20 lg:py-28 overflow-hidden border-b border-carbon-800/80">
 
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 

@@ -15,12 +15,16 @@
     <!-- Scripts and Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-carbon-950 text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white">
-    <x-navbar />
-    <x-hero-section />
-    <x-featured-projects />
-    <x-tech-stack />
-    <x-work-experience-section />
+<body class="bg-carbon-950 text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white relative min-h-screen">
+    <!-- Global Seamless Engineering Matrix Grid Background -->
+    <div class="fixed inset-0 bg-[linear-gradient(to_right,#1f293d18_1px,transparent_1px),linear-gradient(to_bottom,#1f293d18_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none z-0"></div>
+
+    <div class="relative z-10">
+        <x-navbar />
+        <x-hero-section />
+        <x-featured-projects />
+        <x-tech-stack />
+        <x-work-experience-section />
 
     <!-- ─── Progressive Collapsible Secondary Sections (Learning Journey & Learning Log) ─── -->
     <div x-data="{
@@ -88,6 +92,7 @@
 
     </div>
 
-    <x-footer />
+        <x-footer />
+    </div>
 </body>
 </html>

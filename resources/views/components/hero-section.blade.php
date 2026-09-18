@@ -25,10 +25,9 @@
              }
          }"
          @keydown.escape.window="closeBioModal(); closeCvModal();"
-         class="relative min-h-[90vh] flex items-center justify-center bg-carbon-950 text-slate-100 overflow-hidden py-20 lg:py-28 border-b border-carbon-800/80">
+         class="relative min-h-[90vh] flex items-center justify-center bg-carbon-950/60 text-slate-100 overflow-hidden py-20 lg:py-28 border-b border-carbon-800/80">
 
-    <!-- Technical Background Matrix Grid & Architectural Subtle Accent Line -->
-    <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f293d18_1px,transparent_1px),linear-gradient(to_bottom,#1f293d18_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_60%,transparent_100%)] pointer-events-none"></div>
+    <!-- Architectural Subtle Accent Line -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-vermilion-500/20 to-transparent pointer-events-none"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
