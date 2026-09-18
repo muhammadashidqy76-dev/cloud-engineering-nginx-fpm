@@ -32,7 +32,7 @@
                 this.stage = 0;
             }
         }
-    }" class="relative bg-[#0b0f19]">
+    }" class="relative bg-carbon-950">
 
         <!-- Section 1: Learning Journey & Credentials (Shown when stage >= 1) -->
         <div x-show="stage >= 1"
@@ -59,16 +59,16 @@
         </div>
 
         <!-- Horizontal Centered Trigger Bar (Positioned dynamically beneath the last active section) -->
-        <div class="relative py-12 flex items-center justify-center border-t border-slate-800/80">
+        <div class="relative py-12 flex items-center justify-center border-t border-carbon-800/80">
             <div class="relative flex justify-center z-10">
                 <button type="button"
                         @click="nextStage()"
-                        class="inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-slate-900/95 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-all duration-200 shadow-xl hover:shadow-red-500/5 hover:-translate-y-0.5 group focus:outline-none focus:ring-2 focus:ring-red-500/40 cursor-pointer">
+                        class="inline-flex items-center gap-3 px-6 py-3 rounded-lg bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 hover:border-slate-700 text-slate-300 hover:text-white transition-all duration-200 shadow-xl hover:-translate-y-0.5 group focus:outline-none focus:ring-2 focus:ring-vermilion-500/40 cursor-pointer font-mono text-xs">
                     
-                    <span class="w-2 h-2 rounded-full bg-red-500/80 group-hover:bg-red-400"
+                    <span class="w-2 h-2 rounded-full bg-vermilion-500/80 group-hover:bg-vermilion-400"
                           :class="stage === 2 ? 'bg-amber-400' : 'animate-pulse'"></span>
                     
-                    <span class="text-xs sm:text-sm font-semibold tracking-wide"
+                    <span class="font-semibold tracking-wide"
                           x-text="stage === 0 
                                     ? '{{ __('stage.show_journey') }}' 
                                     : (stage === 1 
@@ -76,9 +76,9 @@
                                         : '{{ __('stage.close_all') }}')">
                     </span>
 
-                    <div class="w-6 h-6 rounded-full bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-slate-400 group-hover:text-white transition-transform duration-300"
-                         :class="stage === 2 ? 'rotate-180 bg-red-500/20 text-red-300 border-red-500/30' : ''">
-                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <div class="w-5 h-5 rounded bg-carbon-950 border border-carbon-800 flex items-center justify-center text-slate-400 group-hover:text-white transition-transform duration-300"
+                         :class="stage === 2 ? 'rotate-180 bg-vermilion-500/20 text-vermilion-400 border-vermilion-500/30' : ''">
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
                     </div>
