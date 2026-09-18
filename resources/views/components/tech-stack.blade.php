@@ -75,7 +75,7 @@
     $fallbackIconPath = '<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>';
 @endphp
 
-<section id="tech-stack" class="relative bg-carbon-950/60 text-slate-100 py-20 lg:py-28 overflow-hidden border-b border-carbon-800/80">
+<section id="tech-stack" class="relative bg-transparent text-slate-100 py-20 lg:py-28 overflow-hidden border-b border-carbon-800/80">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         <!-- ─── Section Header ─── -->

@@ -92,7 +92,7 @@
              }
          }"
          @keydown.escape.window="closeModal()"
-         class="relative bg-carbon-950/60 text-slate-100 py-20 lg:py-28 overflow-hidden border-b border-carbon-800/80">
+         class="relative bg-transparent text-slate-100 py-20 lg:py-28 overflow-hidden border-b border-carbon-800/80">
 
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 

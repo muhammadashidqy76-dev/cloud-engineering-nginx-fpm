@@ -17,7 +17,7 @@
 </head>
 <body class="bg-carbon-950 text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white relative min-h-screen">
     <!-- Global Seamless Engineering Matrix Grid Background -->
-    <div class="fixed inset-0 bg-[linear-gradient(to_right,#1f293d18_1px,transparent_1px),linear-gradient(to_bottom,#1f293d18_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none z-0"></div>
+    <div class="fixed inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.065)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.065)_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none z-0"></div>
 
     <div class="relative z-10">
         <x-navbar />
@@ -36,7 +36,7 @@
                 this.stage = 0;
             }
         }
-    }" class="relative bg-carbon-950">
+    }" class="relative bg-transparent">
 
         <!-- Section 1: Learning Journey & Credentials (Shown when stage >= 1) -->
         <div x-show="stage >= 1"

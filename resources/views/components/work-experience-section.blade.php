@@ -9,7 +9,7 @@
 @endphp
 
 @if($items && $items->isNotEmpty())
-<section id="experience" class="py-20 lg:py-28 bg-carbon-950/60 text-slate-100 border-b border-carbon-800/80 relative overflow-hidden">
+<section id="experience" class="py-20 lg:py-28 bg-transparent text-slate-100 border-b border-carbon-800/80 relative overflow-hidden">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         <!-- Section Header -->
