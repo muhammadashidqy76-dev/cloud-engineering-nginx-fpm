@@ -16,8 +16,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-carbon-950 text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white relative min-h-screen">
-    <!-- Global Seamless Engineering Matrix Grid Background (+10% contrast) -->
-    <div class="fixed inset-0 bg-[linear-gradient(to_right,#33415535_1px,transparent_1px),linear-gradient(to_bottom,#33415535_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] pointer-events-none z-0"></div>
+    <!-- Global Seamless Engineering Matrix Grid Background (Option 1: Crisp Blueprint Grid) -->
+    <div class="fixed inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.075)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.075)_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] pointer-events-none z-0"></div>
 
     <div class="relative z-10">
         <x-navbar />
