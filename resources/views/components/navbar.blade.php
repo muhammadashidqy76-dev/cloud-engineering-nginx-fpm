@@ -99,7 +99,7 @@
                    :class="activeSection === 'projects'
                        ? 'text-red-400 bg-red-500/10 border-red-500/20 font-semibold shadow-sm'
                        : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border-transparent font-medium'">
-                    Projects
+                    {{ __('nav.projects') }}
                 </a>
 
                 <!-- Tech Stack -->
@@ -108,7 +108,7 @@
                    :class="activeSection === 'tech-stack'
                        ? 'text-red-400 bg-red-500/10 border-red-500/20 font-semibold shadow-sm'
                        : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border-transparent font-medium'">
-                    Tech Stack
+                    {{ __('nav.tech_stack') }}
                 </a>
 
                 <!-- Experience -->
@@ -117,13 +117,28 @@
                    :class="activeSection === 'experience'
                        ? 'text-red-400 bg-red-500/10 border-red-500/20 font-semibold shadow-sm'
                        : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border-transparent font-medium'">
-                    Experience
+                    {{ __('nav.experience') }}
                 </a>
             </nav>
 
-            <!-- ─── Far Right: CTA / GitHub Button & Mobile Toggle ─── -->
-            <div class="flex items-center gap-3">
-                
+            <!-- ─── Far Right: Language Switcher + CTA / GitHub Button & Mobile Toggle ─── -->
+            <div class="flex items-center gap-2 sm:gap-3">
+
+                <!-- Language Switcher Pill -->
+                <div class="flex items-center rounded-lg bg-slate-900/80 border border-slate-800 overflow-hidden shadow-sm">
+                    <a href="{{ route('lang.switch', 'id') }}"
+                       class="px-2.5 py-1.5 text-[11px] font-semibold transition-all {{ app()->getLocale() === 'id' ? 'bg-red-600 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}"
+                       title="Bahasa Indonesia">
+                        ID
+                    </a>
+                    <span class="w-px h-3 bg-slate-700"></span>
+                    <a href="{{ route('lang.switch', 'en') }}"
+                       class="px-2.5 py-1.5 text-[11px] font-semibold transition-all {{ app()->getLocale() === 'en' ? 'bg-red-600 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800' }}"
+                       title="English">
+                        EN
+                    </a>
+                </div>
+
                 <!-- GitHub Button (Desktop: visible on md and up) -->
                 <a href="https://github.com"
                    target="_blank"
@@ -142,7 +157,7 @@
                 <button type="button"
                         @click="mobileOpen = !mobileOpen"
                         class="inline-flex md:hidden items-center justify-center p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500/40"
-                        aria-label="Toggle Navigation Menu">
+                        aria-label="{{ __('nav.toggle_menu') }}">
                     <svg x-show="!mobileOpen" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -175,7 +190,7 @@
                :class="activeSection === 'projects'
                    ? 'text-red-400 bg-red-500/10 border-red-500 font-semibold'
                    : 'text-slate-300 hover:bg-slate-800/80 hover:text-white border-transparent font-medium'">
-                <span>Projects</span>
+                <span>{{ __('nav.projects') }}</span>
                 <span class="font-mono text-[10px]" :class="activeSection === 'projects' ? 'text-red-400 font-bold' : 'text-slate-500'">01</span>
             </a>
 
@@ -186,7 +201,7 @@
                :class="activeSection === 'tech-stack'
                    ? 'text-red-400 bg-red-500/10 border-red-500 font-semibold'
                    : 'text-slate-300 hover:bg-slate-800/80 hover:text-white border-transparent font-medium'">
-                <span>Tech Stack</span>
+                <span>{{ __('nav.tech_stack') }}</span>
                 <span class="font-mono text-[10px]" :class="activeSection === 'tech-stack' ? 'text-red-400 font-bold' : 'text-slate-500'">02</span>
             </a>
 
@@ -197,7 +212,7 @@
                :class="activeSection === 'experience'
                    ? 'text-red-400 bg-red-500/10 border-red-500 font-semibold'
                    : 'text-slate-300 hover:bg-slate-800/80 hover:text-white border-transparent font-medium'">
-                <span>Experience</span>
+                <span>{{ __('nav.experience') }}</span>
                 <span class="font-mono text-[10px]" :class="activeSection === 'experience' ? 'text-red-400 font-bold' : 'text-slate-500'">03</span>
             </a>
 
@@ -209,7 +224,7 @@
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
                     </svg>
-                    <span>View GitHub Profile</span>
+                    <span>{{ __('nav.view_github') }}</span>
                 </a>
             </div>
         </nav>

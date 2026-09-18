@@ -86,13 +86,13 @@
         <div class="mb-12 max-w-2xl">
             <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-red-400 mb-3">
                 <span class="w-4 h-px bg-red-400/80 rounded"></span>
-                Tech Stack &amp; Tools
+                {{ __('tech.tag') }}
             </span>
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight">
-                Teknologi &amp; Tools Ekosistem
+                {{ __('tech.title') }}
             </h2>
             <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-                Dikelompokkan secara terstruktur untuk gambaran arsitektur backend, database, frontend, dan workflow kerja.
+                {{ __('tech.subtitle') }}
             </p>
         </div>
 
@@ -122,7 +122,7 @@
                             </div>
 
                             <span class="font-mono text-xs text-rose-300/80 bg-slate-800/60 border border-slate-700/50 px-2.5 py-1 rounded-md">
-                                {{ $count }} {{ $count > 1 ? 'technologies' : 'technology' }}
+                                {{ $count }} {{ $count > 1 ? __('tech.technologies') : __('tech.technology') }}
                             </span>
                         </div>
 

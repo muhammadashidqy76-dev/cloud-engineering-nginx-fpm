@@ -18,17 +18,17 @@
 
         <!-- Section Header -->
         <div class="mb-12">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-slate-400 mb-4">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Work Experience &amp; Internships</span>
-            </div>
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-red-400 mb-3">
+                <span class="w-4 h-px bg-red-400/80 rounded"></span>
+                {{ __('experience.tag') }}
+            </span>
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                        Pengalaman Kerja &amp; Magang
+                        {{ __('experience.title') }}
                     </h2>
                     <p class="mt-2 text-sm sm:text-base text-slate-400 max-w-2xl">
-                        Rekam jejak kontribusi teknis dan pengalaman profesional dalam pengembangan sistem backend.
+                        {{ __('experience.subtitle') }}
                     </p>
                 </div>
             </div>

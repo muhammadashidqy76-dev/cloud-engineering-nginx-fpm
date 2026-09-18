@@ -72,13 +72,13 @@
         <div class="mb-12 max-w-2xl">
             <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-red-400 mb-3">
                 <span class="w-4 h-px bg-red-400/80 rounded"></span>
-                Learning Journey &amp; Credentials
+                {{ __('journey.tag') }}
             </span>
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight">
-                Timeline Pembelajaran &amp; Kredensial
+                {{ __('journey.title') }}
             </h2>
             <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-                Pengganti pengalaman kerja formal &mdash; pembuktian kompetensi melalui siklus belajar terstruktur, sertifikasi resmi, aplikasi project nyata, dan hasil terukur.
+                {{ __('journey.subtitle') }}
             </p>
         </div>
 
@@ -96,9 +96,9 @@
 
                     $credentialType = $entry->credential_type ?? 'course';
                     $typeLabel = match($credentialType) {
-                        'certification' => 'Certification',
-                        'diploma' => 'Diploma',
-                        default => 'Course',
+                        'certification' => __('journey.badge_certification'),
+                        'diploma' => __('journey.badge_diploma'),
+                        default => __('journey.badge_course'),
                     };
                     $typeBadgeClass = match($credentialType) {
                         'certification' => 'text-amber-400 bg-amber-500/10 border-amber-500/20',
@@ -163,15 +163,15 @@
                                 </div>
                                 <div class="flex flex-col min-w-0">
                                     <span class="text-xs font-semibold text-slate-200 truncate">
-                                        {{ $entry->source ?: 'Official Learning Provider' }}
+                                        {{ $entry->source ?: __('journey.default_provider') }}
                                     </span>
                                     <span class="text-[10px] text-slate-400 truncate">
                                         @if($credentialType === 'certification')
-                                            Sertifikasi Profesi
+                                            {{ __('journey.sub_certification') }}
                                         @elseif($credentialType === 'diploma')
-                                            Kredensial Akademik
+                                            {{ __('journey.sub_diploma') }}
                                         @else
-                                            Self-Directed Course
+                                            {{ __('journey.sub_course') }}
                                         @endif
                                     </span>
                                 </div>
@@ -188,13 +188,13 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                     </svg>
-                                    <span>Dokumen</span>
+                                    <span>{{ __('journey.doc') }}</span>
                                 </a>
                             @endif
 
                             @if(!empty($entry->verification_url))
                                 <a href="{{ $entry->verification_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-red-400 bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 hover:text-red-300 transition-colors ml-auto">
-                                    <span>Verifikasi</span>
+                                    <span>{{ __('journey.verify') }}</span>
                                     <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                     </svg>

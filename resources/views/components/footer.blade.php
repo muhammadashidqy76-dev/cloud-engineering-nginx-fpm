@@ -18,7 +18,7 @@
                     </span>
                 </a>
                 <p class="text-xs text-slate-400 max-w-md leading-relaxed">
-                    Laravel Backend Developer &mdash; Fokus membangun sistem backend yang scalable, teroptimasi, dan maintainable.
+                    {{ __('footer.tagline') }}
                 </p>
             </div>
 
@@ -61,11 +61,11 @@
         <!-- Bottom Bar: Copyright & Built with Info -->
         <div class="mt-8 pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
             <p>
-                &copy; {{ date('Y') }} Ashidqy. All rights reserved.
+                &copy; {{ date('Y') }} Ashidqy. {{ __('footer.rights') }}
             </p>
 
             <div class="flex items-center gap-1.5 font-mono text-[11px] text-slate-400">
-                <span>Built with</span>
+                <span>{{ __('footer.built_with') }}</span>
                 <span class="text-rose-400 font-semibold">Laravel</span>
                 <span>&amp;</span>
                 <span class="text-sky-400 font-semibold">Tailwind CSS</span>

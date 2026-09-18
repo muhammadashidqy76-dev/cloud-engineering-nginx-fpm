@@ -70,10 +70,10 @@
                     
                     <span class="text-xs sm:text-sm font-semibold tracking-wide"
                           x-text="stage === 0 
-                                    ? 'Tampilkan Learning Journey &amp; Credentials' 
+                                    ? '{{ __('stage.show_journey') }}' 
                                     : (stage === 1 
-                                        ? 'Lanjut: Tampilkan Learning Log &amp; Technical Notes' 
-                                        : 'Tutup Riwayat &amp; Catatan Teknis')">
+                                        ? '{{ __('stage.show_log') }}' 
+                                        : '{{ __('stage.close_all') }}')">
                     </span>
 
                     <div class="w-6 h-6 rounded-full bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-slate-400 group-hover:text-white transition-transform duration-300"

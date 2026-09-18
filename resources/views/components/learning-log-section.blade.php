@@ -45,13 +45,13 @@
         <div class="mb-12 max-w-2xl">
             <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-red-400 mb-3">
                 <span class="w-4 h-px bg-red-400/80 rounded"></span>
-                Learning Log &amp; Technical Notes
+                {{ __('log.tag') }}
             </span>
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight">
-                Catatan Eksplorasi &amp; Production Notes
+                {{ __('log.title') }}
             </h2>
             <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-                Log teknis bergaya blog singkat mengenai eksperimen, temuan optimasi, serta praktik terbaik yang siap diterapkan ke lingkungan produksi.
+                {{ __('log.subtitle') }}
             </p>
         </div>
 
@@ -86,12 +86,12 @@
                                 @if($isProdReady)
                                     <span class="font-mono text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
                                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                                        Production-Ready
+                                        {{ __('log.tag_production_ready') }}
                                     </span>
                                 @else
                                     <span class="font-mono text-[10px] font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
                                         <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-                                        Exploring
+                                        {{ __('log.tag_exploring') }}
                                     </span>
                                 @endif
                             </div>

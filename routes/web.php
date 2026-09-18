@@ -23,6 +23,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*
+ * Language / Locale Switcher
+ * GET /lang/{locale} — menyimpan pilihan bahasa ke session & redirect kembali.
+ */
+Route::get('/lang/{locale}', function (string $locale) {
+    $supported = ['id', 'en'];
+    if (in_array($locale, $supported)) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back()->withHeaders([
+        'Cache-Control' => 'no-store',
+    ]);
+})->name('lang.switch')->where('locale', 'id|en');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
