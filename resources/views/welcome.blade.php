@@ -16,8 +16,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-carbon-950 text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white relative min-h-screen">
-    <!-- Global Seamless Engineering Matrix Grid Background (Option 1: Crisp Blueprint Grid) -->
-    <div class="fixed inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.075)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.075)_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] pointer-events-none z-0"></div>
+    <!-- Global Seamless Dot Matrix Canvas Background -->
+    <div class="fixed inset-0 bg-[radial-gradient(rgba(148,163,184,0.22)_1.2px,transparent_1.2px)] [background-size:24px_24px] pointer-events-none z-0"></div>
 
     <div class="relative z-10">
         <x-navbar />
@@ -36,7 +36,7 @@
                 this.stage = 0;
             }
         }
-    }" class="relative">
+    }" class="relative bg-carbon-950">
 
         <!-- Section 1: Learning Journey & Credentials (Shown when stage >= 1) -->
         <div x-show="stage >= 1"
