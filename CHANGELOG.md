@@ -6,6 +6,9 @@ bukan per-commit (untuk itu lihat `git log`).
 
 ## [Unreleased]
 
+### Changed
+- Blade `resources/views/notes/show.blade.php`: upgrade header ke reader-mode lengkap (branding `<Ashidqy/>`, tombol kembali ke beranda, judul artikel fade-in saat scroll melewati header artikel, tombol salin link dengan feedback tooltip, language switcher ID/EN), penambahan Author Card mini profil di akhir artikel, dan upgrade footer lengkap dengan navigasi quick links, info built with, copyright, dan social media links.
+
 ### Added
 - Migration `add_slug_and_body_to_learning_log_entries_table`: menambahkan kolom `slug` (unique) dan `body` (longText, Markdown penuh) ke tabel `learning_log_entries`. Kolom `content` tetap sebagai excerpt di card homepage.
 - Model `LearningLogEntry`: tambah `slug` & `body` ke `$fillable`, auto-generate slug dari title via `booted()`, route key binding by `slug`, accessor `getBodyHtmlAttribute()` yang mengkonversi `body` Markdown ke HTML via `Str::markdown()`, dan update `getReadingTimeAttribute()` untuk menghitung dari `body` jika tersedia.

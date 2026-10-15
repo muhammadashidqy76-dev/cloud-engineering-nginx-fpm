@@ -183,35 +183,128 @@
     <div id="reading-progress" aria-hidden="true"></div>
 
     <div class="relative z-10">
-        <!-- ── Minimal Header ── -->
-        <header class="sticky top-0 z-50 backdrop-blur-md bg-carbon-950/80 border-b border-carbon-800/60">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
-                <!-- Back to home -->
-                <a href="/"
-                   class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium group"
-                   id="back-to-home-link">
-                    <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    <span class="hidden sm:inline">Kembali</span>
-                </a>
+        <!-- ── Reader-Mode Header ── -->
+        <header x-data="{
+                    showTitle: false,
+                    copied: false,
+                    init() {
+                        const target = document.getElementById('article-title');
+                        if (target) {
+                            const observer = new IntersectionObserver(([entry]) => {
+                                this.showTitle = !entry.isIntersecting;
+                            }, { threshold: 0 });
+                            observer.observe(target);
+                        }
+                    },
+                    copyUrl() {
+                        navigator.clipboard.writeText(window.location.href);
+                        this.copied = true;
+                        setTimeout(() => this.copied = false, 2500);
+                    }
+                }"
+                class="sticky top-0 z-50 backdrop-blur-md bg-carbon-950/85 border-b border-carbon-800/80 transition-all duration-300">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
 
-                <!-- Track badge + reading time -->
-                <div class="flex items-center gap-2">
+                <!-- Left: Logo & Back to Home -->
+                <div class="flex items-center gap-3 shrink-0">
+                    <a href="/" class="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-vermilion-500/40 rounded-lg p-1" title="Kembali ke Beranda">
+                        <!-- 3 Window Dots Motif -->
+                        <div class="flex items-center gap-1 p-1 rounded bg-carbon-900 border border-carbon-800 group-hover:border-carbon-700 transition-colors">
+                            <span class="w-1.5 h-1.5 rounded-full bg-rose-500/90"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400/90"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400/90"></span>
+                        </div>
+                        <span class="font-mono text-sm sm:text-base font-bold text-white tracking-tight">
+                            <span class="text-vermilion-400 group-hover:-translate-x-0.5 transition-transform inline-block">&lt;</span>
+                            <span class="text-slate-100 group-hover:text-white transition-colors">Ashidqy</span>
+                            <span class="text-vermilion-400 group-hover:translate-x-0.5 transition-transform inline-block">/&gt;</span>
+                        </span>
+                    </a>
+
+                    <span class="h-4 w-px bg-carbon-800 hidden sm:block"></span>
+
+                    <a href="/"
+                       class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-white transition-colors group px-2 py-1 rounded-md hover:bg-carbon-900"
+                       id="back-to-home-link">
+                        <svg class="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5 text-vermilion-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        <span>Beranda</span>
+                    </a>
+                </div>
+
+                <!-- Center: Scrolled Article Title Fade-in -->
+                <div class="hidden md:flex flex-1 items-center justify-center min-w-0 px-4">
+                    <div x-show="showTitle"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 -translate-y-2"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 -translate-y-2"
+                         style="display: none;"
+                         class="text-xs font-medium text-slate-300 truncate max-w-sm lg:max-w-md text-center">
+                        {{ $entry->title }}
+                    </div>
+                </div>
+
+                <!-- Right: Actions & Badges -->
+                <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+                    <!-- Track Badge -->
                     @if($entry->category === 'laravel')
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20">
                             <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
                             Laravel
                         </span>
                     @else
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
                             <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-                            Cloud Engineering
+                            Cloud
                         </span>
                     @endif
 
-                    <span class="text-slate-500 text-xs font-mono">{{ $entry->reading_time }}</span>
+                    <!-- Reading Time -->
+                    <span class="text-slate-500 text-[11px] font-mono hidden xs:inline-block px-1">
+                        {{ $entry->reading_time }}
+                    </span>
+
+                    <!-- Copy / Share Button -->
+                    <button @click="copyUrl()"
+                            type="button"
+                            class="relative p-2 rounded-lg bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm focus:outline-none"
+                            :title="copied ? 'Tautan tersalin!' : 'Salin tautan artikel'"
+                            aria-label="Salin tautan artikel">
+                        <svg x-show="!copied" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                        </svg>
+                        <svg x-show="copied" style="display: none;" class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <!-- Tooltip notification -->
+                        <span x-show="copied"
+                              x-transition
+                              style="display: none;"
+                              class="absolute -bottom-8 right-0 px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-[10px] font-mono whitespace-nowrap shadow-lg">
+                            Tersalin!
+                        </span>
+                    </button>
+
+                    <!-- Language Switcher Pill -->
+                    <div class="flex items-center rounded-lg bg-carbon-900 border border-carbon-800 overflow-hidden shadow-sm font-mono text-[11px]">
+                        <a href="{{ route('lang.switch', 'id') }}"
+                           class="px-2 py-1 font-semibold transition-all {{ app()->getLocale() === 'id' ? 'bg-vermilion-600 text-white' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}"
+                           title="Bahasa Indonesia">
+                            ID
+                        </a>
+                        <span class="w-px h-3 bg-carbon-800"></span>
+                        <a href="{{ route('lang.switch', 'en') }}"
+                           class="px-2 py-1 font-semibold transition-all {{ app()->getLocale() === 'en' ? 'bg-vermilion-600 text-white' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}"
+                           title="English">
+                            EN
+                        </a>
+                    </div>
                 </div>
+
             </div>
         </header>
 
@@ -235,7 +328,7 @@
                 @endif
 
                 <!-- Title -->
-                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight mb-4">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight mb-4" id="article-title">
                     {{ $entry->title }}
                 </h1>
 
@@ -271,6 +364,46 @@
             <article class="prose-note" id="article-body">
                 {!! $entry->body_html !!}
             </article>
+
+            <!-- ── Author Card / Mini Profile ── -->
+            <div class="mt-14 pt-8 border-t border-carbon-800">
+                <div class="p-6 rounded-2xl bg-carbon-900/70 border border-carbon-800/80 backdrop-blur-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+                    <div class="flex items-center gap-4">
+                        <!-- Avatar / Monogram -->
+                        <div class="w-12 h-12 rounded-xl bg-carbon-800 border border-carbon-700/80 flex items-center justify-center font-mono font-bold text-vermilion-400 text-base shadow-inner shrink-0">
+                            &lt;A/&gt;
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-sm font-bold text-white tracking-tight">Moch Hasbi Ashidqy</h3>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-vermilion-500/10 border border-vermilion-500/20 text-vermilion-400">Author</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-0.5 leading-relaxed">
+                                Self-taught Laravel Backend Developer &bull; Berbagi catatan eksplorasi arsitektur, clean code, dan performa backend.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Connect / Socials -->
+                    <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-carbon-850 hover:bg-carbon-800 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm" aria-label="GitHub" title="GitHub">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-carbon-850 hover:bg-carbon-800 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm" aria-label="LinkedIn" title="LinkedIn">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2z" />
+                            </svg>
+                        </a>
+                        <a href="mailto:contact@example.com" class="p-2 rounded-lg bg-carbon-850 hover:bg-carbon-800 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm" aria-label="Email" title="Kirim Email">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
         </main>
 
@@ -314,15 +447,88 @@
         </nav>
         @endif
 
-        <!-- ── Footer ── -->
-        <footer class="border-t border-carbon-800 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="flex items-center justify-between">
-                <a href="/"
-                   class="flex items-center gap-2 text-slate-500 hover:text-white transition-colors text-sm group">
-                    <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                    Kembali ke Beranda
-                </a>
-                <span class="text-xs font-mono text-slate-600">Ashidqy Handbook</span>
+        <!-- ── Site Footer ── -->
+        <footer class="relative bg-carbon-950 text-slate-100 border-t border-carbon-800/90 overflow-hidden mt-16">
+            <!-- Subtle Top Edge Gradient Accent Line -->
+            <div class="h-px w-full bg-gradient-to-r from-transparent via-vermilion-500/30 to-transparent"></div>
+
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-14">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+
+                    <!-- Left: Brand / Logo & Tagline -->
+                    <div class="flex flex-col items-center md:items-start text-center md:text-left gap-2">
+                        <a href="/" class="inline-flex items-center gap-2.5 group">
+                            <div class="flex items-center gap-1 p-1 rounded bg-carbon-900 border border-carbon-800">
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500/90"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400/90"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400/90"></span>
+                            </div>
+                            <span class="font-mono text-base font-bold text-white tracking-tight">
+                                <span class="text-vermilion-400">&lt;</span>Ashidqy<span class="text-vermilion-400">/&gt;</span>
+                            </span>
+                        </a>
+                        <p class="text-xs text-slate-400 max-w-md leading-relaxed font-normal">
+                            {{ __('footer.tagline') }}
+                        </p>
+                    </div>
+
+                    <!-- Center / Quick Links -->
+                    <div class="flex items-center gap-5 text-xs font-mono text-slate-400">
+                        <a href="/#projects" class="hover:text-white transition-colors">Projek</a>
+                        <a href="/#tech-stack" class="hover:text-white transition-colors">Teknologi</a>
+                        <a href="/#experience" class="hover:text-white transition-colors">Pengalaman</a>
+                        <a href="/" class="hover:text-vermilion-400 transition-colors">Beranda</a>
+                    </div>
+
+                    <!-- Right: Social Links -->
+                    <div class="flex items-center gap-2.5">
+                        <a href="https://github.com"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="p-2.5 rounded-lg bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm"
+                           aria-label="GitHub"
+                           title="GitHub">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                            </svg>
+                        </a>
+
+                        <a href="https://linkedin.com"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="p-2.5 rounded-lg bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm"
+                           aria-label="LinkedIn"
+                           title="LinkedIn">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2z" />
+                            </svg>
+                        </a>
+
+                        <a href="mailto:contact@example.com"
+                           class="p-2.5 rounded-lg bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm"
+                           aria-label="Email"
+                           title="Kirim Email">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Bottom Bar: Copyright & Built with Info -->
+                <div class="mt-8 pt-8 border-t border-carbon-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                    <p>
+                        &copy; {{ date('Y') }} Ashidqy. {{ __('footer.rights') }}
+                    </p>
+
+                    <div class="flex items-center gap-1.5 font-mono text-[11px] text-slate-400">
+                        <span>{{ __('footer.built_with') }}</span>
+                        <span class="text-vermilion-400 font-semibold">Laravel</span>
+                        <span>&amp;</span>
+                        <span class="text-sky-300 font-semibold">Tailwind CSS</span>
+                    </div>
+                </div>
             </div>
         </footer>
 
