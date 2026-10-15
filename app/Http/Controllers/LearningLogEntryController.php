@@ -11,9 +11,13 @@ class LearningLogEntryController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $entries = LearningLogEntry::with('relatedProject')
-            ->latest('published_at')
-            ->get();
+        $query = LearningLogEntry::with('relatedProject');
+
+        if ($request->filled('category')) {
+            $query->where('category', $request->query('category'));
+        }
+
+        $entries = $query->latest('published_at')->get();
 
         return response()->json($entries);
     }

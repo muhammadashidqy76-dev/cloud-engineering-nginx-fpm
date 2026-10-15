@@ -26,6 +26,14 @@ class LearningLogEntryRequest extends FormRequest
                     LearningLogEntry::TAG_PRODUCTION_READY,
                 ]),
             ],
+            'category' => [
+                'required',
+                'string',
+                Rule::in([
+                    LearningLogEntry::CATEGORY_LARAVEL,
+                    LearningLogEntry::CATEGORY_CLOUD,
+                ]),
+            ],
             'related_project_id' => ['nullable', 'integer', 'exists:projects,id'],
             'published_at' => ['nullable', 'date'],
             'status' => ['required', 'string', Rule::in(['draft', 'published'])],

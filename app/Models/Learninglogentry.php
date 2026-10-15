@@ -14,10 +14,14 @@ class LearningLogEntry extends Model
     public const TAG_EXPLORING = 'exploring';
     public const TAG_PRODUCTION_READY = 'production_ready';
 
+    public const CATEGORY_LARAVEL = 'laravel';
+    public const CATEGORY_CLOUD = 'cloud_engineering';
+
     protected $fillable = [
         'title',
         'content',
         'tag',
+        'category',
         'related_project_id',
         'published_at',
         'status',
@@ -45,5 +49,20 @@ class LearningLogEntry extends Model
     public function scopeProductionReady(Builder $query): Builder
     {
         return $query->where('tag', self::TAG_PRODUCTION_READY);
+    }
+
+    public function scopeLaravel(Builder $query): Builder
+    {
+        return $query->where('category', self::CATEGORY_LARAVEL);
+    }
+
+    public function scopeCloud(Builder $query): Builder
+    {
+        return $query->where('category', self::CATEGORY_CLOUD);
+    }
+
+    public function scopeCategory(Builder $query, string $category): Builder
+    {
+        return $query->where('category', $category);
     }
 }
