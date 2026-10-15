@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class LearningLogEntry extends Model
 {
@@ -19,7 +20,9 @@ class LearningLogEntry extends Model
 
     protected $fillable = [
         'title',
+        'slug',
         'content',
+        'body',
         'tag',
         'category',
         'related_project_id',
@@ -30,6 +33,26 @@ class LearningLogEntry extends Model
     protected $casts = [
         'published_at' => 'date',
     ];
+
+    /**
+     * Auto-generate slug from title when creating if not provided.
+     */
+    protected static function booted(): void
+    {
+        static::creating(function (LearningLogEntry $entry) {
+            if (empty($entry->slug)) {
+                $entry->slug = Str::slug($entry->title);
+            }
+        });
+    }
+
+    /**
+     * Route model binding by slug instead of id.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function relatedProject(): BelongsTo
     {
@@ -66,10 +89,27 @@ class LearningLogEntry extends Model
         return $query->where('category', $category);
     }
 
+    /**
+     * Reading time calculated from body (full content) if available, else from excerpt.
+     */
     public function getReadingTimeAttribute(): string
     {
-        $words = str_word_count(strip_tags((string) $this->content));
+        $text = !empty($this->body) ? $this->body : $this->content;
+        $words = str_word_count(strip_tags((string) $text));
         $minutes = max(1, (int) ceil($words / 180));
         return "{$minutes} min read";
+    }
+
+    /**
+     * Returns parsed HTML from the body Markdown field.
+     * Falls back to content excerpt if body is empty.
+     */
+    public function getBodyHtmlAttribute(): string
+    {
+        $source = !empty($this->body) ? $this->body : $this->content;
+        return \Illuminate\Support\Str::markdown((string) $source, [
+            'html_input' => 'strip',
+            'allow_unsafe_links' => false,
+        ]);
     }
 }

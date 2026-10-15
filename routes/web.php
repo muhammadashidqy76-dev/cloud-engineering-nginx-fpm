@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\JourneyEntryController;
 use App\Http\Controllers\LearningLogEntryController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TechStackItemController;
@@ -22,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// ─── Public Reading Pages ─────────────────────────────────────────────────────
+Route::get('/notes/{entry:slug}', [NoteController::class, 'show'])->name('notes.show');
 
 /*
  * Language / Locale Switcher

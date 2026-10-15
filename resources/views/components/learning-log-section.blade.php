@@ -139,7 +139,7 @@
                             })($log->content);
                         @endphp
 
-                        <article class="group flex flex-col justify-between rounded-xl bg-carbon-900 border border-carbon-800 hover:border-carbon-700/80 transition-all duration-200 hover:-translate-y-0.5 overflow-hidden">
+                        <article class="group flex flex-col justify-between rounded-xl bg-carbon-900 border border-carbon-800 hover:border-vermilion-500/40 transition-all duration-200 hover:-translate-y-0.5 overflow-hidden">
                             <div>
                                 <!-- Window Mockup Header Bar -->
                                 <div class="flex items-center justify-between px-4 py-2.5 bg-carbon-950 border-b border-carbon-800 select-none">
@@ -161,9 +161,17 @@
 
                                 <!-- Card Body -->
                                 <div class="p-5 flex flex-col gap-2.5">
-                                    <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-vermilion-400 transition-colors leading-snug">
-                                        {{ $log->title }}
-                                    </h4>
+                                    @if(!empty($log->slug))
+                                        <a href="{{ route('notes.show', $log->slug) }}" class="block">
+                                            <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-vermilion-400 transition-colors leading-snug">
+                                                {{ $log->title }}
+                                            </h4>
+                                        </a>
+                                    @else
+                                        <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-vermilion-400 transition-colors leading-snug">
+                                            {{ $log->title }}
+                                        </h4>
+                                    @endif
                                     <p class="text-xs text-slate-300 leading-relaxed font-sans">
                                         {{ $log->content }}
                                     </p>
@@ -175,11 +183,20 @@
                                 <span class="text-[10px] text-slate-400">
                                     {{ $pubDate ?? '—' }}
                                 </span>
-                                @if($relatedName)
-                                    <span class="text-[10px] font-medium text-slate-400 bg-carbon-950 border border-carbon-800 px-2 py-0.5 rounded truncate max-w-[180px]">
-                                        {{ $relatedName }}
-                                    </span>
-                                @endif
+                                <div class="flex items-center gap-2">
+                                    @if($relatedName)
+                                        <span class="text-[10px] font-medium text-slate-400 bg-carbon-950 border border-carbon-800 px-2 py-0.5 rounded truncate max-w-[120px]">
+                                            {{ $relatedName }}
+                                        </span>
+                                    @endif
+                                    @if(!empty($log->slug))
+                                        <a href="{{ route('notes.show', $log->slug) }}"
+                                           class="inline-flex items-center gap-1 text-[10px] font-semibold text-vermilion-400 hover:text-vermilion-300 transition-colors">
+                                            Baca
+                                            <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
                         </article>
                     @empty
@@ -238,7 +255,7 @@
                             })($log->content);
                         @endphp
 
-                        <article class="group flex flex-col justify-between rounded-xl bg-carbon-900 border border-carbon-800 hover:border-carbon-700/80 transition-all duration-200 hover:-translate-y-0.5 overflow-hidden">
+                        <article class="group flex flex-col justify-between rounded-xl bg-carbon-900 border border-carbon-800 hover:border-cyan-500/40 transition-all duration-200 hover:-translate-y-0.5 overflow-hidden">
                             <div>
                                 <!-- Window Mockup Header Bar -->
                                 <div class="flex items-center justify-between px-4 py-2.5 bg-carbon-950 border-b border-carbon-800 select-none">
@@ -260,9 +277,17 @@
 
                                 <!-- Card Body -->
                                 <div class="p-5 flex flex-col gap-2.5">
-                                    <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-cyan-400 transition-colors leading-snug">
-                                        {{ $log->title }}
-                                    </h4>
+                                    @if(!empty($log->slug))
+                                        <a href="{{ route('notes.show', $log->slug) }}" class="block">
+                                            <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-cyan-400 transition-colors leading-snug">
+                                                {{ $log->title }}
+                                            </h4>
+                                        </a>
+                                    @else
+                                        <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-cyan-400 transition-colors leading-snug">
+                                            {{ $log->title }}
+                                        </h4>
+                                    @endif
                                     <p class="text-xs text-slate-300 leading-relaxed font-sans">
                                         {{ $log->content }}
                                     </p>
@@ -274,11 +299,20 @@
                                 <span class="text-[10px] text-slate-400">
                                     {{ $pubDate ?? '—' }}
                                 </span>
-                                @if($relatedName)
-                                    <span class="text-[10px] font-medium text-slate-400 bg-carbon-950 border border-carbon-800 px-2 py-0.5 rounded truncate max-w-[180px]">
-                                        {{ $relatedName }}
-                                    </span>
-                                @endif
+                                <div class="flex items-center gap-2">
+                                    @if($relatedName)
+                                        <span class="text-[10px] font-medium text-slate-400 bg-carbon-950 border border-carbon-800 px-2 py-0.5 rounded truncate max-w-[120px]">
+                                            {{ $relatedName }}
+                                        </span>
+                                    @endif
+                                    @if(!empty($log->slug))
+                                        <a href="{{ route('notes.show', $log->slug) }}"
+                                           class="inline-flex items-center gap-1 text-[10px] font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">
+                                            Baca
+                                            <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
                         </article>
                     @empty
