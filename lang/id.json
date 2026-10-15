@@ -94,6 +94,11 @@
     "log.hide": "Sembunyikan Learning Log",
     "log.tag_production_ready": "Production-Ready",
     "log.tag_exploring": "Exploring",
+    "log.track_laravel_title": "Laravel & Arsitektur Sistem",
+    "log.track_laravel_desc": "Pola arsitektur, clean controller, dan optimasi query Eloquent.",
+    "log.track_cloud_title": "Cloud Engineering & Infrastruktur",
+    "log.track_cloud_desc": "Redis caching, Docker containerization, dan keandalan server backend.",
+    "log.empty_track": "Belum ada catatan publik untuk pilar ini.",
 
     "experience.tag": "Work Experience & Internships",
     "experience.title": "Pengalaman Kerja & Magang",

@@ -94,6 +94,11 @@
     "log.hide": "Hide Learning Log",
     "log.tag_production_ready": "Production-Ready",
     "log.tag_exploring": "Exploring",
+    "log.track_laravel_title": "Laravel & System Architecture",
+    "log.track_laravel_desc": "Architectural patterns, clean controllers, and Eloquent query optimization.",
+    "log.track_cloud_title": "Cloud Engineering & Infrastructure",
+    "log.track_cloud_desc": "Redis caching, Docker containerization, and backend server reliability.",
+    "log.empty_track": "No public notes in this pillar yet.",
 
     "experience.tag": "Work Experience & Internships",
     "experience.title": "Work Experience & Internships",

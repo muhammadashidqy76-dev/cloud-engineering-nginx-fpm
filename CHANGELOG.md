@@ -7,6 +7,12 @@ bukan per-commit (untuk itu lihat `git log`).
 ## [Unreleased]
 
 ### Added
+- Migration `add_category_to_learning_log_entries_table`: menambahkan kolom `category` (default `laravel`) pada tabel `learning_log_entries` untuk pengelompokan pilar topik (Laravel Ecosystem vs Cloud Engineering).
+- Model `LearningLogEntry`: tambah konstanta `CATEGORY_LARAVEL` & `CATEGORY_CLOUD`, field `category` ke `$fillable`, serta query scopes `scopeLaravel()`, `scopeCloud()`, dan `scopeCategory()`.
+- `LearningLogEntryRequest`: tambah validasi field `category` (`required`, `in:laravel,cloud_engineering`).
+- `LearningLogEntryController`: tambah dukungan filter query parameter `category` pada method `index()`.
+- `LearningLogEntryFactory` & `LearningLogEntrySeeder`: dukungan atribut `category`, factory states `laravel()` & `cloud()`, serta seed entri data seimbang untuk pilar Laravel dan Cloud Engineering.
+- Keys lokalisasi track pilar (`log.track_laravel_title/desc`, `log.track_cloud_title/desc`, `log.empty_track`) di `lang/id.json` dan `lang/en.json`.
 - Feature tests `FeaturedProjectsTest.php`: validasi query data published projects dari database, relasi tech stack items, complexity order, dan rendering mock-up API.
 - Feature tests `WorkExperienceTest.php`: validasi model, accessors (`duration_label`, badge classes), scopes (`published`, `current`, `chronological`), form requests, CRUD API endpoints, dan graceful frontend visibility pada welcome page.
 - `WorkExperienceSeeder`: seeder dengan 1 entri data dummy sementara untuk keperluan preview visual section Work Experience (perlu diganti data asli sebelum deploy).
@@ -30,6 +36,7 @@ bukan per-commit (untuk itu lihat `git log`).
 - fix: seragamkan ukuran logo issuer di card Journey (`w-8 h-8`, `shrink-0`, `object-contain`, `rounded-md`) agar konsisten untuk semua tipe card dan resolusi gambar.
 
 ### Changed
+- `learning-log-section.blade.php`: beralih dari layout 3-kolom grid menjadi layout Split Section Two-Track berdampingan (`lg:grid-cols-2`) untuk Track 01 (Laravel & System Architecture) dan Track 02 (Cloud Engineering & Infrastructure) dengan header pilar beraksen arsitektural (icon kode vermilion & icon cloud cyan) dan counter badge entri.
 - Redesain visual seluruh Error Pages (`403`, `404`, `419`, `429`, `500`, `503`, dan `layout.blade.php`): mengintegrasikan tema *Architectural Backend Craft*, window mockup header `app/Exceptions/Handler.php` dengan badge status `EXCEPTION_THROWN`, blok telemetri terminal monospace interaktif, tombol CTA vermilion, dan background matrix grid global terpadu.
 - Penyatuan pola background matrix grid: memindahkan pola *blueprint matrix grid* dari masing-masing section ke satu layer global (*fixed background*) di `welcome.blade.php`, menghasilkan garis grid yang tersambung seamless dari atas hingga bawah halaman tanpa pengulangan pola per-section.
 - Redesain visual (UI/styling) Section Journey, Learning Log, Work Experience, dan Tech Stack: standarisasi penuh ke tema *Architectural Backend Craft* berbasis Obsidian-Carbon (`bg-carbon-950`, `bg-carbon-900`, `border-carbon-800`), badge status monospace terstruktur, motif window header 3-dot presisi, dan tipografi hierarkis tajam tanpa mengubah struktur data, model, translation keys, atau fungsionalitas Alpine.

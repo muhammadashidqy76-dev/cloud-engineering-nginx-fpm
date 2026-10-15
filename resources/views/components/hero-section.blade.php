@@ -25,7 +25,7 @@
              }
          }"
          @keydown.escape.window="closeBioModal(); closeCvModal();"
-         class="relative min-h-[90vh] flex items-center justify-center bg-transparent text-slate-100 overflow-hidden py-20 lg:py-28 border-b border-carbon-800/80">
+         class="relative min-h-[90vh] flex items-center justify-center bg-carbon-950/60 text-slate-100 overflow-hidden py-20 lg:py-28 border-b border-carbon-800/80">
 
     <!-- Architectural Subtle Accent Line -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-vermilion-500/20 to-transparent pointer-events-none"></div>

@@ -16,8 +16,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-carbon-950 text-slate-100 font-sans antialiased selection:bg-rose-500 selection:text-white relative min-h-screen">
-    <!-- Global Seamless Dot Matrix Canvas Background -->
-    <div class="fixed inset-0 bg-[radial-gradient(rgba(148,163,184,0.22)_1.2px,transparent_1.2px)] [background-size:24px_24px] pointer-events-none z-0"></div>
+    <!-- Global Seamless Engineering Matrix Grid Background -->
+    <div class="fixed inset-0 bg-[linear-gradient(to_right,#1f293d18_2px,transparent_2px),linear-gradient(to_bottom,#1f293d18_2px,transparent_2px)] bg-[size:3.5rem_3.5rem] pointer-events-none z-0"></div>
 
     <div class="relative z-10">
         <x-navbar />
