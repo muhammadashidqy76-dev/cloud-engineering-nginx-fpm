@@ -7,9 +7,12 @@ bukan per-commit (untuk itu lihat `git log`).
 ## [Unreleased]
 
 ### Changed
-- Blade `resources/views/notes/show.blade.php`: upgrade header ke reader-mode lengkap (branding `<Ashidqy/>`, tombol kembali ke beranda, judul artikel fade-in saat scroll melewati header artikel, tombol salin link dengan feedback tooltip, language switcher ID/EN), penambahan Author Card mini profil di akhir artikel, dan upgrade footer lengkap dengan navigasi quick links, info built with, copyright, dan social media links.
+- Blade `resources/views/notes/show.blade.php`: menghapus switcher bahasa (ID/EN) dari header baca artikel dan menggantinya dengan tautan langsung ke katalog catatan (`/notes`) serta penambahan link `Catatan` di quick links footer.
+- Blade `resources/views/notes/show.blade.php`: upgrade header ke reader-mode lengkap (branding `<Ashidqy/>`, tombol kembali ke beranda, judul artikel fade-in saat scroll melewati header artikel, tombol salin link dengan feedback tooltip), penambahan Author Card mini profil di akhir artikel, dan upgrade footer lengkap dengan navigasi quick links, info built with, copyright, dan social media links.
 
 ### Added
+- Route publik `GET /notes` → `NoteController::index` dan Blade `resources/views/notes/index.blade.php`: halaman arsip & katalog penuh untuk seluruh catatan teknis, dilengkapi filter kategori (Semua, Laravel, Cloud Engineering), pencarian judul/konten, grid card responsif 3-kolom, dan pagination.
+- Component `learning-log-section.blade.php`: tombol Call-to-Action "Lihat Semua Catatan & Eksperimen" di bagian bawah section beranda yang mengarah langsung ke `/notes`.
 - Migration `add_slug_and_body_to_learning_log_entries_table`: menambahkan kolom `slug` (unique) dan `body` (longText, Markdown penuh) ke tabel `learning_log_entries`. Kolom `content` tetap sebagai excerpt di card homepage.
 - Model `LearningLogEntry`: tambah `slug` & `body` ke `$fillable`, auto-generate slug dari title via `booted()`, route key binding by `slug`, accessor `getBodyHtmlAttribute()` yang mengkonversi `body` Markdown ke HTML via `Str::markdown()`, dan update `getReadingTimeAttribute()` untuk menghitung dari `body` jika tersedia.
 - Controller `NoteController`: handle publik route `GET /notes/{entry:slug}`, guard 404 untuk entri belum published, query prev/next dalam track yang sama untuk navigasi artikel.

@@ -25,6 +25,7 @@ Route::get('/', function () {
 });
 
 // ─── Public Reading Pages ─────────────────────────────────────────────────────
+Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
 Route::get('/notes/{entry:slug}', [NoteController::class, 'show'])->name('notes.show');
 
 /*

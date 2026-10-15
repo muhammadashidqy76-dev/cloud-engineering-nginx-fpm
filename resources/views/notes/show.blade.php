@@ -226,9 +226,6 @@
                     <a href="/"
                        class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-white transition-colors group px-2 py-1 rounded-md hover:bg-carbon-900"
                        id="back-to-home-link">
-                        <svg class="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5 text-vermilion-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                        </svg>
                         <span>Beranda</span>
                     </a>
                 </div>
@@ -289,20 +286,15 @@
                         </span>
                     </button>
 
-                    <!-- Language Switcher Pill -->
-                    <div class="flex items-center rounded-lg bg-carbon-900 border border-carbon-800 overflow-hidden shadow-sm font-mono text-[11px]">
-                        <a href="{{ route('lang.switch', 'id') }}"
-                           class="px-2 py-1 font-semibold transition-all {{ app()->getLocale() === 'id' ? 'bg-vermilion-600 text-white' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}"
-                           title="Bahasa Indonesia">
-                            ID
-                        </a>
-                        <span class="w-px h-3 bg-carbon-800"></span>
-                        <a href="{{ route('lang.switch', 'en') }}"
-                           class="px-2 py-1 font-semibold transition-all {{ app()->getLocale() === 'en' ? 'bg-vermilion-600 text-white' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}"
-                           title="English">
-                            EN
-                        </a>
-                    </div>
+                    <!-- Link to All Notes Archive -->
+                    <a href="{{ route('notes.index') }}"
+                       class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 hover:border-slate-700 text-slate-300 hover:text-white transition-all text-xs font-mono group"
+                       title="Lihat semua catatan & eksperimen">
+                        <svg class="w-3.5 h-3.5 text-vermilion-400 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        <span class="hidden sm:inline">Semua Catatan</span>
+                    </a>
                 </div>
 
             </div>
@@ -369,9 +361,8 @@
             <div class="mt-14 pt-8 border-t border-carbon-800">
                 <div class="p-6 rounded-2xl bg-carbon-900/70 border border-carbon-800/80 backdrop-blur-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
                     <div class="flex items-center gap-4">
-                        <!-- Avatar / Monogram -->
                         <div class="w-12 h-12 rounded-xl bg-carbon-800 border border-carbon-700/80 flex items-center justify-center font-mono font-bold text-vermilion-400 text-base shadow-inner shrink-0">
-                            &lt;A/&gt;
+                            <img src="/images/Siakad.jpg" alt="Moch Hasbi Ashidqy" class="w-full h-full rounded-xl object-cover">
                         </div>
                         <div>
                             <div class="flex items-center gap-2">
@@ -382,25 +373,6 @@
                                 Self-taught Laravel Backend Developer &bull; Berbagi catatan eksplorasi arsitektur, clean code, dan performa backend.
                             </p>
                         </div>
-                    </div>
-
-                    <!-- Connect / Socials -->
-                    <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-carbon-850 hover:bg-carbon-800 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm" aria-label="GitHub" title="GitHub">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-                            </svg>
-                        </a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-carbon-850 hover:bg-carbon-800 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm" aria-label="LinkedIn" title="LinkedIn">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2z" />
-                            </svg>
-                        </a>
-                        <a href="mailto:contact@example.com" class="p-2 rounded-lg bg-carbon-850 hover:bg-carbon-800 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm" aria-label="Email" title="Kirim Email">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -477,7 +449,8 @@
                         <a href="/#projects" class="hover:text-white transition-colors">Projek</a>
                         <a href="/#tech-stack" class="hover:text-white transition-colors">Teknologi</a>
                         <a href="/#experience" class="hover:text-white transition-colors">Pengalaman</a>
-                        <a href="/" class="hover:text-vermilion-400 transition-colors">Beranda</a>
+                        <a href="{{ route('notes.index') }}" class="text-vermilion-400 font-semibold hover:text-vermilion-300 transition-colors">Catatan</a>
+                        <a href="/" class="hover:text-white transition-colors">Beranda</a>
                     </div>
 
                     <!-- Right: Social Links -->
