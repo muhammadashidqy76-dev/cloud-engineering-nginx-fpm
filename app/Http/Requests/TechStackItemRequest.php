@@ -40,6 +40,8 @@ class TechStackItemRequest extends FormRequest
                 TechStackItem::STATUS_IN_PROGRESS,
                 TechStackItem::STATUS_NOT_STARTED,
             ])],
+            'project_ids'     => ['nullable', 'array'],
+            'project_ids.*'   => ['integer', 'exists:projects,id'],
         ];
     }
 

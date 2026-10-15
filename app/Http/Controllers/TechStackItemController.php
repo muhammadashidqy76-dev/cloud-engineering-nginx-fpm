@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TechStackItemRequest;
+use App\Models\Project;
 use App\Models\TechStackItem;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -66,7 +67,9 @@ class TechStackItemController extends Controller
 
         $nextOrder = (TechStackItem::where('category', $selectedCategory)->max('display_order') ?? 0) + 1;
 
-        return view('tech-stack.create', compact('categories', 'selectedCategory', 'nextOrder'));
+        $projects = Project::orderBy('complexity_order')->get();
+
+        return view('tech-stack.create', compact('categories', 'selectedCategory', 'nextOrder', 'projects'));
     }
 
     /**
@@ -75,14 +78,18 @@ class TechStackItemController extends Controller
     public function store(TechStackItemRequest $request): RedirectResponse|JsonResponse
     {
         $validated = $request->validated();
-        unset($validated['custom_category']);
+        unset($validated['custom_category'], $validated['project_ids']);
 
         $item = TechStackItem::create($validated);
+
+        if ($request->has('project_ids')) {
+            $item->projects()->sync($request->input('project_ids', []));
+        }
 
         if ($request->wantsJson()) {
             return response()->json([
                 'message' => 'Tech stack item created successfully.',
-                'data'    => $item,
+                'data'    => $item->load('projects'),
             ], 201);
         }
 
@@ -117,7 +124,9 @@ class TechStackItemController extends Controller
         $presetCategories = ['Backend', 'Database', 'Tools', 'Frontend', 'Cloud & DevOps'];
         $categories = array_values(array_unique(array_merge($presetCategories, $existingCategories)));
 
-        return view('tech-stack.edit', compact('techStackItem', 'categories'));
+        $projects = Project::orderBy('complexity_order')->get();
+
+        return view('tech-stack.edit', compact('techStackItem', 'categories', 'projects'));
     }
 
     /**
@@ -126,14 +135,17 @@ class TechStackItemController extends Controller
     public function update(TechStackItemRequest $request, TechStackItem $techStackItem): RedirectResponse|JsonResponse
     {
         $validated = $request->validated();
-        unset($validated['custom_category']);
+        unset($validated['custom_category'], $validated['project_ids']);
 
         $techStackItem->update($validated);
+
+        // Sinkronisasi relasi pivot (menambah yang dicentang, melepas yang tidak dicentang)
+        $techStackItem->projects()->sync($request->input('project_ids', []));
 
         if ($request->wantsJson()) {
             return response()->json([
                 'message' => 'Tech stack item updated successfully.',
-                'data'    => $techStackItem,
+                'data'    => $techStackItem->load('projects'),
             ]);
         }
 

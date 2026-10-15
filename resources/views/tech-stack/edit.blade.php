@@ -155,35 +155,75 @@
                     </div>
                 </div>
 
-                <!-- ─── CARD: Proyek yang Terhubung ──────────────────────────────────── -->
-                <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
-                    <div class="px-6 py-3.5 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
-                        <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Relasi Featured Projects Terkait ({{ $techStackItem->projects->count() }})
-                        </span>
-                        <span class="text-[10px] font-mono text-slate-500">PIVOT_REFERENCE</span>
+                <!-- ─── CARD: Kelola Relasi Featured Projects ───────────────────────── -->
+                <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden"
+                     x-data="{
+                         selectAll() {
+                             this.$el.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = true);
+                         },
+                         deselectAll() {
+                             this.$el.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false);
+                         }
+                     }">
+                    <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
+                        <div>
+                            <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider block">
+                                Hubungkan / Kelola Relasi Proyek ({{ $techStackItem->projects->count() }} Terhubung)
+                            </span>
+                            <span class="text-[11px] font-mono text-slate-400">
+                                Centang untuk menghubungkan, hapus centang untuk mencopot relasi dari proyek.
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button type="button" @click="selectAll()" class="text-[11px] font-mono text-vermilion-400 hover:text-vermilion-300">Pilih Semua</button>
+                            <span class="text-slate-600 font-mono text-xs">•</span>
+                            <button type="button" @click="deselectAll()" class="text-[11px] font-mono text-slate-400 hover:text-white">Batal</button>
+                        </div>
                     </div>
 
                     <div class="p-6">
-                        @if ($techStackItem->projects->isNotEmpty())
-                            <div class="space-y-2">
-                                @foreach ($techStackItem->projects as $proj)
-                                    <div class="flex items-center justify-between p-3 rounded-lg bg-carbon-950 border border-carbon-800 text-xs font-mono">
-                                        <div class="flex items-center gap-2">
-                                            <span class="text-vermilion-400">#0{{ $proj->complexity_order }}</span>
-                                            <span class="text-white font-medium">{{ $proj->title }}</span>
+                        @if ($projects->isNotEmpty())
+                            @php
+                                $attachedIds = old('project_ids', $techStackItem->projects->pluck('id')->toArray());
+                            @endphp
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                @foreach ($projects as $proj)
+                                    @php
+                                        $isChecked = in_array($proj->id, $attachedIds);
+                                    @endphp
+                                    <label class="flex items-start justify-between gap-3 p-3.5 rounded-lg bg-carbon-950 border border-carbon-800 hover:border-carbon-700 cursor-pointer transition-colors has-[:checked]:border-vermilion-500/50 has-[:checked]:bg-vermilion-500/5">
+                                        <div class="flex items-start gap-3">
+                                            <input type="checkbox" 
+                                                   name="project_ids[]" 
+                                                   value="{{ $proj->id }}"
+                                                   {{ $isChecked ? 'checked' : '' }}
+                                                   class="mt-0.5 rounded bg-carbon-900 border-carbon-700 text-vermilion-500 focus:ring-vermilion-500/20">
+                                            <div class="text-xs font-mono">
+                                                <div class="flex items-center gap-2 mb-0.5">
+                                                    <span class="text-vermilion-400 font-bold">#0{{ $proj->complexity_order }}</span>
+                                                    <span class="text-white font-medium">{{ $proj->title }}</span>
+                                                </div>
+                                                <span class="text-[11px] text-slate-500 block truncate max-w-[220px]">
+                                                    {{ $proj->problem_statement ?? 'Proyek Portofolio' }}
+                                                </span>
+                                            </div>
                                         </div>
-                                        <a href="{{ route('projects.edit', $proj) }}" class="text-slate-400 hover:text-white transition-colors">
-                                            Buka Proyek &rarr;
+
+                                        <a href="{{ route('projects.edit', $proj) }}" 
+                                           target="_blank"
+                                           class="text-[10px] font-mono text-slate-500 hover:text-white shrink-0 self-center px-1.5 py-0.5 rounded bg-carbon-900 border border-carbon-800 transition-colors"
+                                           title="Buka proyek di tab baru">
+                                            ↗
                                         </a>
-                                    </div>
+                                    </label>
                                 @endforeach
                             </div>
                         @else
                             <p class="text-xs font-mono text-slate-500">
-                                Teknologi ini belum dihubungkan ke Featured Project manapun. Anda dapat menghubungkannya saat mengedit proyek.
+                                Belum ada Featured Project yang terdaftar di database.
                             </p>
                         @endif
+                        <x-input-error :messages="$errors->get('project_ids')" />
                     </div>
                 </div>
 

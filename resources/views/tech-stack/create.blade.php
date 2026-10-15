@@ -155,6 +155,67 @@
                     </div>
                 </div>
 
+                <!-- ─── CARD: Hubungkan ke Featured Projects ───────────────────────── -->
+                <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden"
+                     x-data="{
+                         selectAll() {
+                             this.$el.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = true);
+                         },
+                         deselectAll() {
+                             this.$el.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false);
+                         }
+                     }">
+                    <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
+                        <div>
+                            <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider block">
+                                Hubungkan ke Featured Projects (Opsional)
+                            </span>
+                            <span class="text-[11px] font-mono text-slate-400">
+                                Pilih proyek yang menerapkan teknologi ini (relasi pivot).
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button type="button" @click="selectAll()" class="text-[11px] font-mono text-vermilion-400 hover:text-vermilion-300">Pilih Semua</button>
+                            <span class="text-slate-600 font-mono text-xs">•</span>
+                            <button type="button" @click="deselectAll()" class="text-[11px] font-mono text-slate-400 hover:text-white">Batal</button>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        @if ($projects->isNotEmpty())
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                @foreach ($projects as $proj)
+                                    @php
+                                        $selectedProjects = old('project_ids', []);
+                                        $isChecked = in_array($proj->id, $selectedProjects);
+                                    @endphp
+                                    <label class="flex items-start gap-3 p-3.5 rounded-lg bg-carbon-950 border border-carbon-800 hover:border-carbon-700 cursor-pointer transition-colors has-[:checked]:border-vermilion-500/50 has-[:checked]:bg-vermilion-500/5">
+                                        <input type="checkbox" 
+                                               name="project_ids[]" 
+                                               value="{{ $proj->id }}"
+                                               {{ $isChecked ? 'checked' : '' }}
+                                               class="mt-0.5 rounded bg-carbon-900 border-carbon-700 text-vermilion-500 focus:ring-vermilion-500/20">
+                                        <div class="text-xs font-mono">
+                                            <div class="flex items-center gap-2 mb-0.5">
+                                                <span class="text-vermilion-400 font-bold">#0{{ $proj->complexity_order }}</span>
+                                                <span class="text-white font-medium">{{ $proj->title }}</span>
+                                            </div>
+                                            <span class="text-[11px] text-slate-500 block truncate max-w-[240px]">
+                                                {{ $proj->problem_statement ?? 'Proyek Portofolio' }}
+                                            </span>
+                                        </div>
+                                    </label>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-xs font-mono text-slate-500">
+                                Belum ada Featured Project yang terdaftar. Anda dapat membuat proyek terlebih dahulu di menu Projects.
+                            </p>
+                        @endif
+                        <x-input-error :messages="$errors->get('project_ids')" />
+                    </div>
+                </div>
+
                 <!-- Action Buttons -->
                 <div class="flex items-center justify-between pt-2">
                     <a href="{{ route('tech-stack.index') }}" class="px-4 py-2 rounded-lg font-mono text-xs font-medium text-slate-400 hover:text-white transition-colors">
