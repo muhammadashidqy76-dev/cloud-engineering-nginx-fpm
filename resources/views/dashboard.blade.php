@@ -57,11 +57,11 @@
                 </a>
 
                 <!-- 2. Tech Stack -->
-                <div class="rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-carbon-700 transition-all shadow-lg flex flex-col justify-between">
+                <a href="{{ route('tech-stack.index') }}" class="group rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-vermilion-500/50 transition-all shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span>02. Tech Stack</span>
-                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-carbon-950 border border-carbon-800 text-slate-400">Batch 3</span>
+                            <span class="group-hover:text-vermilion-400 transition-colors">02. Tech Stack &rarr;</span>
+                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Live</span>
                         </div>
                         <div class="text-2xl sm:text-3xl font-bold font-mono text-white">
                             {{ $techStats['total'] }}
@@ -71,7 +71,7 @@
                         <span class="text-emerald-400">{{ $techStats['finished'] }} Mastered</span>
                         <span class="text-amber-400">{{ $techStats['in_progress'] }} Learning</span>
                     </div>
-                </div>
+                </a>
 
                 <!-- 3. Work Experience -->
                 <div class="rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-carbon-700 transition-all shadow-lg flex flex-col justify-between">
@@ -135,7 +135,7 @@
                         </span>
                     </div>
                     <span class="font-mono text-[11px] text-slate-500">
-                        2 Selesai &bull; 4 Menunggu Batch
+                        3 Selesai &bull; 3 Menunggu Batch
                     </span>
                 </div>
 
@@ -173,15 +173,15 @@
                         </div>
                     </div>
 
-                    <!-- Batch 3 (Next) -->
-                    <div class="p-4 rounded-lg bg-carbon-950 border border-carbon-800 flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-carbon-900 border border-carbon-700 text-slate-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
-                            3
+                    <!-- Batch 3 (Active / Done) -->
+                    <div class="p-4 rounded-lg bg-carbon-950 border border-emerald-500/30 flex items-start gap-3 relative overflow-hidden">
+                        <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
+                            ✓
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center justify-between gap-2">
-                                <h4 class="font-mono text-xs font-bold text-slate-200">Batch 3: Tech Stack</h4>
-                                <span class="text-[10px] font-mono text-amber-400 uppercase tracking-wider">Berikutnya</span>
+                                <a href="{{ route('tech-stack.index') }}" class="font-mono text-xs font-bold text-white hover:text-vermilion-400 transition-colors">Batch 3: Tech Stack &rarr;</a>
+                                <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Live</span>
                             </div>
                             <p class="text-xs text-slate-400 mt-1">
                                 Manajemen item teknologi per kategori (Backend, Database, Tools) dan status penguasaan.
@@ -189,7 +189,7 @@
                         </div>
                     </div>
 
-                    <!-- Batch 4 -->
+                    <!-- Batch 4 (Next) -->
                     <div class="p-4 rounded-lg bg-carbon-950 border border-carbon-800 flex items-start gap-3">
                         <div class="w-6 h-6 rounded-full bg-carbon-900 border border-carbon-700 text-slate-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
                             4
@@ -197,7 +197,7 @@
                         <div class="flex-1">
                             <div class="flex items-center justify-between gap-2">
                                 <h4 class="font-mono text-xs font-bold text-slate-200">Batch 4: Work Experience</h4>
-                                <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Antrean</span>
+                                <span class="text-[10px] font-mono text-amber-400 uppercase tracking-wider">Berikutnya</span>
                             </div>
                             <p class="text-xs text-slate-400 mt-1">
                                 Manajemen pengalaman kerja & magang, tipe employment, masa kerja, dan status publikasi.

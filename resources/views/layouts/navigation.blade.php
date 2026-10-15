@@ -38,11 +38,10 @@
                         {{ __('Projects') }}
                     </x-nav-link>
 
-                    <!-- 3. Tech Stack (Batch 3) -->
-                    <span class="inline-flex items-center px-3 pt-1 border-b-2 border-transparent text-xs font-mono font-medium text-slate-500 cursor-not-allowed select-none group" title="Segera hadir di Batch 3">
-                        <span>Tech Stack</span>
-                        <span class="ms-1.5 text-[9px] px-1 py-0.2 rounded bg-carbon-900 border border-carbon-800 text-slate-500">B3</span>
-                    </span>
+                    <!-- 3. Tech Stack (Active) -->
+                    <x-nav-link :href="route('tech-stack.index')" :active="request()->routeIs('tech-stack.*')">
+                        {{ __('Tech Stack') }}
+                    </x-nav-link>
 
                     <!-- 4. Work Experience (Batch 4) -->
                     <span class="inline-flex items-center px-3 pt-1 border-b-2 border-transparent text-xs font-mono font-medium text-slate-500 cursor-not-allowed select-none group" title="Segera hadir di Batch 4">
@@ -127,10 +126,13 @@
                 {{ __('Featured Projects (Active)') }}
             </x-responsive-nav-link>
 
+            <x-responsive-nav-link :href="route('tech-stack.index')" :active="request()->routeIs('tech-stack.*')">
+                {{ __('Tech Stack (Active)') }}
+            </x-responsive-nav-link>
+
             <div class="px-4 py-2 text-[11px] font-mono text-slate-500 uppercase tracking-wider">
-                Modul Konten (Akan Hadir di Batch 3-6)
+                Modul Konten (Akan Hadir di Batch 4-6)
             </div>
-            <div class="px-4 py-1.5 text-xs font-mono text-slate-500">3. Tech Stack</div>
             <div class="px-4 py-1.5 text-xs font-mono text-slate-500">4. Work Experience</div>
             <div class="px-4 py-1.5 text-xs font-mono text-slate-500">5. Journey & Kredensial</div>
             <div class="px-4 py-1.5 text-xs font-mono text-slate-500">6. Learning Log / Notes</div>
