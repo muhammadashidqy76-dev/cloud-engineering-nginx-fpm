@@ -13,8 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Seed Featured Projects & Tech Stack Items
+        // 1. Seed Admin User, Featured Projects & Tech Stack Items
         $this->call([
+            AdminUserSeeder::class,
             ProjectSeeder::class,
             TechStackItemSeeder::class,
         ]);

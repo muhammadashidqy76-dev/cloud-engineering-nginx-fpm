@@ -6,7 +6,19 @@ bukan per-commit (untuk itu lihat `git log`).
 
 ## [Unreleased]
 
+### Added
+- `AdminUserSeeder`: seeder akun administrator awal (`admin@ashidqy.dev` / `password`).
+- Controller `DashboardController`: mengelola tampilan konsol ringkasan `/dashboard` dengan agregasi metrik dari seluruh model konten CMS (Projects, Tech Stack, Work Experience, Journey, dan Notes/Learning Log).
+- Blade `resources/views/dashboard.blade.php`: Control Room overview dashboard (Batch 1) bertema dark architectural carbon yang menampilkan 5 kartu statistik metrik, roadmap tracker implementasi modular batch 1-6, feed catatan teknis terkini, dan preview featured projects.
+
 ### Changed
+- `routes/auth.php`: menonaktifkan rute registrasi publik (`/register` otomatis dialihkan ke `/login`) agar CMS berjalan aman dalam mode single-operator.
+- `routes/web.php`: rute `/dashboard` beralih dari closure view statis ke `DashboardController::class, 'index'`.
+- Layout `resources/views/layouts/guest.blade.php`: redesain total dengan estetika dark architectural carbon, window terminal mockup, grid matrix canvas, dan branding `<Ashidqy/>`.
+- Blade auth (`auth/login.blade.php`, `auth/forgot-password.blade.php`, `auth/reset-password.blade.php`): penyelarasan visual ke dark theme lengkap dengan styling input, label monospace, remember-me checkbox, dan tombol aksen vermilion.
+- Layout `resources/views/layouts/app.blade.php` & `resources/views/layouts/navigation.blade.php`: layout CMS dark carbon, navigasi modular bertahap (Overview aktif, batch 2-6 berindikator status), link shortcut "Lihat Website ↗", profil dropdown, dan responsive mobile menu.
+- Komponen Breeze (`text-input`, `input-label`, `primary-button`, `secondary-button`, `danger-button`, `input-error`, `auth-session-status`, `nav-link`, `responsive-nav-link`, `dropdown`, `dropdown-link`, `modal`): diselaraskan penuh dengan palet warna Carbon (slate/dark) dan aksen Vermilion.
+- Blade `profile/edit.blade.php` & partials: penyesuaian kontainer card dan kontras teks form profil ke dark carbon.
 - Blade `resources/views/notes/show.blade.php`: menghapus switcher bahasa (ID/EN) dari header baca artikel dan menggantinya dengan tautan langsung ke katalog catatan (`/notes`) serta penambahan link `Catatan` di quick links footer.
 - Blade `resources/views/notes/show.blade.php`: upgrade header ke reader-mode lengkap (branding `<Ashidqy/>`, tombol kembali ke beranda, judul artikel fade-in saat scroll melewati header artikel, tombol salin link dengan feedback tooltip), penambahan Author Card mini profil di akhir artikel, dan upgrade footer lengkap dengan navigasi quick links, info built with, copyright, dan social media links.
 
