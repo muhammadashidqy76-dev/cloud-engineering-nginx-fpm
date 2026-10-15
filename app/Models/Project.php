@@ -54,30 +54,35 @@ class Project extends Model
     }
 
     /**
-     * Accessor dinamis untuk 'title'
-     * Otomatis mengembalikan title_id atau title_en sesuai locale aktif.
+     * Accessor & Mutator dinamis untuk 'title'
      */
     protected function title(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->getLocalizedValue('title')
+            get: fn () => $this->getLocalizedValue('title'),
+            set: fn ($value) => is_array($value) ? $value : [
+                'title_id' => $value,
+                'title_en' => $this->attributes['title_en'] ?? $value,
+            ]
         );
     }
 
     /**
-     * Accessor dinamis untuk 'problem_statement'
-     * Otomatis mengembalikan problem_statement_id atau problem_statement_en sesuai locale aktif.
+     * Accessor & Mutator dinamis untuk 'problem_statement'
      */
     protected function problemStatement(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->getLocalizedValue('problem_statement')
+            get: fn () => $this->getLocalizedValue('problem_statement'),
+            set: fn ($value) => is_array($value) ? $value : [
+                'problem_statement_id' => $value,
+                'problem_statement_en' => $this->attributes['problem_statement_en'] ?? $value,
+            ]
         );
     }
 
     /**
      * Accessor dinamis untuk 'architecture_details'
-     * Otomatis mengembalikan architecture_details_id atau architecture_details_en sesuai locale aktif.
      */
     protected function architectureDetails(): Attribute
     {
@@ -87,13 +92,37 @@ class Project extends Model
     }
 
     /**
-     * Alias accessor untuk backward-compatibility dengan kode yang merujuk architecture_decision_summary
+     * Alias accessor & mutator untuk backward-compatibility dengan architecture_decision_summary
      */
     protected function architectureDecisionSummary(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->getLocalizedValue('architecture_details')
+            get: fn () => $this->getLocalizedValue('architecture_details'),
+            set: fn ($value) => is_array($value) ? $value : [
+                'architecture_details_id' => $value,
+                'architecture_details_en' => $this->attributes['architecture_details_en'] ?? $value,
+            ]
         );
+    }
+
+    /**
+     * Accessor URL thumbnail preview proyek
+     */
+    public function getPreviewImageUrlAttribute(): ?string
+    {
+        if (empty($this->preview_image_path)) {
+            return null;
+        }
+
+        if (\Illuminate\Support\Str::startsWith($this->preview_image_path, ['http://', 'https://'])) {
+            return $this->preview_image_path;
+        }
+
+        if (file_exists(public_path($this->preview_image_path))) {
+            return asset($this->preview_image_path);
+        }
+
+        return asset('storage/' . ltrim($this->preview_image_path, '/'));
     }
 
     public function techStackItems(): BelongsToMany

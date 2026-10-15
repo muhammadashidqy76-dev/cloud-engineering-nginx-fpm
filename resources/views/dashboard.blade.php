@@ -40,11 +40,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 
                 <!-- 1. Featured Projects -->
-                <div class="rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-carbon-700 transition-all shadow-lg flex flex-col justify-between">
+                <a href="{{ route('projects.index') }}" class="group rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-vermilion-500/50 transition-all shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span>01. Projects</span>
-                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-carbon-950 border border-carbon-800 text-slate-400">Batch 2</span>
+                            <span class="group-hover:text-vermilion-400 transition-colors">01. Projects &rarr;</span>
+                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Live</span>
                         </div>
                         <div class="text-2xl sm:text-3xl font-bold font-mono text-white">
                             {{ $projectStats['total'] }}
@@ -54,7 +54,7 @@
                         <span class="text-emerald-400">{{ $projectStats['published'] }} Published</span>
                         <span class="text-slate-500">{{ $projectStats['draft'] }} Draft</span>
                     </div>
-                </div>
+                </a>
 
                 <!-- 2. Tech Stack -->
                 <div class="rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-carbon-700 transition-all shadow-lg flex flex-col justify-between">
@@ -135,7 +135,7 @@
                         </span>
                     </div>
                     <span class="font-mono text-[11px] text-slate-500">
-                        1 Selesai &bull; 5 Menunggu Batch
+                        2 Selesai &bull; 4 Menunggu Batch
                     </span>
                 </div>
 
@@ -157,15 +157,15 @@
                         </div>
                     </div>
 
-                    <!-- Batch 2 (Next) -->
-                    <div class="p-4 rounded-lg bg-carbon-950 border border-carbon-800 flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-carbon-900 border border-carbon-700 text-slate-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
-                            2
+                    <!-- Batch 2 (Active / Done) -->
+                    <div class="p-4 rounded-lg bg-carbon-950 border border-emerald-500/30 flex items-start gap-3 relative overflow-hidden">
+                        <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
+                            ✓
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center justify-between gap-2">
-                                <h4 class="font-mono text-xs font-bold text-slate-200">Batch 2: Featured Projects</h4>
-                                <span class="text-[10px] font-mono text-amber-400 uppercase tracking-wider">Berikutnya</span>
+                                <a href="{{ route('projects.index') }}" class="font-mono text-xs font-bold text-white hover:text-vermilion-400 transition-colors">Batch 2: Featured Projects &rarr;</a>
+                                <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Live</span>
                             </div>
                             <p class="text-xs text-slate-400 mt-1">
                                 Form CRUD project, mapping tech stack pivot, complexity order, thumbnail preview, dan demo URL.
@@ -173,7 +173,7 @@
                         </div>
                     </div>
 
-                    <!-- Batch 3 -->
+                    <!-- Batch 3 (Next) -->
                     <div class="p-4 rounded-lg bg-carbon-950 border border-carbon-800 flex items-start gap-3">
                         <div class="w-6 h-6 rounded-full bg-carbon-900 border border-carbon-700 text-slate-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
                             3
@@ -181,7 +181,7 @@
                         <div class="flex-1">
                             <div class="flex items-center justify-between gap-2">
                                 <h4 class="font-mono text-xs font-bold text-slate-200">Batch 3: Tech Stack</h4>
-                                <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Antrean</span>
+                                <span class="text-[10px] font-mono text-amber-400 uppercase tracking-wider">Berikutnya</span>
                             </div>
                             <p class="text-xs text-slate-400 mt-1">
                                 Manajemen item teknologi per kategori (Backend, Database, Tools) dan status penguasaan.
@@ -317,9 +317,9 @@
                                     Featured Projects Utama
                                 </h3>
                             </div>
-                            <span class="text-xs font-mono text-slate-500">
-                                Urutan Kompleksitas (1-3)
-                            </span>
+                            <a href="{{ route('projects.index') }}" class="text-xs font-mono text-vermilion-400 hover:text-vermilion-300 transition-colors">
+                                Kelola Semua Proyek &rarr;
+                            </a>
                         </div>
 
                         <div class="divide-y divide-carbon-800/80">

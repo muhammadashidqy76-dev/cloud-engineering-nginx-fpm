@@ -7,11 +7,18 @@ bukan per-commit (untuk itu lihat `git log`).
 ## [Unreleased]
 
 ### Added
+- Blade `resources/views/projects/index.blade.php`: antarmuka visual daftar Featured Projects lengkap dengan info urutan tier kompleksitas, thumbnail preview/mockup API, badge status, tautan live demo, dan tombol aksi Edit & Hapus.
+- Blade `resources/views/projects/create.blade.php` & `resources/views/projects/edit.blade.php`: form pembuatan & pengeditan proyek bertema dark carbon dengan auto-slug generator, input multi-bahasa (ID & EN), pemilihan complexity order (1-3), upload file thumbnail / custom path, demo URL, dan pemilih tech stack terkelompok per kategori via checkbox relasi pivot.
 - `AdminUserSeeder`: seeder akun administrator awal (`admin@ashidqy.dev` / `password`).
 - Controller `DashboardController`: mengelola tampilan konsol ringkasan `/dashboard` dengan agregasi metrik dari seluruh model konten CMS (Projects, Tech Stack, Work Experience, Journey, dan Notes/Learning Log).
 - Blade `resources/views/dashboard.blade.php`: Control Room overview dashboard (Batch 1) bertema dark architectural carbon yang menampilkan 5 kartu statistik metrik, roadmap tracker implementasi modular batch 1-6, feed catatan teknis terkini, dan preview featured projects.
 
 ### Changed
+- Controller `ProjectController`: upgrade dari JSON-only response menjadi full Blade CRUD controller (`index`, `create`, `store`, `edit`, `update`, `destroy`) dengan dukungan upload file thumbnail gambar ke storage publik, sinkronisasi relasi pivot `techStackItems`, dan penanganan backward compatibility JSON.
+- `ProjectRequest`: penambahan aturan validasi untuk `title_id`, `slug`, `complexity_order`, `problem_statement_id`, `architecture_details_id`, upload file `preview_image`, `demo_url`, dan `status`.
+- Model `Project`: mutator setter untuk atribut multi-bahasa dan accessor `preview_image_url` untuk kemudahan rendering thumbnail di dashboard.
+- Layout `resources/views/layouts/navigation.blade.php`: mengaktifkan menu navigasi `Projects` (Batch 2) di desktop dan mobile menu.
+- Blade `resources/views/dashboard.blade.php`: memperbarui status roadmap tracker batch 2 menjadi Live dan kartu metrik proyek menjadi tautan langsung.
 - `routes/auth.php`: menonaktifkan rute registrasi publik (`/register` otomatis dialihkan ke `/login`) agar CMS berjalan aman dalam mode single-operator.
 - `routes/web.php`: rute `/dashboard` beralih dari closure view statis ke `DashboardController::class, 'index'`.
 - Layout `resources/views/layouts/guest.blade.php`: redesain total dengan estetika dark architectural carbon, window terminal mockup, grid matrix canvas, dan branding `<Ashidqy/>`.
