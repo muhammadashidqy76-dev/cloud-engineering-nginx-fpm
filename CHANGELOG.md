@@ -7,6 +7,13 @@ bukan per-commit (untuk itu lihat `git log`).
 ## [Unreleased]
 
 ### Added
+- Migration `add_slug_and_body_to_learning_log_entries_table`: menambahkan kolom `slug` (unique) dan `body` (longText, Markdown penuh) ke tabel `learning_log_entries`. Kolom `content` tetap sebagai excerpt di card homepage.
+- Model `LearningLogEntry`: tambah `slug` & `body` ke `$fillable`, auto-generate slug dari title via `booted()`, route key binding by `slug`, accessor `getBodyHtmlAttribute()` yang mengkonversi `body` Markdown ke HTML via `Str::markdown()`, dan update `getReadingTimeAttribute()` untuk menghitung dari `body` jika tersedia.
+- Controller `NoteController`: handle publik route `GET /notes/{entry:slug}`, guard 404 untuk entri belum published, query prev/next dalam track yang sama untuk navigasi artikel.
+- Route publik `GET /notes/{entry:slug}` → `notes.show` di `routes/web.php`, di luar middleware auth.
+- Blade `resources/views/notes/show.blade.php`: halaman detail artikel bergaya Medium — sticky minimal header dengan track badge & reading time, artikel header (status badge, h1 judul, meta bar), lead/excerpt box, body Markdown dirender sebagai HTML dengan custom `prose-note` typography, navigasi prev/next in-track, dan reading progress bar JavaScript.
+- `LearningLogEntrySeeder`: update semua 4 entri dengan `slug` dan konten artikel `body` Markdown penuh (Breeze vs Sanctum, Form Requests & API Resources, Redis Caching, Docker Multi-Stage Build).
+- Component `learning-log-section.blade.php`: title card sekarang berupa link ke `/notes/{slug}`, card footer mendapat tombol "Baca →" berwarna sesuai track (vermilion untuk Laravel, cyan untuk Cloud), hover border card berubah ke warna track.
 - Model `LearningLogEntry`: tambah accessor `getReadingTimeAttribute()` untuk estimasi waktu baca otomatis bergaya Medium berdasarkan jumlah kata konten.
 - Migration `add_category_to_learning_log_entries_table`: menambahkan kolom `category` (default `laravel`) pada tabel `learning_log_entries` untuk pengelompokan pilar topik (Laravel Ecosystem vs Cloud Engineering).
 - Model `LearningLogEntry`: tambah konstanta `CATEGORY_LARAVEL` & `CATEGORY_CLOUD`, field `category` ke `$fillable`, serta query scopes `scopeLaravel()`, `scopeCloud()`, dan `scopeCategory()`.
