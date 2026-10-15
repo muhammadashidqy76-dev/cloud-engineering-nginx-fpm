@@ -61,7 +61,7 @@
 
         <div class="pt-2">
             <x-primary-button class="w-full">
-                {{ __('Masuk ke Console') }} &rarr;
+                {{ __('Masuk ke Console') }}
             </x-primary-button>
         </div>
     </form>

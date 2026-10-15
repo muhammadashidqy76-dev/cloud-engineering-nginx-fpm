@@ -53,7 +53,7 @@
 
         <div class="pt-2">
             <x-primary-button class="w-full">
-                {{ __('Simpan Kata Sandi Baru') }} &rarr;
+                {{ __('Simpan Kata Sandi Baru') }}
             </x-primary-button>
         </div>
     </form>

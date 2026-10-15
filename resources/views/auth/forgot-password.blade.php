@@ -29,7 +29,7 @@
 
         <div class="pt-2 flex flex-col gap-3">
             <x-primary-button class="w-full">
-                {{ __('Kirim Tautan Reset') }} &rarr;
+                {{ __('Kirim Tautan Reset') }}
             </x-primary-button>
 
             <div class="text-center">
