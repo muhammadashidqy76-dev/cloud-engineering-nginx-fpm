@@ -10,32 +10,32 @@
     if (!$items || $items->isEmpty()) {
         $items = collect([
             (object)[
-                'title' => 'Penerapan API Resources & Custom Form Requests',
-                'content' => 'Praktik terbaik dalam memisahkan logika validasi input dengan Form Requests dan pemformatan output JSON dengan Eloquent API Resources untuk menjaga controller tetap clean dan scalable.',
+                'title' => 'Breeze vs Sanctum: Membedah State Cookie vs Stateless Token',
+                'content' => 'Eksperimen membedah arsitektur otentikasi di Laravel. Membandingkan kapan harus memakai session-based cookie dengan Breeze untuk web monolith vs API token stateless dengan Sanctum untuk SPA/Mobile.',
                 'tag' => 'production_ready',
                 'category' => 'laravel',
                 'relatedProject' => (object)['title' => 'OrderSync API'],
                 'published_at' => \Carbon\Carbon::parse('2026-06-15'),
             ],
             (object)[
-                'title' => 'Eksplorasi Dynamic Component & Scope Query di Laravel Eloquent',
-                'content' => 'Catatan mengenai efisiensi penulisan reusable query scopes seperti scopePublished() dan scopeOrderedByComplexity() agar pengambilan data di controller tetap expressive.',
+                'title' => 'Penerapan Form Requests & API Resources untuk Clean Controller',
+                'content' => 'Catatan mengenai pemisahan tanggung jawab (Separation of Concerns). Memindahkan validasi rumit ke Form Requests dan formatting payload JSON ke API Resources agar controller tetap ramping.',
                 'tag' => 'production_ready',
                 'category' => 'laravel',
                 'relatedProject' => (object)['title' => 'Portfolio CMS'],
                 'published_at' => \Carbon\Carbon::parse('2026-08-25'),
             ],
             (object)[
-                'title' => 'Eksplorasi Redis Caching untuk API Rate Limiting & Session',
-                'content' => 'Mengevaluasi latensi pemindahan session store dan rate limiting throttling dari database ke Redis standalone server. Latensi throttling turun dari 15ms menjadi < 2ms.',
+                'title' => 'Eksplorasi Redis Caching untuk API Rate Limiting & Session Store',
+                'content' => 'Catatan pengujian latensi pemindahan driver session dan rate throttling dari MySQL ke Redis in-memory server lokal. Latensi throttling terpangkas dari 15ms menjadi kurang dari 2ms.',
                 'tag' => 'production_ready',
                 'category' => 'cloud_engineering',
                 'relatedProject' => (object)['title' => 'OrderSync API'],
                 'published_at' => \Carbon\Carbon::parse('2026-06-01'),
             ],
             (object)[
-                'title' => 'Containerization PHP 8.3 & Nginx dengan Docker Multi-Stage',
-                'content' => 'Eksplorasi optimasi container image Laravel menggunakan Docker multi-stage build dan Alpine Linux untuk memangkas ukuran image dari 800MB menjadi di bawah 140MB siap deploy.',
+                'title' => 'Containerization PHP 8.3 & Nginx dengan Docker Multi-Stage Build',
+                'content' => 'Bedah optimasi ukuran Docker image untuk Laravel. Memisahkan tahapan composer install dengan production image berbasis Alpine Linux, memangkas ukuran dari 800MB menjadi 135MB siap rilis.',
                 'tag' => 'exploring',
                 'category' => 'cloud_engineering',
                 'relatedProject' => (object)['title' => 'Portfolio CMS'],
@@ -44,15 +44,16 @@
         ]);
     }
 
-    $laravelItems = $items->filter(fn($item) => ($item->category ?? 'laravel') === 'laravel');
-    $cloudItems = $items->filter(fn($item) => ($item->category ?? '') === 'cloud_engineering');
+    // Limit to latest 2 entries per track for a clean, focused homepage showcase
+    $laravelItems = $items->filter(fn($item) => ($item->category ?? 'laravel') === 'laravel')->take(2);
+    $cloudItems = $items->filter(fn($item) => ($item->category ?? '') === 'cloud_engineering')->take(2);
 @endphp
 
 <section id="learning-log" class="relative bg-carbon-950/60 text-slate-100 py-20 lg:py-28 overflow-hidden border-b border-carbon-800/80">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" x-data="{ activeMobileTrack: 'laravel' }">
 
         <!-- ─── Section Header ─── -->
-        <div class="mb-14 max-w-2xl">
+        <div class="mb-10 lg:mb-14 max-w-2xl">
             <span class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-widest text-vermilion-400 mb-3">
                 <span class="w-3.5 h-px bg-vermilion-500 rounded"></span>
                 // {{ __('log.tag') }}
@@ -65,11 +66,34 @@
             </p>
         </div>
 
-        <!-- ─── Two-Track Split Grid Layout ─── -->
+        <!-- ─── Mobile Segmented Tab Switcher (Visible only on < lg screens) ─── -->
+        <div class="flex lg:hidden items-center justify-center mb-8">
+            <div class="inline-flex p-1 rounded-xl bg-carbon-900 border border-carbon-800 max-w-sm w-full font-mono text-xs">
+                <button type="button"
+                        @click="activeMobileTrack = 'laravel'"
+                        class="flex-1 py-2 px-3 rounded-lg text-center font-medium transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                        :class="activeMobileTrack === 'laravel' ? 'bg-carbon-950 text-vermilion-400 border border-carbon-800 shadow-sm font-bold' : 'text-slate-400 hover:text-white'">
+                    <span class="w-1.5 h-1.5 rounded-full bg-vermilion-400"></span>
+                    <span>{{ __('log.tab_laravel') }}</span>
+                    <span class="text-[10px] opacity-70">({{ $laravelItems->count() }})</span>
+                </button>
+                <button type="button"
+                        @click="activeMobileTrack = 'cloud'"
+                        class="flex-1 py-2 px-3 rounded-lg text-center font-medium transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                        :class="activeMobileTrack === 'cloud' ? 'bg-carbon-950 text-cyan-400 border border-carbon-800 shadow-sm font-bold' : 'text-slate-400 hover:text-white'">
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                    <span>{{ __('log.tab_cloud') }}</span>
+                    <span class="text-[10px] opacity-70">({{ $cloudItems->count() }})</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ─── Two-Track Grid Layout (Desktop: 2 side-by-side columns | Mobile: Tab-controlled) ─── -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
 
             <!-- ═════ TRACK 1: LARAVEL & SYSTEM ARCHITECTURE ═════ -->
-            <div class="flex flex-col gap-5">
+            <div class="flex-col gap-5"
+                 :class="activeMobileTrack === 'laravel' ? 'flex' : 'hidden lg:flex'">
                 <!-- Track Pillar Header -->
                 <div class="flex items-center justify-between p-4 rounded-xl bg-carbon-900/90 border border-carbon-800 backdrop-blur-sm">
                     <div class="flex items-center gap-3">
@@ -107,8 +131,12 @@
                                     ? \Carbon\Carbon::parse($log->published_at)->format('d M Y')
                                     : $log->published_at->format('d M Y');
                             }
-                            $isProdReady = ($log->tag === 'production_ready' || (defined('\App\Models\LearningLogEntry::TAG_PRODUCTION_READY') && $log->tag === \App\Models\LearningLogEntry::TAG_PRODUCTION_READY));
                             $relatedName = is_object($log->relatedProject) ? $log->relatedProject->title : null;
+                            $readTime = $log->reading_time ?? (function($text) {
+                                $words = str_word_count(strip_tags((string)$text));
+                                $min = max(1, (int) ceil($words / 180));
+                                return "{$min} min read";
+                            })($log->content);
                         @endphp
 
                         <article class="group flex flex-col justify-between rounded-xl bg-carbon-900 border border-carbon-800 hover:border-carbon-700/80 transition-all duration-200 hover:-translate-y-0.5 overflow-hidden">
@@ -121,17 +149,13 @@
                                         <span class="w-2 h-2 rounded-full bg-emerald-400/80"></span>
                                     </div>
                                     <div>
-                                        @if($isProdReady)
-                                            <span class="font-mono text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded inline-flex items-center gap-1">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                                                {{ __('log.tag_production_ready') }}
-                                            </span>
-                                        @else
-                                            <span class="font-mono text-[10px] font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded inline-flex items-center gap-1">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-                                                {{ __('log.tag_exploring') }}
-                                            </span>
-                                        @endif
+                                        <!-- Medium-Style Reading Time Pill -->
+                                        <span class="font-mono text-[10px] font-semibold text-slate-300 bg-carbon-900 border border-carbon-800 px-2 py-0.5 rounded inline-flex items-center gap-1.5 select-none">
+                                            <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            {{ $readTime }}
+                                        </span>
                                     </div>
                                 </div>
 
@@ -167,7 +191,8 @@
             </div>
 
             <!-- ═════ TRACK 2: CLOUD ENGINEERING & INFRASTRUCTURE ═════ -->
-            <div class="flex flex-col gap-5">
+            <div class="flex-col gap-5"
+                 :class="activeMobileTrack === 'cloud' ? 'flex' : 'hidden lg:flex'">
                 <!-- Track Pillar Header -->
                 <div class="flex items-center justify-between p-4 rounded-xl bg-carbon-900/90 border border-carbon-800 backdrop-blur-sm">
                     <div class="flex items-center gap-3">
@@ -205,8 +230,12 @@
                                     ? \Carbon\Carbon::parse($log->published_at)->format('d M Y')
                                     : $log->published_at->format('d M Y');
                             }
-                            $isProdReady = ($log->tag === 'production_ready' || (defined('\App\Models\LearningLogEntry::TAG_PRODUCTION_READY') && $log->tag === \App\Models\LearningLogEntry::TAG_PRODUCTION_READY));
                             $relatedName = is_object($log->relatedProject) ? $log->relatedProject->title : null;
+                            $readTime = $log->reading_time ?? (function($text) {
+                                $words = str_word_count(strip_tags((string)$text));
+                                $min = max(1, (int) ceil($words / 180));
+                                return "{$min} min read";
+                            })($log->content);
                         @endphp
 
                         <article class="group flex flex-col justify-between rounded-xl bg-carbon-900 border border-carbon-800 hover:border-carbon-700/80 transition-all duration-200 hover:-translate-y-0.5 overflow-hidden">
@@ -219,17 +248,13 @@
                                         <span class="w-2 h-2 rounded-full bg-emerald-400/80"></span>
                                     </div>
                                     <div>
-                                        @if($isProdReady)
-                                            <span class="font-mono text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded inline-flex items-center gap-1">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                                                {{ __('log.tag_production_ready') }}
-                                            </span>
-                                        @else
-                                            <span class="font-mono text-[10px] font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded inline-flex items-center gap-1">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-                                                {{ __('log.tag_exploring') }}
-                                            </span>
-                                        @endif
+                                        <!-- Medium-Style Reading Time Pill -->
+                                        <span class="font-mono text-[10px] font-semibold text-slate-300 bg-carbon-900 border border-carbon-800 px-2 py-0.5 rounded inline-flex items-center gap-1.5 select-none">
+                                            <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            {{ $readTime }}
+                                        </span>
                                     </div>
                                 </div>
 

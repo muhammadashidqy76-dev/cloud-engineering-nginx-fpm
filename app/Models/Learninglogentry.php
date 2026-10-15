@@ -65,4 +65,11 @@ class LearningLogEntry extends Model
     {
         return $query->where('category', $category);
     }
+
+    public function getReadingTimeAttribute(): string
+    {
+        $words = str_word_count(strip_tags((string) $this->content));
+        $minutes = max(1, (int) ceil($words / 180));
+        return "{$minutes} min read";
+    }
 }

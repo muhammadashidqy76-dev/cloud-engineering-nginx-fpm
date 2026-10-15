@@ -16,8 +16,8 @@ class LearningLogEntrySeeder extends Seeder
         $entries = [
             // Track 1: Laravel Ecosystem & Architecture
             [
-                'title' => 'Penerapan API Resources & Custom Form Requests',
-                'content' => 'Praktik terbaik dalam memisahkan logika validasi input dengan Form Requests dan pemformatan output JSON dengan Eloquent API Resources untuk menjaga controller tetap clean dan scalable.',
+                'title' => 'Breeze vs Sanctum: Membedah State Cookie vs Stateless Token',
+                'content' => 'Eksperimen membedah arsitektur otentikasi di Laravel. Membandingkan kapan harus memakai session-based cookie dengan Breeze untuk web monolith vs API token stateless dengan Sanctum untuk SPA/Mobile.',
                 'tag' => LearningLogEntry::TAG_PRODUCTION_READY,
                 'category' => LearningLogEntry::CATEGORY_LARAVEL,
                 'related_project_id' => $headless?->id,
@@ -25,8 +25,8 @@ class LearningLogEntrySeeder extends Seeder
                 'status' => 'published',
             ],
             [
-                'title' => 'Eksplorasi Dynamic Component & Scope Query di Laravel Eloquent',
-                'content' => 'Catatan mengenai efisiensi penulisan reusable query scopes seperti scopePublished() dan scopeOrderedByComplexity() agar pengambilan data di controller tetap expressive.',
+                'title' => 'Penerapan Form Requests & API Resources untuk Clean Controller',
+                'content' => 'Catatan mengenai pemisahan tanggung jawab (Separation of Concerns). Memindahkan validasi rumit ke Form Requests dan formatting payload JSON ke API Resources agar controller tetap ramping.',
                 'tag' => LearningLogEntry::TAG_PRODUCTION_READY,
                 'category' => LearningLogEntry::CATEGORY_LARAVEL,
                 'related_project_id' => $cms?->id,
@@ -35,8 +35,8 @@ class LearningLogEntrySeeder extends Seeder
             ],
             // Track 2: Cloud Engineering & Infrastructure
             [
-                'title' => 'Eksplorasi Redis Caching untuk API Rate Limiting & Session',
-                'content' => 'Mengevaluasi latensi pemindahan session store dan rate limiting throttling dari database ke Redis standalone server. Latensi throttling turun dari 15ms menjadi < 2ms.',
+                'title' => 'Eksplorasi Redis Caching untuk API Rate Limiting & Session Store',
+                'content' => 'Catatan pengujian latensi pemindahan driver session dan rate throttling dari MySQL ke Redis in-memory server lokal. Latensi throttling terpangkas dari 15ms menjadi kurang dari 2ms.',
                 'tag' => LearningLogEntry::TAG_PRODUCTION_READY,
                 'category' => LearningLogEntry::CATEGORY_CLOUD,
                 'related_project_id' => $headless?->id,
@@ -44,8 +44,8 @@ class LearningLogEntrySeeder extends Seeder
                 'status' => 'published',
             ],
             [
-                'title' => 'Containerization PHP 8.3 & Nginx dengan Docker Multi-Stage',
-                'content' => 'Eksplorasi optimasi container image Laravel menggunakan Docker multi-stage build dan Alpine Linux untuk memangkas ukuran image dari 800MB menjadi di bawah 140MB siap deploy.',
+                'title' => 'Containerization PHP 8.3 & Nginx dengan Docker Multi-Stage Build',
+                'content' => 'Bedah optimasi ukuran Docker image untuk Laravel. Memisahkan tahapan composer install dengan production image berbasis Alpine Linux, memangkas ukuran dari 800MB menjadi 135MB siap rilis.',
                 'tag' => LearningLogEntry::TAG_EXPLORING,
                 'category' => LearningLogEntry::CATEGORY_CLOUD,
                 'related_project_id' => $cms?->id,
