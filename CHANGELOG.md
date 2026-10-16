@@ -7,6 +7,9 @@ bukan per-commit (untuk itu lihat `git log`).
 ## [Unreleased]
 
 ### Added
+- Blade `resources/views/work-experience/index.blade.php`: antarmuka visual manajemen riwayat pengalaman kerja bertema dark carbon dengan 4 kartu statistik metrik (Total, Aktif Sekarang, Published, Draft), filter status tab, card timeline bergaya window terminal, badge tipe pekerjaan dan durasi waktu, serta aksi Edit & Hapus.
+- Blade `resources/views/work-experience/create.blade.php` & `resources/views/work-experience/edit.blade.php`: form pembuatan & pengeditan riwayat pengalaman kerja dengan selector radio tipe pekerjaan (Internship, Full-time, Part-time, Freelance), toggle reaktif Alpine.js "Masih Bekerja di Sini (Present)" yang otomatis mengontrol input tanggal selesai, textarea poin pencapaian/tanggung jawab, display order, dan status publikasi (Published / Draft).
+- `WorkExperienceRequest`: validasi terpadu input riwayat pengalaman kerja dengan normalisasi otomatis boolean `is_current`, validasi conditional `end_date`, validasi enum employment type dan status, serta pesan kesalahan dalam bahasa Indonesia.
 - Blade `resources/views/tech-stack/create.blade.php` & `resources/views/tech-stack/edit.blade.php`: panel pemilih relasi Featured Projects dua arah dengan checkbox interaktif, quick action "Pilih Semua / Batal", tautan cepat ke proyek terkait, serta sinkronisasi otomatis pivot `project_tech_stack_item` saat menambah maupun mengedit teknologi.
 - Blade `resources/views/tech-stack/index.blade.php`: antarmuka visual manajemen Tech Stack Items terkelompok per kategori (Core Backend, Database & Cache, Tools & DevOps, dll) dengan kartu ringkasan status penguasaan (Finished, In Progress, Not Started), filter kategori cepat, counter metrik, dan aksi Edit & Hapus.
 - Blade `resources/views/projects/index.blade.php`: antarmuka visual daftar Featured Projects lengkap dengan info urutan tier kompleksitas, thumbnail preview/mockup API, badge status, tautan live demo, dan tombol aksi Edit & Hapus.
@@ -16,6 +19,9 @@ bukan per-commit (untuk itu lihat `git log`).
 - Blade `resources/views/dashboard.blade.php`: Control Room overview dashboard (Batch 1) bertema dark architectural carbon yang menampilkan 5 kartu statistik metrik, roadmap tracker implementasi modular batch 1-6, feed catatan teknis terkini, dan preview featured projects.
 
 ### Changed
+- Controller `WorkExperienceController`: upgrade dari JSON-only response menjadi full Blade CRUD controller (`index`, `create`, `store`, `edit`, `update`, `destroy`) dengan agregasi counter status pengalaman, pengurutan kronologis terbalik, filter status interaktif, dan penanganan backward compatibility JSON.
+- Layout `resources/views/layouts/navigation.blade.php`: mengaktifkan menu navigasi `Experience` (Batch 4) di desktop dan mobile menu.
+- Blade `resources/views/dashboard.blade.php`: memperbarui status roadmap tracker Batch 4 menjadi Live, kartu metrik `03. Experience` menjadi tautan langsung ke `work-experience.index`, dan Batch 5 menjadi status "Berikutnya".
 - Controller `TechStackItemController`: upgrade dari JSON-only response menjadi full Blade CRUD controller (`index`, `create`, `store`, `edit`, `update`, `destroy`) dengan fitur sinkronisasi relasi pivot `projects()`, agregasi counter status penguasaan, pengelompokan kategori, filter interaktif, dan penanganan backward compatibility JSON.
 - `TechStackItemRequest`: penambahan aturan validasi untuk `name`, `category`, `custom_category`, `status` (`finished`, `in_progress`, `not_started`), `display_order`, `description`, serta array `project_ids.*`.
 - Layout `resources/views/layouts/navigation.blade.php`: mengaktifkan menu navigasi `Tech Stack` (Batch 3) di desktop dan mobile menu.

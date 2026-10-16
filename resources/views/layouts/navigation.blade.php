@@ -43,11 +43,10 @@
                         {{ __('Tech Stack') }}
                     </x-nav-link>
 
-                    <!-- 4. Work Experience (Batch 4) -->
-                    <span class="inline-flex items-center px-3 pt-1 border-b-2 border-transparent text-xs font-mono font-medium text-slate-500 cursor-not-allowed select-none group" title="Segera hadir di Batch 4">
-                        <span>Experience</span>
-                        <span class="ms-1.5 text-[9px] px-1 py-0.2 rounded bg-carbon-900 border border-carbon-800 text-slate-500">B4</span>
-                    </span>
+                    <!-- 4. Work Experience (Active) -->
+                    <x-nav-link :href="route('work-experience.index')" :active="request()->routeIs('work-experience.*')">
+                        {{ __('Experience') }}
+                    </x-nav-link>
 
                     <!-- 5. Journey & Kredensial (Batch 5) -->
                     <span class="inline-flex items-center px-3 pt-1 border-b-2 border-transparent text-xs font-mono font-medium text-slate-500 cursor-not-allowed select-none group" title="Segera hadir di Batch 5">
@@ -130,10 +129,13 @@
                 {{ __('Tech Stack (Active)') }}
             </x-responsive-nav-link>
 
+            <x-responsive-nav-link :href="route('work-experience.index')" :active="request()->routeIs('work-experience.*')">
+                {{ __('Work Experience (Active)') }}
+            </x-responsive-nav-link>
+
             <div class="px-4 py-2 text-[11px] font-mono text-slate-500 uppercase tracking-wider">
-                Modul Konten (Akan Hadir di Batch 4-6)
+                Modul Konten (Akan Hadir di Batch 5-6)
             </div>
-            <div class="px-4 py-1.5 text-xs font-mono text-slate-500">4. Work Experience</div>
             <div class="px-4 py-1.5 text-xs font-mono text-slate-500">5. Journey & Kredensial</div>
             <div class="px-4 py-1.5 text-xs font-mono text-slate-500">6. Learning Log / Notes</div>
         </div>
