@@ -26,6 +26,7 @@ bukan per-commit (untuk itu lihat `git log`).
 - Blade `resources/views/dashboard.blade.php`: Control Room overview dashboard (Batch 1) bertema dark architectural carbon yang menampilkan 5 kartu statistik metrik, roadmap tracker implementasi modular batch 1-6, feed catatan teknis terkini, dan preview featured projects.
 
 ### Changed
+- Blade `resources/views/projects/index.blade.php`: redesain visual tombol tautan `Live Demo` dari sekadar tautan teks menjadi button interaktif dengan kontainer berlatar cyan transparan, border aksen, pulsing indicator dot, ikon panah eksternal animasi hover, dan tooltip URL agar jelas terlihat sebagai elemen yang dapat diklik.
 - Controller `LearningLogEntryController`: upgrade dari JSON-only response menjadi full Blade CRUD controller (`index`, `create`, `store`, `edit`, `update`, `destroy`) dengan fitur filter kategori pilar & tag kesiapan, pencarian teks lengkap, kalkulasi statistik 4-dimensi, auto-redirect rute model binding by slug, dan backward compatibility JSON.
 - Layout `resources/views/layouts/navigation.blade.php`: mengaktifkan menu navigasi `Notes` (Batch 6) di desktop dan mobile menu, menyelesaikan seluruh tautan modul CMS admin.
 - Blade `resources/views/dashboard.blade.php`: memperbarui status roadmap tracker Batch 6 menjadi Live (menandai 100% modul selesai - 6 dari 6 batch), dan kartu metrik `05. Tech Notes` menjadi tautan langsung ke `learning-log.index`.

@@ -111,21 +111,15 @@
                                         </span>
                                     </div>
 
-                                    <!-- Slug & Live Demo URL link -->
-                                    <div class="flex items-center gap-3 text-xs font-mono text-slate-400 flex-wrap">
+                                    <!-- Slug, Live Demo Button & Impact Metric -->
+                                    <div class="flex items-center gap-2.5 text-xs font-mono text-slate-400 flex-wrap">
                                         <span class="text-slate-500">/{{ $project->slug }}</span>
 
-                                        @if ($project->demo_url)
-                                            <a href="{{ $project->demo_url }}" target="_blank" class="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 transition-colors">
-                                                <span>Live Demo ↗</span>
-                                            </a>
-                                        @else
-                                            <span class="text-slate-600">Tanpa Demo URL</span>
-                                        @endif
+                                        
 
                                         @if ($project->impact_metric)
-                                            <span class="text-slate-500">&bull;</span>
-                                            <span class="text-slate-300 truncate max-w-xs">{{ $project->impact_metric }}</span>
+                                            <span class="text-slate-700">&bull;</span>
+                                            <span class="text-slate-300 truncate max-w-xs" title="{{ $project->impact_metric }}">{{ $project->impact_metric }}</span>
                                         @endif
                                     </div>
 
@@ -149,7 +143,27 @@
 
                             <!-- Right Section: Actions -->
                             <div class="flex items-center gap-2 self-end lg:self-center shrink-0 border-t lg:border-t-0 border-carbon-800/80 pt-3 lg:pt-0 w-full lg:w-auto justify-end">
-                                <!-- Edit Button -->
+                            
+
+                                        @if ($project->demo_url)
+                                            <a href="{{ $project->demo_url }}" 
+                                               target="_blank" 
+                                               rel="noopener noreferrer"
+                                               title="Buka Demo URL: {{ $project->demo_url }}"
+                                               class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 active:bg-cyan-500/30 border border-cyan-500/30 hover:border-cyan-400/60 shadow-sm hover:shadow-cyan-500/10 transition-all duration-150 group">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 group-hover:bg-cyan-300 group-hover:scale-125 transition-transform animate-pulse"></span>
+                                                <span>Live Demo</span>
+                                                <svg class="w-3 h-3 text-cyan-400 group-hover:text-cyan-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                </svg>
+                                            </a>
+                                        @else
+                                            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-mono text-slate-500 bg-carbon-950/80 border border-carbon-850 select-none">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+                                                <span>Tanpa Demo URL</span>
+                                            </span>
+                                        @endif   
+                            <!-- Edit Button -->
                                 <a href="{{ route('projects.edit', $project) }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-xs font-medium text-slate-200 bg-carbon-800 hover:bg-carbon-750 border border-carbon-700 hover:border-slate-600 transition-colors">
                                     <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
