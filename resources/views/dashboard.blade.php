@@ -91,11 +91,11 @@
                 </a>
 
                 <!-- 4. Journey & Credentials -->
-                <div class="rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-carbon-700 transition-all shadow-lg flex flex-col justify-between">
+                <a href="{{ route('journey.index') }}" class="group rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-vermilion-500/50 transition-all shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span>04. Journey</span>
-                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-carbon-950 border border-carbon-800 text-slate-400">Batch 5</span>
+                            <span class="group-hover:text-vermilion-400 transition-colors">04. Journey &rarr;</span>
+                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Live</span>
                         </div>
                         <div class="text-2xl sm:text-3xl font-bold font-mono text-white">
                             {{ $journeyStats['total'] }}
@@ -105,7 +105,7 @@
                         <span class="text-amber-400">{{ $journeyStats['certifications'] }} Sertifikat</span>
                         <span class="text-slate-500">{{ $journeyStats['courses'] }} Kursus</span>
                     </div>
-                </div>
+                </a>
 
                 <!-- 5. Learning Log / Technical Notes -->
                 <div class="rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-carbon-700 transition-all shadow-lg flex flex-col justify-between">
@@ -135,7 +135,7 @@
                         </span>
                     </div>
                     <span class="font-mono text-[11px] text-slate-500">
-                        4 Selesai &bull; 2 Menunggu Batch
+                        5 Selesai &bull; 1 Menunggu Batch
                     </span>
                 </div>
 
@@ -205,15 +205,15 @@
                         </div>
                     </div>
 
-                    <!-- Batch 5 (Next) -->
-                    <div class="p-4 rounded-lg bg-carbon-950 border border-carbon-800 flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-carbon-900 border border-carbon-700 text-slate-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
-                            5
+                    <!-- Batch 5 (Active / Done) -->
+                    <div class="p-4 rounded-lg bg-carbon-950 border border-emerald-500/30 flex items-start gap-3 relative overflow-hidden">
+                        <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
+                            ✓
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center justify-between gap-2">
-                                <h4 class="font-mono text-xs font-bold text-slate-200">Batch 5: Journey & Kredensial</h4>
-                                <span class="text-[10px] font-mono text-amber-400 uppercase tracking-wider">Berikutnya</span>
+                                <a href="{{ route('journey.index') }}" class="font-mono text-xs font-bold text-white hover:text-vermilion-400 transition-colors">Batch 5: Journey &rarr;</a>
+                                <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Live</span>
                             </div>
                             <p class="text-xs text-slate-400 mt-1">
                                 Timeline pembelajaran, upload dokumen sertifikat/ijazah, link verifikasi, dan narasi 3-langkah.
@@ -221,7 +221,7 @@
                         </div>
                     </div>
 
-                    <!-- Batch 6 -->
+                    <!-- Batch 6 (Next) -->
                     <div class="p-4 rounded-lg bg-carbon-950 border border-carbon-800 flex items-start gap-3">
                         <div class="w-6 h-6 rounded-full bg-carbon-900 border border-carbon-700 text-slate-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
                             6
@@ -229,7 +229,7 @@
                         <div class="flex-1">
                             <div class="flex items-center justify-between gap-2">
                                 <h4 class="font-mono text-xs font-bold text-slate-200">Batch 6: Notes & Learning Log</h4>
-                                <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider">Antrean</span>
+                                <span class="text-[10px] font-mono text-amber-400 uppercase tracking-wider">Berikutnya</span>
                             </div>
                             <p class="text-xs text-slate-400 mt-1">
                                 Editor Markdown artikel penuh untuk `/notes`, pengelompokan pilar (Laravel/Cloud), dan auto slug.
