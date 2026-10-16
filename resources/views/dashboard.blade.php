@@ -108,11 +108,11 @@
                 </a>
 
                 <!-- 5. Learning Log / Technical Notes -->
-                <div class="rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-carbon-700 transition-all shadow-lg flex flex-col justify-between">
+                <a href="{{ route('learning-log.index') }}" class="group rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-vermilion-500/50 transition-all shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span>05. Tech Notes</span>
-                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-carbon-950 border border-carbon-800 text-slate-400">Batch 6</span>
+                            <span class="group-hover:text-vermilion-400 transition-colors">05. Tech Notes &rarr;</span>
+                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Live</span>
                         </div>
                         <div class="text-2xl sm:text-3xl font-bold font-mono text-white">
                             {{ $noteStats['total'] }}
@@ -122,7 +122,7 @@
                         <span class="text-vermilion-400">{{ $noteStats['laravel'] }} Laravel</span>
                         <span class="text-cyan-400">{{ $noteStats['cloud'] }} Cloud</span>
                     </div>
-                </div>
+                </a>
 
             </div>
 
@@ -135,7 +135,7 @@
                         </span>
                     </div>
                     <span class="font-mono text-[11px] text-slate-500">
-                        5 Selesai &bull; 1 Menunggu Batch
+                        6 Selesai &bull; 100% Modul CRUD Aktif
                     </span>
                 </div>
 
@@ -148,7 +148,7 @@
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center justify-between gap-2">
-                                <h4 class="font-mono text-xs font-bold text-white">Batch 1: Overview & Auth</h4>
+                                <a href="{{ route('dashboard') }}" class="font-mono text-xs font-bold text-white hover:text-vermilion-400 transition-colors">Batch 1: Overview &amp; Auth &rarr;</a>
                                 <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Live</span>
                             </div>
                             <p class="text-xs text-slate-400 mt-1">
@@ -221,18 +221,18 @@
                         </div>
                     </div>
 
-                    <!-- Batch 6 (Next) -->
-                    <div class="p-4 rounded-lg bg-carbon-950 border border-carbon-800 flex items-start gap-3">
-                        <div class="w-6 h-6 rounded-full bg-carbon-900 border border-carbon-700 text-slate-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
-                            6
+                    <!-- Batch 6 (Active / Done) -->
+                    <div class="p-4 rounded-lg bg-carbon-950 border border-emerald-500/30 flex items-start gap-3 relative overflow-hidden">
+                        <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
+                            ✓
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center justify-between gap-2">
-                                <h4 class="font-mono text-xs font-bold text-slate-200">Batch 6: Notes & Learning Log</h4>
-                                <span class="text-[10px] font-mono text-amber-400 uppercase tracking-wider">Berikutnya</span>
+                                <a href="{{ route('learning-log.index') }}" class="font-mono text-xs font-bold text-white hover:text-vermilion-400 transition-colors">Batch 6: Notes &amp; Learning Log &rarr;</a>
+                                <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Live</span>
                             </div>
                             <p class="text-xs text-slate-400 mt-1">
-                                Editor Markdown artikel penuh untuk `/notes`, pengelompokan pilar (Laravel/Cloud), dan auto slug.
+                                Editor Markdown artikel penuh untuk /notes, pilar Laravel vs Cloud, status exploring/production-ready, dan auto slug.
                             </p>
                         </div>
                     </div>
