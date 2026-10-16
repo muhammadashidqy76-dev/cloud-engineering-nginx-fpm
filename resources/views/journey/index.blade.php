@@ -3,9 +3,9 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <div class="flex items-center gap-2 font-mono text-xs text-slate-400 mb-1">
-                    <a href="{{ route('dashboard') }}" class="hover:text-white transition-colors">cms</a>
+                    <a href="{{ route('dashboard') }}" class="hover:text-white transition-colors">Cms</a>
                     <span class="text-slate-600">/</span>
-                    <span class="text-vermilion-400">journey</span>
+                    <span class="text-vermilion-400">Journey</span>
                 </div>
                 <h1 class="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight">
                     Timeline Journey &amp; Kredensial
@@ -27,7 +27,23 @@
         </div>
     </x-slot>
 
-    <div class="py-6 sm:py-8">
+    <div class="py-6 sm:py-8"
+         x-data="{
+             deleteModalOpen: false,
+             deleteAction: '',
+             courseName: '',
+             credentialType: '',
+             openDeleteModal(action, name, type) {
+                 this.deleteAction = action;
+                 this.courseName = name;
+                 this.credentialType = type;
+                 this.deleteModalOpen = true;
+             },
+             closeDeleteModal() {
+                 this.deleteModalOpen = false;
+             }
+         }"
+         @keydown.escape.window="closeDeleteModal()">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
             <!-- Flash Session Alert -->
@@ -252,17 +268,12 @@
                                         Edit
                                     </a>
 
-                                    <form method="POST" 
-                                          action="{{ route('journey.destroy', $item) }}" 
-                                          onsubmit="return confirm('Apakah Anda yakin ingin menghapus entri {{ addslashes($item->course_name) }}?');"
-                                          class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" 
-                                                class="px-2.5 py-1 rounded-md bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 border border-rose-500/20 transition-colors">
-                                            Hapus
-                                        </button>
-                                    </form>
+                                    <!-- Delete Button — triggers custom modal -->
+                                    <button type="button"
+                                            @click="openDeleteModal('{{ route('journey.destroy', $item) }}', '{{ addslashes($item->course_name) }}', '{{ $item->credential_type }}')"
+                                            class="px-2.5 py-1 rounded-md bg-rose-500/10 hover:bg-rose-500/20 active:bg-rose-500/30 text-rose-400 hover:text-rose-300 border border-rose-500/20 transition-colors cursor-pointer">
+                                        Hapus
+                                    </button>
                                 </div>
                             </div>
 
@@ -289,5 +300,115 @@
             @endif
 
         </div>
+
+        <!-- ─── Modal Konfirmasi Hapus Journey Entry (Dark Architectural Carbon UI) ─── -->
+        <div x-show="deleteModalOpen"
+             style="display: none;"
+             class="fixed inset-0 z-50 overflow-y-auto px-4 py-6 sm:px-0 flex items-center justify-center"
+             x-cloak>
+
+            <!-- Backdrop Blur Overlay -->
+            <div x-show="deleteModalOpen"
+                 x-transition:enter="ease-out duration-200"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="ease-in duration-150"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 @click="closeDeleteModal()"
+                 class="fixed inset-0 bg-carbon-950/80 backdrop-blur-md transition-opacity"></div>
+
+            <!-- Modal Dialog Window -->
+            <div x-show="deleteModalOpen"
+                 x-transition:enter="ease-out duration-200"
+                 x-transition:enter-start="opacity-0 translate-y-3 sm:translate-y-0 sm:scale-95"
+                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave="ease-in duration-150"
+                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave-end="opacity-0 translate-y-3 sm:translate-y-0 sm:scale-95"
+                 class="relative w-full max-w-md bg-carbon-900 border border-carbon-800 rounded-xl overflow-hidden shadow-2xl z-10 text-slate-100">
+
+                <!-- Window Terminal Header -->
+                <div class="px-5 py-3.5 bg-carbon-950/90 border-b border-carbon-800 flex items-center justify-between select-none">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80 inline-block"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80 inline-block"></span>
+                        <span class="ml-2 font-mono text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                            KONFIRMASI_HAPUS_JOURNEY // DANGER_ZONE
+                        </span>
+                    </div>
+                    <button type="button"
+                            @click="closeDeleteModal()"
+                            class="text-slate-500 hover:text-white transition-colors p-1 rounded hover:bg-carbon-800">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Window Content -->
+                <div class="p-6 space-y-4">
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 class="font-mono text-sm font-bold text-white">
+                                Hapus Entri Journey Ini?
+                            </h3>
+                            <p class="text-xs text-slate-400 leading-relaxed font-mono">
+                                Tindakan ini tidak dapat dibatalkan. Entri pembelajaran beserta narasi 3-langkah akan dihapus permanen.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Highlighted Target Item Box -->
+                    <div class="p-3.5 rounded-lg bg-carbon-950 border border-carbon-800 space-y-1.5 font-mono text-xs">
+                        <div class="flex items-center justify-between text-[10px] text-slate-500 uppercase tracking-wider">
+                            <span>JOURNEY_TARGET</span>
+                            <span class="px-1.5 py-0.5 rounded border text-[10px]"
+                                  :class="{
+                                      'text-amber-400 bg-amber-500/10 border-amber-500/20': credentialType === 'certification',
+                                      'text-emerald-400 bg-emerald-500/10 border-emerald-500/20': credentialType === 'diploma',
+                                      'text-sky-400 bg-sky-500/10 border-sky-500/20': credentialType === 'course'
+                                  }"
+                                  x-text="credentialType === 'certification' ? 'Sertifikasi' : (credentialType === 'diploma' ? 'Ijazah / Gelar' : 'Course')"></span>
+                        </div>
+                        <div class="text-sm font-bold text-white" x-text="courseName"></div>
+                        <div class="text-[11px] text-slate-500">
+                            Narasi Learned → Applied → Result akan turut dihapus.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Window Footer Actions -->
+                <div class="px-6 py-4 bg-carbon-950/70 border-t border-carbon-800 flex items-center justify-end gap-3 font-mono text-xs">
+                    <button type="button"
+                            @click="closeDeleteModal()"
+                            class="px-4 py-2 rounded-lg font-medium text-slate-300 hover:text-white bg-carbon-850 hover:bg-carbon-800 border border-carbon-750 transition-colors cursor-pointer">
+                        Batal
+                    </button>
+
+                    <form :action="deleteAction" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg font-medium text-white bg-rose-600 hover:bg-rose-500 active:bg-rose-700 border border-rose-500/50 shadow-lg shadow-rose-950/50 transition-all cursor-pointer">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            <span>Konfirmasi Hapus</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </x-app-layout>
