@@ -4,7 +4,9 @@
     $itemsGrouped = $techStack;
 
     if (!$itemsGrouped) {
-        $all = \App\Models\TechStackItem::orderBy('display_order')->get();
+        $all = \App\Models\TechStackItem::where('status', '!=', \App\Models\TechStackItem::STATUS_NOT_STARTED)
+            ->orderBy('display_order')
+            ->get();
         if ($all->isNotEmpty()) {
             $itemsGrouped = $all->groupBy('category');
         } else {
@@ -31,6 +33,13 @@
                 ],
             ]);
         }
+    } else {
+        $itemsGrouped = $itemsGrouped->map(function ($items) {
+            return collect($items)->filter(function ($item) {
+                $status = is_array($item) ? ($item['status'] ?? null) : ($item->status ?? null);
+                return $status !== \App\Models\TechStackItem::STATUS_NOT_STARTED;
+            });
+        })->filter(fn ($items) => count($items) > 0);
     }
 
     $preferredOrder = ['Tools', 'Database', 'Backend', 'Frontend'];
@@ -129,7 +138,7 @@
                                 </h3>
                             </div>
 
-                            <span class="font-mono text-xs text-vermilion-400 bg-carbon-950 border border-carbon-800 px-2.5 py-1 rounded-md">
+                            <span class="font-mono text-xs text-cyan-400 bg-carbon-950 border border-carbon-800 px-2.5 py-1 rounded-md">
                                 {{ $count }} {{ $count > 1 ? __('tech.technologies') : __('tech.technology') }}
                             </span>
                         </div>
@@ -142,7 +151,7 @@
 
                                     $badgeClasses = ($item instanceof \App\Models\TechStackItem)
                                         ? $item->status_badge_classes
-                                        : ['text' => 'text-vermilion-400', 'bg' => 'bg-carbon-950', 'border' => 'border-carbon-800'];
+                                        : ['text' => 'text-cyan-400', 'bg' => 'bg-carbon-950', 'border' => 'border-carbon-800'];
 
                                     $iconPath = $techIconPaths[$name] ?? $fallbackIconPath;
                                 @endphp
