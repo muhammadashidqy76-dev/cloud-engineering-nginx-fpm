@@ -3,11 +3,11 @@
         <div class="flex items-center justify-between">
             <div>
                 <div class="flex items-center gap-2 font-mono text-xs text-slate-400 mb-1">
-                    <a href="{{ route('dashboard') }}" class="hover:text-white transition-colors">cms</a>
+                    <a href="{{ route('dashboard') }}" class="hover:text-white transition-colors">Cms</a>
                     <span class="text-slate-600">/</span>
-                    <a href="{{ route('learning-log.index') }}" class="hover:text-white transition-colors">notes</a>
+                    <a href="{{ route('learning-log.index') }}" class="hover:text-white transition-colors">Notes</a>
                     <span class="text-slate-600">/</span>
-                    <span class="text-vermilion-400">edit</span>
+                    <span class="text-vermilion-400">Edit</span>
                 </div>
                 <h1 class="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight">
                     Edit Catatan: <span class="text-vermilion-400">{{ $learningLogEntry->title }}</span>
@@ -17,14 +17,17 @@
             <div class="flex items-center gap-2">
                 @if ($learningLogEntry->status === 'published')
                     <a href="{{ route('notes.show', $learningLogEntry->slug) }}" 
-                       target="_blank" 
-                       class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-xs text-vermilion-400 hover:text-vermilion-300 bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 transition-colors">
-                        <span>Lihat Publik ↗</span>
+                    target="_blank" 
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-xs text-vermilion-400 hover:text-vermilion-300 bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 transition-colors">
+                        <span>Lihat Publik</span>
+                        <svg class="w-3.5 h-3.5 text-vermilion-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
                     </a>
                 @endif
 
                 <a href="{{ route('learning-log.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-xs text-slate-400 hover:text-white bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 transition-colors">
-                    <span>&larr; Kembali ke Daftar</span>
+                    <span>Kembali ke Daftar</span>
                 </a>
             </div>
         </div>
@@ -84,7 +87,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Identitas Catatan &amp; URL Slug
+                            1 | Identitas Catatan &amp; URL Slug
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">ID: #{{ $learningLogEntry->id }}</span>
                     </div>
@@ -136,7 +139,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Klasifikasi Pilar &amp; Tingkat Kesiapan
+                            2 | Klasifikasi Pilar &amp; Tingkat Kesiapan
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">TAXONOMY</span>
                     </div>
@@ -240,7 +243,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Penerbitan &amp; Relasi Proyek Portofolio
+                            3 | Penerbitan &amp; Relasi Proyek Portofolio
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">PUBLISHING_META</span>
                     </div>
@@ -334,7 +337,7 @@
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <div>
                             <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider block">
-                                Ringkasan Cuplikan (Excerpt)
+                                4 | Ringkasan Cuplikan (Excerpt)
                             </span>
                             <span class="text-[11px] font-mono text-slate-400">
                                 Ditampilkan pada card preview beranda dan katalog daftar catatan.
@@ -359,7 +362,7 @@
                     <div class="px-4 py-3 bg-carbon-950/90 border-b border-carbon-800 flex items-center justify-between flex-wrap gap-2">
                         <div class="flex items-center gap-1.5 flex-wrap">
                             <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider mr-2 hidden sm:inline">
-                                Isi Artikel Penuh (Markdown)
+                                5 | Isi Artikel Penuh (Markdown)
                             </span>
 
                             <!-- Toolbar Quick Buttons -->

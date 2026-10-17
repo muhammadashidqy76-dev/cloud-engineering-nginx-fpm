@@ -3,11 +3,11 @@
         <div class="flex items-center justify-between">
             <div>
                 <div class="flex items-center gap-2 font-mono text-xs text-slate-400 mb-1">
-                    <a href="{{ route('dashboard') }}" class="hover:text-white transition-colors">cms</a>
+                    <a href="{{ route('dashboard') }}" class="hover:text-white transition-colors">Cms</a>
                     <span class="text-slate-600">/</span>
-                    <a href="{{ route('learning-log.index') }}" class="hover:text-white transition-colors">notes</a>
+                    <a href="{{ route('learning-log.index') }}" class="hover:text-white transition-colors">Notes</a>
                     <span class="text-slate-600">/</span>
-                    <span class="text-vermilion-400">create</span>
+                    <span class="text-vermilion-400">Create</span>
                 </div>
                 <h1 class="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight">
                     Tulis Catatan Teknis / Artikel Baru
@@ -15,7 +15,7 @@
             </div>
 
             <a href="{{ route('learning-log.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-xs text-slate-400 hover:text-white bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 transition-colors">
-                <span>&larr; Kembali ke Daftar</span>
+                <span> Kembali ke Daftar</span>
             </a>
         </div>
     </x-slot>
@@ -73,7 +73,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Identitas Catatan &amp; URL Slug
+                            1 | Identitas Catatan &amp; URL Slug
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">NOTE_HEADER</span>
                     </div>
@@ -126,7 +126,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Klasifikasi Pilar &amp; Tingkat Kesiapan
+                            2 | Klasifikasi Pilar &amp; Tingkat Kesiapan
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">TAXONOMY</span>
                     </div>
@@ -230,7 +230,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Penerbitan &amp; Relasi Proyek Portofolio
+                            3 | Penerbitan &amp; Relasi Proyek Portofolio
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">PUBLISHING_META</span>
                     </div>
@@ -324,7 +324,7 @@
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <div>
                             <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider block">
-                                Ringkasan Cuplikan (Excerpt)
+                                4 | Ringkasan Cuplikan (Excerpt)
                             </span>
                             <span class="text-[11px] font-mono text-slate-400">
                                 Ditampilkan pada card preview beranda dan katalog daftar catatan.

@@ -3,11 +3,11 @@
         <div class="flex items-center justify-between">
             <div>
                 <div class="flex items-center gap-2 font-mono text-xs text-slate-400 mb-1">
-                    <a href="{{ route('dashboard') }}" class="hover:text-white transition-colors">cms</a>
+                    <a href="{{ route('dashboard') }}" class="hover:text-white transition-colors">Cms</a>
                     <span class="text-slate-600">/</span>
-                    <a href="{{ route('tech-stack.index') }}" class="hover:text-white transition-colors">tech-stack</a>
+                    <a href="{{ route('tech-stack.index') }}" class="hover:text-white transition-colors">Tech-Stack</a>
                     <span class="text-slate-600">/</span>
-                    <span class="text-vermilion-400">edit</span>
+                    <span class="text-vermilion-400">Edit</span>
                 </div>
                 <h1 class="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight">
                     Edit Item Tech Stack: <span class="text-vermilion-400">{{ $techStackItem->name }}</span>
@@ -15,7 +15,7 @@
             </div>
 
             <a href="{{ route('tech-stack.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-xs text-slate-400 hover:text-white bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 transition-colors">
-                <span>&larr; Kembali ke Daftar</span>
+                <span>Kembali ke Daftar</span>
             </a>
         </div>
     </x-slot>
@@ -30,7 +30,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Perbarui Properti Teknologi
+                            1 | Perbarui Properti Teknologi
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">ID: #{{ $techStackItem->id }}</span>
                     </div>
@@ -168,7 +168,7 @@
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <div>
                             <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider block">
-                                Hubungkan / Kelola Relasi Proyek ({{ $techStackItem->projects->count() }} Terhubung)
+                               2 | Hubungkan / Kelola Relasi Proyek ({{ $techStackItem->projects->count() }} Terhubung)
                             </span>
                             <span class="text-[11px] font-mono text-slate-400">
                                 Centang untuk menghubungkan, hapus centang untuk mencopot relasi dari proyek.

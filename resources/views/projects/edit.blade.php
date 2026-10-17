@@ -16,7 +16,7 @@
 
             <div class="flex items-center gap-3">
                 <a href="{{ route('projects.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-xs text-slate-400 hover:text-white bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 transition-colors">
-                    <span>&larr; Kembali ke Daftar</span>
+                    <span> Kembali ke Daftar</span>
                 </a>
             </div>
         </div>
@@ -33,7 +33,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            01 // Identitas &amp; Pengurutan Proyek
+                            01 | Identitas &amp; Pengurutan Proyek
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">ID: #{{ $project->id }}</span>
                     </div>
@@ -128,7 +128,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            02 // Problem Statement &amp; Narasi Teknis
+                            02 | Problem Statement &amp; Narasi Teknis
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">ENGINEERING_DETAILS</span>
                     </div>
@@ -198,7 +198,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            03 // Media Thumbnail &amp; Live Demo URL
+                            03 | Media Thumbnail &amp; Live Demo URL
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">MEDIA_LINKS</span>
                     </div>
@@ -212,7 +212,7 @@
                                           type="url" 
                                           name="demo_url" 
                                           :value="old('demo_url', $project->demo_url)" 
-                                          placeholder="https://stockguard-demo.example.com" />
+                                          placeholder="https:|stockguard-demo.example.com" />
                             <p class="text-[11px] font-mono text-slate-500 mt-1">
                                 Tautan live preview eksternal untuk recruiter.
                             </p>
@@ -260,7 +260,7 @@
                                               type="text" 
                                               name="preview_image_path" 
                                               :value="old('preview_image_path', $project->preview_image_path)" 
-                                              placeholder="https://..." />
+                                              placeholder="https:|..." />
                                 <x-input-error :messages="$errors->get('preview_image_path')" />
                             </div>
                         </div>
@@ -272,7 +272,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            04 // Hubungkan Tech Stack (Relasi Pivot)
+                            04 | Hubungkan Tech Stack (Relasi Pivot)
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">TECH_STACK_ITEMS</span>
                     </div>

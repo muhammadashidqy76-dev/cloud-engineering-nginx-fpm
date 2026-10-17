@@ -3,11 +3,11 @@
         <div class="flex items-center justify-between">
             <div>
                 <div class="flex items-center gap-2 font-mono text-xs text-slate-400 mb-1">
-                    <a href="{{ route('dashboard') }}" class="hover:text-white transition-colors">cms</a>
+                    <a href="{{ route('dashboard') }}" class="hover:text-white transition-colors">Cms</a>
                     <span class="text-slate-600">/</span>
-                    <a href="{{ route('journey.index') }}" class="hover:text-white transition-colors">journey</a>
+                    <a href="{{ route('journey.index') }}" class="hover:text-white transition-colors">Journey</a>
                     <span class="text-slate-600">/</span>
-                    <span class="text-vermilion-400">create</span>
+                    <span class="text-vermilion-400">Create</span>
                 </div>
                 <h1 class="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight">
                     Tambah Entri Journey &amp; Kredensial
@@ -15,7 +15,7 @@
             </div>
 
             <a href="{{ route('journey.index') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-xs text-slate-400 hover:text-white bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 transition-colors">
-                <span>&larr; Kembali ke Daftar</span>
+                <span>Kembali ke Daftar</span>
             </a>
         </div>
     </x-slot>
@@ -31,7 +31,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Jenis Kredensial &amp; Platform Penerbit
+                            1 | Jenis Kredensial &amp; Platform Penerbit
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">CREDENTIAL_PROPERTIES</span>
                     </div>
@@ -143,7 +143,7 @@
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <div>
                             <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider block">
-                                Narasi Pembelajaran (Learned &rarr; Applied &rarr; Result)
+                              2 | Narasi Pembelajaran (Learned &rarr; Applied &rarr; Result)
                             </span>
                             <span class="text-[11px] font-mono text-slate-400">
                                 Menjelaskan proses pembelajaran hingga pembuktian hasil nyata di Featured Project.
@@ -210,7 +210,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Dokumen Sertifikat &amp; Tautan Verifikasi
+                            3 | Dokumen Sertifikat &amp; Tautan Verifikasi
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">CREDENTIAL_PROOF</span>
                     </div>
@@ -263,7 +263,7 @@
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Pengaturan Tampilan &amp; Status Publikasi
+                            4 | Pengaturan Tampilan &amp; Status Publikasi
                         </span>
                         <span class="text-[10px] font-mono text-slate-500">CMS_PUBLISHING</span>
                     </div>

@@ -3,9 +3,9 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <div class="flex items-center gap-2 font-mono text-xs text-slate-400 mb-1">
-                    <span>cms</span>
+                    <span>CMS</span>
                     <span class="text-slate-600">/</span>
-                    <span class="text-vermilion-400">overview</span>
+                    <span class="text-vermilion-400">Overview</span>
                 </div>
                 <h1 class="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight flex items-center gap-2">
                     <span>Control Room</span>
@@ -43,7 +43,7 @@
                 <a href="{{ route('projects.index') }}" class="group rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-vermilion-500/50 transition-all shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span class="group-hover:text-vermilion-400 transition-colors">01. Projects &rarr;</span>
+                            <span class="group-hover:text-vermilion-400 transition-colors">01. Projects &nearrow;</span>
                             <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Live</span>
                         </div>
                         <div class="text-2xl sm:text-3xl font-bold font-mono text-white">
@@ -60,7 +60,7 @@
                 <a href="{{ route('tech-stack.index') }}" class="group rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-vermilion-500/50 transition-all shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span class="group-hover:text-vermilion-400 transition-colors">02. Tech Stack &rarr;</span>
+                            <span class="group-hover:text-vermilion-400 transition-colors">02. Tech Stack &nearrow;</span>
                             <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Live</span>
                         </div>
                         <div class="text-2xl sm:text-3xl font-bold font-mono text-white">
@@ -77,7 +77,7 @@
                 <a href="{{ route('work-experience.index') }}" class="group rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-vermilion-500/50 transition-all shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span class="group-hover:text-vermilion-400 transition-colors">03. Experience &rarr;</span>
+                            <span class="group-hover:text-vermilion-400 transition-colors">03. Experience &nearrow;</span>
                             <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Live</span>
                         </div>
                         <div class="text-2xl sm:text-3xl font-bold font-mono text-white">
@@ -94,7 +94,7 @@
                 <a href="{{ route('journey.index') }}" class="group rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-vermilion-500/50 transition-all shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span class="group-hover:text-vermilion-400 transition-colors">04. Journey &rarr;</span>
+                            <span class="group-hover:text-vermilion-400 transition-colors">04. Journey &nearrow;</span>
                             <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Live</span>
                         </div>
                         <div class="text-2xl sm:text-3xl font-bold font-mono text-white">
@@ -111,7 +111,7 @@
                 <a href="{{ route('learning-log.index') }}" class="group rounded-xl bg-carbon-900/90 border border-carbon-800 p-4 sm:p-5 hover:border-vermilion-500/50 transition-all shadow-lg flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-2">
-                            <span class="group-hover:text-vermilion-400 transition-colors">05. Tech Notes &rarr;</span>
+                            <span class="group-hover:text-vermilion-400 transition-colors">05. Tech Notes &nearrow;</span>
                             <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">Live</span>
                         </div>
                         <div class="text-2xl sm:text-3xl font-bold font-mono text-white">
@@ -126,119 +126,6 @@
 
             </div>
 
-            <!-- ─── Roadmap & Batch Implementation Tracker ────────────────────────── -->
-            <div class="rounded-xl bg-carbon-900 border border-carbon-800 overflow-hidden shadow-xl">
-                <div class="px-5 py-3.5 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            Rencana Kerja &bull; Roadmap CRUD Modular
-                        </span>
-                    </div>
-                    <span class="font-mono text-[11px] text-slate-500">
-                        6 Selesai &bull; 100% Modul CRUD Aktif
-                    </span>
-                </div>
-
-                <div class="p-5 sm:p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
-                    
-                    <!-- Batch 1 (Active / Done) -->
-                    <div class="p-4 rounded-lg bg-carbon-950 border border-emerald-500/30 flex items-start gap-3 relative overflow-hidden">
-                        <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
-                            ✓
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between gap-2">
-                                <a href="{{ route('dashboard') }}" class="font-mono text-xs font-bold text-white hover:text-vermilion-400 transition-colors">Batch 1: Overview &amp; Auth &rarr;</a>
-                                <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Live</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mt-1">
-                                Layout dark theme, login & reset password, disable registrasi publik, dan kartu ringkasan metrics.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Batch 2 (Active / Done) -->
-                    <div class="p-4 rounded-lg bg-carbon-950 border border-emerald-500/30 flex items-start gap-3 relative overflow-hidden">
-                        <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
-                            ✓
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between gap-2">
-                                <a href="{{ route('projects.index') }}" class="font-mono text-xs font-bold text-white hover:text-vermilion-400 transition-colors">Batch 2: Featured Projects &rarr;</a>
-                                <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Live</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mt-1">
-                                Form CRUD project, mapping tech stack pivot, complexity order, thumbnail preview, dan demo URL.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Batch 3 (Active / Done) -->
-                    <div class="p-4 rounded-lg bg-carbon-950 border border-emerald-500/30 flex items-start gap-3 relative overflow-hidden">
-                        <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
-                            ✓
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between gap-2">
-                                <a href="{{ route('tech-stack.index') }}" class="font-mono text-xs font-bold text-white hover:text-vermilion-400 transition-colors">Batch 3: Tech Stack &rarr;</a>
-                                <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Live</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mt-1">
-                                Manajemen item teknologi per kategori (Backend, Database, Tools) dan status penguasaan.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Batch 4 (Active / Done) -->
-                    <div class="p-4 rounded-lg bg-carbon-950 border border-emerald-500/30 flex items-start gap-3 relative overflow-hidden">
-                        <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
-                            ✓
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between gap-2">
-                                <a href="{{ route('work-experience.index') }}" class="font-mono text-xs font-bold text-white hover:text-vermilion-400 transition-colors">Batch 4: Experience &rarr;</a>
-                                <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Live</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mt-1">
-                                Manajemen riwayat pengalaman kerja &amp; magang, tipe employment, status is_current, dan poin pencapaian.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Batch 5 (Active / Done) -->
-                    <div class="p-4 rounded-lg bg-carbon-950 border border-emerald-500/30 flex items-start gap-3 relative overflow-hidden">
-                        <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
-                            ✓
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between gap-2">
-                                <a href="{{ route('journey.index') }}" class="font-mono text-xs font-bold text-white hover:text-vermilion-400 transition-colors">Batch 5: Journey &rarr;</a>
-                                <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Live</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mt-1">
-                                Timeline pembelajaran, upload dokumen sertifikat/ijazah, link verifikasi, dan narasi 3-langkah.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Batch 6 (Active / Done) -->
-                    <div class="p-4 rounded-lg bg-carbon-950 border border-emerald-500/30 flex items-start gap-3 relative overflow-hidden">
-                        <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-mono text-xs font-bold">
-                            ✓
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center justify-between gap-2">
-                                <a href="{{ route('learning-log.index') }}" class="font-mono text-xs font-bold text-white hover:text-vermilion-400 transition-colors">Batch 6: Notes &amp; Learning Log &rarr;</a>
-                                <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">Live</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mt-1">
-                                Editor Markdown artikel penuh untuk /notes, pilar Laravel vs Cloud, status exploring/production-ready, dan auto slug.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
 
             <!-- ─── Two-Column Feed: Recent Technical Notes & Featured Projects ───── -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -254,7 +141,7 @@
                                 </h3>
                             </div>
                             <a href="{{ url('/notes') }}" target="_blank" class="text-xs font-mono text-vermilion-400 hover:text-vermilion-300 transition-colors">
-                                Buka Arsip &rarr;
+                                Kelola Semua Catatan &nearrow;
                             </a>
                         </div>
 
@@ -303,7 +190,7 @@
 
                     <div class="p-4 bg-carbon-950 border-t border-carbon-800 flex items-center justify-between text-xs font-mono text-slate-400">
                         <span>Total: {{ $noteStats['total'] }} Catatan</span>
-                        <span class="text-slate-500">CRUD Editor di Batch 6</span>
+                        <span class="text-slate-500">Notes</span>
                     </div>
                 </div>
 
@@ -318,7 +205,7 @@
                                 </h3>
                             </div>
                             <a href="{{ route('projects.index') }}" class="text-xs font-mono text-vermilion-400 hover:text-vermilion-300 transition-colors">
-                                Kelola Semua Proyek &rarr;
+                                Kelola Semua Proyek &nearrow;
                             </a>
                         </div>
 
@@ -372,7 +259,7 @@
 
                     <div class="p-4 bg-carbon-950 border-t border-carbon-800 flex items-center justify-between text-xs font-mono text-slate-400">
                         <span>Total: {{ $projectStats['total'] }} Projects</span>
-                        <span class="text-slate-500">CRUD Form &amp; Tech Sync di Batch 2</span>
+                        <span class="text-slate-500">Featured Projects</span>
                     </div>
                 </div>
 
