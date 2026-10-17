@@ -90,8 +90,8 @@
                     <span class="text-vermilion-400 group-hover:translate-x-0.5 transition-transform">/&gt;</span>
                 </div>
 
-                <span class="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-vermilion-500/10 border border-vermilion-500/20 text-vermilion-400">
-                    <span class="w-1.5 h-1.5 rounded-full bg-vermilion-400 animate-pulse"></span>
+                <span class="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
                     dev
                 </span>
             </a>
@@ -102,7 +102,7 @@
                 <a href="#projects"
                    class="px-3 py-2 lg:px-3.5 lg:py-2 rounded-lg text-xs transition-all duration-200 border"
                    :class="activeSection === 'projects'
-                       ? 'text-vermilion-400 bg-vermilion-500/10 border-vermilion-500/30 font-semibold shadow-sm'
+                       ? 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30 font-semibold shadow-sm'
                        : 'text-slate-300 hover:text-white hover:bg-carbon-900/80 border-transparent font-medium'">
                     {{ __('nav.projects') }}
                 </a>
@@ -111,7 +111,7 @@
                 <a href="#tech-stack"
                    class="px-3 py-2 lg:px-3.5 lg:py-2 rounded-lg text-xs transition-all duration-200 border"
                    :class="activeSection === 'tech-stack'
-                       ? 'text-vermilion-400 bg-vermilion-500/10 border-vermilion-500/30 font-semibold shadow-sm'
+                       ? 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30 font-semibold shadow-sm'
                        : 'text-slate-300 hover:text-white hover:bg-carbon-900/80 border-transparent font-medium'">
                     {{ __('nav.tech_stack') }}
                 </a>
@@ -120,7 +120,7 @@
                 <a href="#experience"
                    class="px-3 py-2 lg:px-3.5 lg:py-2 rounded-lg text-xs transition-all duration-200 border"
                    :class="activeSection === 'experience'
-                       ? 'text-vermilion-400 bg-vermilion-500/10 border-vermilion-500/30 font-semibold shadow-sm'
+                       ? 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30 font-semibold shadow-sm'
                        : 'text-slate-300 hover:text-white hover:bg-carbon-900/80 border-transparent font-medium'">
                     {{ __('nav.experience') }}
                 </a>
