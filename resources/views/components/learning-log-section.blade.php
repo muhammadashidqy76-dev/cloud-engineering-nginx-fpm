@@ -50,12 +50,12 @@
 @endphp
 
 <section id="learning-log" class="relative bg-carbon-950/60 text-slate-100 py-20 lg:py-28 overflow-hidden border-b border-carbon-800/80">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" x-data="{ activeMobileTrack: 'laravel' }">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" x-data="{ activeMobileTrack: 'cloud' }">
 
         <!-- ─── Section Header ─── -->
         <div class="mb-10 lg:mb-14 max-w-2xl">
-            <span class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-widest text-vermilion-400 mb-3">
-                <span class="w-3.5 h-px bg-vermilion-500 rounded"></span>
+            <span class="inline-flex items-center gap-1.5 font-mono text-[11px] font-semibold uppercase tracking-widest text-cyan-400 mb-3">
+                <span class="w-3.5 h-px bg-cyan-400 rounded"></span>
                 // {{ __('log.tag') }}
             </span>
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight tracking-tight">
@@ -70,14 +70,6 @@
         <div class="flex lg:hidden items-center justify-center mb-8">
             <div class="inline-flex p-1 rounded-xl bg-carbon-900 border border-carbon-800 max-w-sm w-full font-mono text-xs">
                 <button type="button"
-                        @click="activeMobileTrack = 'laravel'"
-                        class="flex-1 py-2 px-3 rounded-lg text-center font-medium transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
-                        :class="activeMobileTrack === 'laravel' ? 'bg-carbon-950 text-vermilion-400 border border-carbon-800 shadow-sm font-bold' : 'text-slate-400 hover:text-white'">
-                    <span class="w-1.5 h-1.5 rounded-full bg-vermilion-400"></span>
-                    <span>{{ __('log.tab_laravel') }}</span>
-                    <span class="text-[10px] opacity-70">({{ $laravelItems->count() }})</span>
-                </button>
-                <button type="button"
                         @click="activeMobileTrack = 'cloud'"
                         class="flex-1 py-2 px-3 rounded-lg text-center font-medium transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
                         :class="activeMobileTrack === 'cloud' ? 'bg-carbon-950 text-cyan-400 border border-carbon-800 shadow-sm font-bold' : 'text-slate-400 hover:text-white'">
@@ -85,129 +77,21 @@
                     <span>{{ __('log.tab_cloud') }}</span>
                     <span class="text-[10px] opacity-70">({{ $cloudItems->count() }})</span>
                 </button>
+                <button type="button"
+                        @click="activeMobileTrack = 'laravel'"
+                        class="flex-1 py-2 px-3 rounded-lg text-center font-medium transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                        :class="activeMobileTrack === 'laravel' ? 'bg-carbon-950 text-amber-400 border border-carbon-800 shadow-sm font-bold' : 'text-slate-400 hover:text-white'">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                    <span>{{ __('log.tab_laravel') }}</span>
+                    <span class="text-[10px] opacity-70">({{ $laravelItems->count() }})</span>
+                </button>
             </div>
         </div>
 
         <!-- ─── Two-Track Grid Layout (Desktop: 2 side-by-side columns | Mobile: Tab-controlled) ─── -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
 
-            <!-- ═════ TRACK 1: LARAVEL & SYSTEM ARCHITECTURE ═════ -->
-            <div class="flex-col gap-5"
-                 :class="activeMobileTrack === 'laravel' ? 'flex' : 'hidden lg:flex'">
-                <!-- Track Pillar Header -->
-                <div class="flex items-center justify-between p-4 rounded-xl bg-carbon-900/90 border border-carbon-800 backdrop-blur-sm">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-vermilion-500/10 border border-vermilion-500/20 flex items-center justify-center text-vermilion-400 shrink-0">
-                            <!-- Laravel / Code Layer Icon -->
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                            </svg>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="font-mono text-[10px] uppercase font-bold text-vermilion-400 tracking-wider">// TRACK 01</span>
-                            </div>
-                            <h3 class="text-sm font-bold text-white tracking-tight">
-                                {{ __('log.track_laravel_title') }}
-                            </h3>
-                        </div>
-                    </div>
-                    <span class="font-mono text-[10px] text-slate-400 bg-carbon-950 border border-carbon-800 px-2.5 py-1 rounded">
-                        {{ $laravelItems->count() }} {{ $laravelItems->count() === 1 ? 'entry' : 'entries' }}
-                    </span>
-                </div>
-
-                <p class="text-xs text-slate-400 font-sans px-1 -mt-2">
-                    {{ __('log.track_laravel_desc') }}
-                </p>
-
-                <!-- Cards List -->
-                <div class="flex flex-col gap-5">
-                    @forelse($laravelItems as $log)
-                        @php
-                            $pubDate = null;
-                            if (!empty($log->published_at)) {
-                                $pubDate = is_string($log->published_at)
-                                    ? \Carbon\Carbon::parse($log->published_at)->format('d M Y')
-                                    : $log->published_at->format('d M Y');
-                            }
-                            $relatedName = is_object($log->relatedProject) ? $log->relatedProject->title : null;
-                            $readTime = $log->reading_time ?? (function($text) {
-                                $words = str_word_count(strip_tags((string)$text));
-                                $min = max(1, (int) ceil($words / 180));
-                                return "{$min} min read";
-                            })($log->content);
-                        @endphp
-
-                        <article class="group flex flex-col justify-between rounded-xl bg-carbon-900 border border-carbon-800 hover:border-vermilion-500/40 transition-all duration-200 hover:-translate-y-0.5 overflow-hidden">
-                            <div>
-                                <!-- Window Mockup Header Bar -->
-                                <div class="flex items-center justify-between px-4 py-2.5 bg-carbon-950 border-b border-carbon-800 select-none">
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-2 h-2 rounded-full bg-rose-500/80"></span>
-                                        <span class="w-2 h-2 rounded-full bg-amber-400/80"></span>
-                                        <span class="w-2 h-2 rounded-full bg-emerald-400/80"></span>
-                                    </div>
-                                    <div>
-                                        <!-- Medium-Style Reading Time Pill -->
-                                        <span class="font-mono text-[10px] font-semibold text-slate-300 bg-carbon-900 border border-carbon-800 px-2 py-0.5 rounded inline-flex items-center gap-1.5 select-none">
-                                            <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            {{ $readTime }}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <!-- Card Body -->
-                                <div class="p-5 flex flex-col gap-2.5">
-                                    @if(!empty($log->slug))
-                                        <a href="{{ route('notes.show', $log->slug) }}" class="block">
-                                            <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-vermilion-400 transition-colors leading-snug">
-                                                {{ $log->title }}
-                                            </h4>
-                                        </a>
-                                    @else
-                                        <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-vermilion-400 transition-colors leading-snug">
-                                            {{ $log->title }}
-                                        </h4>
-                                    @endif
-                                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
-                                        {{ $log->content }}
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Card Footer Meta -->
-                            <div class="px-5 pb-4 pt-3 flex items-center justify-between border-t border-carbon-800/80 mt-1 text-[11px] text-slate-400 font-mono">
-                                <span class="text-[10px] text-slate-400">
-                                    {{ $pubDate ?? '—' }}
-                                </span>
-                                <div class="flex items-center gap-2">
-                                    @if($relatedName)
-                                        <span class="text-[10px] font-medium text-slate-400 bg-carbon-950 border border-carbon-800 px-2 py-0.5 rounded truncate max-w-[120px]">
-                                            {{ $relatedName }}
-                                        </span>
-                                    @endif
-                                    @if(!empty($log->slug))
-                                        <a href="{{ route('notes.show', $log->slug) }}"
-                                           class="inline-flex items-center gap-1 text-[10px] font-semibold text-vermilion-400 hover:text-vermilion-300 transition-colors">
-                                            Baca
-                                            <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-                                        </a>
-                                    @endif
-                                </div>
-                            </div>
-                        </article>
-                    @empty
-                        <div class="p-8 rounded-xl border border-dashed border-carbon-800 text-center font-mono text-xs text-slate-500 bg-carbon-950/40">
-                            {{ __('log.empty_track') }}
-                        </div>
-                    @endforelse
-                </div>
-            </div>
-
-            <!-- ═════ TRACK 2: CLOUD ENGINEERING & INFRASTRUCTURE ═════ -->
+            <!-- ═════ TRACK 1: CLOUD ENGINEERING & INFRASTRUCTURE ═════ -->
             <div class="flex-col gap-5"
                  :class="activeMobileTrack === 'cloud' ? 'flex' : 'hidden lg:flex'">
                 <!-- Track Pillar Header -->
@@ -221,7 +105,7 @@
                         </div>
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="font-mono text-[10px] uppercase font-bold text-cyan-400 tracking-wider">// TRACK 02</span>
+                                <span class="font-mono text-[10px] uppercase font-bold text-cyan-400 tracking-wider">// TRACK 01</span>
                             </div>
                             <h3 class="text-sm font-bold text-white tracking-tight">
                                 {{ __('log.track_cloud_title') }}
@@ -308,6 +192,122 @@
                                     @if(!empty($log->slug))
                                         <a href="{{ route('notes.show', $log->slug) }}"
                                            class="inline-flex items-center gap-1 text-[10px] font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">
+                                            Baca
+                                            <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </article>
+                    @empty
+                        <div class="p-8 rounded-xl border border-dashed border-carbon-800 text-center font-mono text-xs text-slate-500 bg-carbon-950/40">
+                            {{ __('log.empty_track') }}
+                        </div>
+                    @endforelse
+                </div>
+            </div>
+
+            <!-- ═════ TRACK 2: SYSTEM ARCHITECTURE & RUNTIME ═════ -->
+            <div class="flex-col gap-5"
+                 :class="activeMobileTrack === 'laravel' ? 'flex' : 'hidden lg:flex'">
+                <!-- Track Pillar Header -->
+                <div class="flex items-center justify-between p-4 rounded-xl bg-carbon-900/90 border border-carbon-800 backdrop-blur-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 shrink-0">
+                            <!-- Code Layer Icon -->
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-[10px] uppercase font-bold text-amber-400 tracking-wider">// TRACK 02</span>
+                            </div>
+                            <h3 class="text-sm font-bold text-white tracking-tight">
+                                {{ __('log.track_laravel_title') }}
+                            </h3>
+                        </div>
+                    </div>
+                    <span class="font-mono text-[10px] text-slate-400 bg-carbon-950 border border-carbon-800 px-2.5 py-1 rounded">
+                        {{ $laravelItems->count() }} {{ $laravelItems->count() === 1 ? 'entry' : 'entries' }}
+                    </span>
+                </div>
+
+                <p class="text-xs text-slate-400 font-sans px-1 -mt-2">
+                    {{ __('log.track_laravel_desc') }}
+                </p>
+
+                <!-- Cards List -->
+                <div class="flex flex-col gap-5">
+                    @forelse($laravelItems as $log)
+                        @php
+                            $pubDate = null;
+                            if (!empty($log->published_at)) {
+                                $pubDate = is_string($log->published_at)
+                                    ? \Carbon\Carbon::parse($log->published_at)->format('d M Y')
+                                    : $log->published_at->format('d M Y');
+                            }
+                            $relatedName = is_object($log->relatedProject) ? $log->relatedProject->title : null;
+                            $readTime = $log->reading_time ?? (function($text) {
+                                $words = str_word_count(strip_tags((string)$text));
+                                $min = max(1, (int) ceil($words / 180));
+                                return "{$min} min read";
+                            })($log->content);
+                        @endphp
+
+                        <article class="group flex flex-col justify-between rounded-xl bg-carbon-900 border border-carbon-800 hover:border-amber-500/40 transition-all duration-200 hover:-translate-y-0.5 overflow-hidden">
+                            <div>
+                                <!-- Window Mockup Header Bar -->
+                                <div class="flex items-center justify-between px-4 py-2.5 bg-carbon-950 border-b border-carbon-800 select-none">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-full bg-rose-500/80"></span>
+                                        <span class="w-2 h-2 rounded-full bg-amber-400/80"></span>
+                                        <span class="w-2 h-2 rounded-full bg-emerald-400/80"></span>
+                                    </div>
+                                    <div>
+                                        <!-- Medium-Style Reading Time Pill -->
+                                        <span class="font-mono text-[10px] font-semibold text-slate-300 bg-carbon-900 border border-carbon-800 px-2 py-0.5 rounded inline-flex items-center gap-1.5 select-none">
+                                            <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            {{ $readTime }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Card Body -->
+                                <div class="p-5 flex flex-col gap-2.5">
+                                    @if(!empty($log->slug))
+                                        <a href="{{ route('notes.show', $log->slug) }}" class="block">
+                                            <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-amber-400 transition-colors leading-snug">
+                                                {{ $log->title }}
+                                            </h4>
+                                        </a>
+                                    @else
+                                        <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-amber-400 transition-colors leading-snug">
+                                            {{ $log->title }}
+                                        </h4>
+                                    @endif
+                                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                                        {{ $log->content }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Card Footer Meta -->
+                            <div class="px-5 pb-4 pt-3 flex items-center justify-between border-t border-carbon-800/80 mt-1 text-[11px] text-slate-400 font-mono">
+                                <span class="text-[10px] text-slate-400">
+                                    {{ $pubDate ?? '—' }}
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    @if($relatedName)
+                                        <span class="text-[10px] font-medium text-slate-400 bg-carbon-950 border border-carbon-800 px-2 py-0.5 rounded truncate max-w-[120px]">
+                                            {{ $relatedName }}
+                                        </span>
+                                    @endif
+                                    @if(!empty($log->slug))
+                                        <a href="{{ route('notes.show', $log->slug) }}"
+                                           class="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-400 hover:text-amber-300 transition-colors">
                                             Baca
                                             <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                                         </a>

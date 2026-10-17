@@ -370,7 +370,7 @@
                                 <span class="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-vermilion-500/10 border border-vermilion-500/20 text-vermilion-400">Author</span>
                             </div>
                             <p class="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                                Self-taught Laravel Backend Developer &bull; Berbagi catatan eksplorasi arsitektur, clean code, dan performa backend.
+                                Aspiring Cloud &amp; Infrastructure Engineer &bull; Berbagi catatan eksplorasi Linux, Docker, cloud architecture, dan sistem infrastruktur.
                             </p>
                         </div>
                     </div>

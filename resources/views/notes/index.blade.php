@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Catatan Teknis &amp; Eksperimen — Ashidqy Handbook</title>
-    <meta name="description" content="Kumpulan dokumentasi mendalam mengenai eksplorasi arsitektur Laravel, clean code, database transactions, caching, dan backend infrastructure milik Moch Hasbi Ashidqy.">
+    <meta name="description" content="Kumpulan dokumentasi mendalam mengenai eksplorasi Cloud Engineering, Docker containerization, sistem Linux, Redis caching, dan infrastruktur deployment milik Moch Hasbi Ashidqy.">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo-web.svg') }}">
@@ -88,7 +88,7 @@
                     Catatan Teknis, Arsitektur &amp; Eksperimen
                 </h1>
                 <p class="mt-4 text-slate-400 text-sm sm:text-base leading-relaxed font-normal">
-                    Dokumentasi mendalam mengenai eksplorasi arsitektur Laravel, clean controller pattern, database transactions &amp; locking, Redis caching, dan backend infrastructure.
+                    Dokumentasi mendalam mengenai eksplorasi Cloud Engineering, Docker containerization, sistem operasi Linux, optimasi Redis caching, dan keandalan sistem.
                 </p>
 
                 <!-- Stats summary pills -->
@@ -97,13 +97,13 @@
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                         Total {{ $totalCount }} Catatan
                     </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400">
-                        <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
-                        {{ $laravelCount }} Laravel Ecosystem
-                    </span>
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
                         <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                         {{ $cloudCount }} Cloud Engineering
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                        {{ $laravelCount }} Arsitektur Aplikasi
                     </span>
                 </div>
             </div>
@@ -118,16 +118,16 @@
                         Semua ({{ $totalCount }})
                     </a>
 
-                    <a href="{{ route('notes.index', array_filter(['category' => 'laravel', 'q' => $search])) }}"
-                       class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all whitespace-nowrap {{ $category === 'laravel' ? 'bg-rose-500/15 text-rose-300 border border-rose-500/30 font-bold shadow-sm' : 'text-slate-400 hover:text-rose-400 hover:bg-carbon-850' }}">
-                        <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
-                        Laravel ({{ $laravelCount }})
-                    </a>
-
                     <a href="{{ route('notes.index', array_filter(['category' => 'cloud_engineering', 'q' => $search])) }}"
                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all whitespace-nowrap {{ $category === 'cloud_engineering' ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-bold shadow-sm' : 'text-slate-400 hover:text-cyan-400 hover:bg-carbon-850' }}">
                         <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                         Cloud Engineering ({{ $cloudCount }})
+                    </a>
+
+                    <a href="{{ route('notes.index', array_filter(['category' => 'laravel', 'q' => $search])) }}"
+                       class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all whitespace-nowrap {{ $category === 'laravel' ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30 font-bold shadow-sm' : 'text-slate-400 hover:text-amber-400 hover:bg-carbon-850' }}">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                        Arsitektur Aplikasi ({{ $laravelCount }})
                     </a>
                 </div>
 
