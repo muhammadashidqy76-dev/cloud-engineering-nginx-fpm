@@ -137,18 +137,6 @@
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                 Docker Multi-Stage
             </span>
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-carbon-900/80 border border-carbon-800 backdrop-blur-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                Redis Caching
-            </span>
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-carbon-900/80 border border-carbon-800 backdrop-blur-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                Nginx Reverse Proxy
-            </span>
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-carbon-900/80 border border-carbon-800 backdrop-blur-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                CI/CD Pipelines
-            </span>
         </div>
 
         <!-- Clean Social Links Bar Centered -->
