@@ -65,6 +65,9 @@
     "tech.status.not_started": "Not Started",
     "tech.technologies": "teknologi",
     "tech.technology": "teknologi",
+    "tech.toggle_show_roadmap": "Tampilkan Not Started (:count)",
+    "tech.toggle_hide_roadmap": "Sembunyikan Not Started (:count)",
+    "tech.roadmap_empty_state": "Teknologi dalam roadmap pembelajaran (klik tombol di atas untuk melihat)",
 
     "journey.tag": "Learning Journey & Credentials",
     "journey.title": "Kompetensi & Sertifikasi Teknis",

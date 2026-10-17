@@ -65,6 +65,9 @@
     "tech.status.not_started": "Not Started",
     "tech.technologies": "technologies",
     "tech.technology": "technology",
+    "tech.toggle_show_roadmap": "Show Not Started (:count)",
+    "tech.toggle_hide_roadmap": "Hide Not Started (:count)",
+    "tech.roadmap_empty_state": "Technologies in learning roadmap (click toggle above to reveal)",
 
     "journey.tag": "Learning Journey & Credentials",
     "journey.title": "Technical Skills & Certifications",
