@@ -85,9 +85,9 @@
                 </div>
 
                 <div class="flex items-center font-mono text-sm sm:text-base font-bold text-white tracking-tight">
-                    <span class="text-vermilion-400 group-hover:-translate-x-0.5 transition-transform">&lt;</span>
+                    <span class="text-cyan-400 group-hover:-translate-x-0.5 transition-transform">&lt;</span>
                     <span class="px-1 text-slate-100 group-hover:text-white transition-colors">Ashidqy</span>
-                    <span class="text-vermilion-400 group-hover:translate-x-0.5 transition-transform">/&gt;</span>
+                    <span class="text-cyan-400 group-hover:translate-x-0.5 transition-transform">/&gt;</span>
                 </div>
 
                 <span class="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
@@ -132,20 +132,20 @@
                 <!-- Language Switcher Pill -->
                 <div class="flex items-center rounded-lg bg-carbon-900 border border-carbon-800 overflow-hidden shadow-sm font-mono">
                     <a href="{{ route('lang.switch', 'id') }}"
-                       class="px-2.5 py-1.5 text-[11px] font-semibold transition-all {{ app()->getLocale() === 'id' ? 'bg-vermilion-600 text-white' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}"
+                       class="px-2.5 py-1.5 text-[11px] font-semibold transition-all {{ app()->getLocale() === 'id' ? 'bg-cyan-600 text-white' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}"
                        title="Bahasa Indonesia">
                         ID
                     </a>
                     <span class="w-px h-3 bg-carbon-800"></span>
                     <a href="{{ route('lang.switch', 'en') }}"
-                       class="px-2.5 py-1.5 text-[11px] font-semibold transition-all {{ app()->getLocale() === 'en' ? 'bg-vermilion-600 text-white' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}"
+                       class="px-2.5 py-1.5 text-[11px] font-semibold transition-all {{ app()->getLocale() === 'en' ? 'bg-cyan-600 text-white' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}"
                        title="English">
                         EN
                     </a>
                 </div>
 
                 <!-- GitHub Button (Desktop: visible on md and up) -->
-                <a href="https://github.com"
+                <a href="https://github.com/muhammadashidqy76-dev"
                    target="_blank"
                    rel="noopener noreferrer"
                    class="hidden md:inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 hover:border-slate-700 text-slate-200 hover:text-white text-xs font-medium font-mono transition-all shadow-sm group">

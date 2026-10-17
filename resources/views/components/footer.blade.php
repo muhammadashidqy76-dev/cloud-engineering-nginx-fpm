@@ -25,7 +25,7 @@
             <!-- Right: Social Links (Synced with Hero) -->
             <div class="flex items-center gap-2.5">
                 <!-- GitHub -->
-                <a href="https://github.com"
+                <a href="https://github.com/muhammadashidqy76-dev"
                    target="_blank"
                    rel="noopener noreferrer"
                    class="p-2.5 rounded-lg bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm"
@@ -36,7 +36,7 @@
                 </a>
 
                 <!-- LinkedIn -->
-                <a href="https://linkedin.com"
+                <a href="https://www.linkedin.com/in/moch-hasbi-ashidqy-ashidqy-960157130"
                    target="_blank"
                    rel="noopener noreferrer"
                    class="p-2.5 rounded-lg bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm"
@@ -47,7 +47,7 @@
                 </a>
 
                 <!-- Email -->
-                <a href="mailto:contact@example.com"
+                <a href="mailto:[EMAIL_ADDRESS]"
                    class="p-2.5 rounded-lg bg-carbon-900 hover:bg-carbon-850 border border-carbon-800 hover:border-slate-700 text-slate-400 hover:text-white transition-all shadow-sm"
                    aria-label="Email">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
