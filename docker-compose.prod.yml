@@ -1,3 +1,4 @@
+name: cv-prod
 services:
   app:
     build:

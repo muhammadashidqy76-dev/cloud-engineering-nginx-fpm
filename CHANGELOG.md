@@ -27,6 +27,7 @@ bukan per-commit (untuk itu lihat `git log`).
 
 ### Fixed
 - Component & Model Journey: Memperbaiki render logo issuer UIN Maulana Malik Ibrahim Malang (`uin_malang.svg`) dengan menambahkan rounded badge putih dan warna resmi Ulul Albab (emas & hijau) agar tampak kontras pada latar belakang dark-carbon, serta memperluas pencocokan fleksibel (source & course_name) pada accessor `issuer_logo` dan `journey-section.blade.php`.
+- Docker & Models: Memperbaiki casing nama file model (`TechStackItem.php`, `JourneyEntry.php`, `LearningLogEntry.php`) agar sesuai standar PSR-4 sehingga dapat di-autoload dengan sempurna di environment Linux / Docker yang bersifat case-sensitive.
 
 ### Changed
 - Blade `resources/views/components/tech-stack.blade.php`: Menambahkan fitur filter interaktif Alpine.js (`showNotStarted`) untuk menyembunyikan item teknologi berstatus `not_started` secara default di halaman publik, dilengkapi tombol toggle interaktif di section header, transisi halus (`x-transition`), penyesuaian counter jumlah teknologi secara reaktif, serta pesan roadmap fallback jika semua item dalam suatu kategori berstatus `not_started`.
