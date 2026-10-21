@@ -25,6 +25,9 @@ bukan per-commit (untuk itu lihat `git log`).
 - Controller `DashboardController`: mengelola tampilan konsol ringkasan `/dashboard` dengan agregasi metrik dari seluruh model konten CMS (Projects, Tech Stack, Work Experience, Journey, dan Notes/Learning Log).
 - Blade `resources/views/dashboard.blade.php`: Control Room overview dashboard (Batch 1) bertema dark architectural carbon yang menampilkan 5 kartu statistik metrik, roadmap tracker implementasi modular batch 1-6, feed catatan teknis terkini, dan preview featured projects.
 
+### Fixed
+- Component & Model Journey: Memperbaiki render logo issuer UIN Maulana Malik Ibrahim Malang (`uin_malang.svg`) dengan menambahkan rounded badge putih dan warna resmi Ulul Albab (emas & hijau) agar tampak kontras pada latar belakang dark-carbon, serta memperluas pencocokan fleksibel (source & course_name) pada accessor `issuer_logo` dan `journey-section.blade.php`.
+
 ### Changed
 - Blade `resources/views/components/tech-stack.blade.php`: Menambahkan fitur filter interaktif Alpine.js (`showNotStarted`) untuk menyembunyikan item teknologi berstatus `not_started` secara default di halaman publik, dilengkapi tombol toggle interaktif di section header, transisi halus (`x-transition`), penyesuaian counter jumlah teknologi secara reaktif, serta pesan roadmap fallback jika semua item dalam suatu kategori berstatus `not_started`.
 - Blade `resources/views/components/hero-section.blade.php`: Redesain total Hero Section mengadopsi estetika Base.org — beralih dari layout 2-kolom dengan code editor ke centered monumental hero layout dengan visualisasi awan atmosferik (aset awan cinematic `public/images/hero-cloud-bg.jpg`, radial core glow, dan floating vector cloud nodes), centered avatar bio pill dengan foto profil dan trigger modal bio, tipografi monumental tebal dengan gradien cyan-sky, pill CTA buttons beraksen drop glow, serta deretan chips kapabilitas cloud micro-infrastructure.

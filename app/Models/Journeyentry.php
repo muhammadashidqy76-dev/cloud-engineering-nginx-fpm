@@ -68,21 +68,38 @@ class JourneyEntry extends Model
         $mapping = [
             'laracasts' => 'laracasts.svg',
             'udemy' => 'udemy.svg',
+            'dicoding' => 'dicoding.svg',
+            'uin malang' => 'uin_malang.svg',
+            'uin maulana malik ibrahim malang' => 'uin_malang.svg',
+            'uin maulana malik ibrahim' => 'uin_malang.svg',
+            'uin' => 'uin_malang.svg',
+            'maliki' => 'uin_malang.svg',
+            'universitas islam negeri' => 'uin_malang.svg',
             'bnsp' => 'bnsp.svg',
             'badan nasional sertifikasi profesi' => 'bnsp.svg',
-            'lsp telematika' => 'bnsp.svg',
+            'lsp telematika' => 'lsp_telematika.svg',
         ];
 
         $sourceKey = strtolower(trim($this->source ?? ''));
+        $courseKey = strtolower(trim($this->course_name ?? ''));
         $file = 'default.svg';
 
         if (isset($mapping[$sourceKey])) {
             $file = $mapping[$sourceKey];
         } else {
             foreach ($mapping as $key => $logo) {
-                if (str_contains($sourceKey, $key)) {
+                if ($sourceKey !== '' && str_contains($sourceKey, $key)) {
                     $file = $logo;
                     break;
+                }
+            }
+
+            if ($file === 'default.svg') {
+                foreach ($mapping as $key => $logo) {
+                    if ($courseKey !== '' && str_contains($courseKey, $key)) {
+                        $file = $logo;
+                        break;
+                    }
                 }
             }
         }

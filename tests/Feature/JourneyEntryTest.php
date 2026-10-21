@@ -154,11 +154,15 @@ class JourneyEntryTest extends TestCase
     {
         $laracasts = new JourneyEntry(['source' => 'Laracasts']);
         $udemy = new JourneyEntry(['source' => 'Udemy Online']);
+        $dicoding = new JourneyEntry(['source' => 'Dicoding Indonesia']);
+        $uin_malang = new JourneyEntry(['source' => 'UIN Malang']);
         $bnsp = new JourneyEntry(['source' => 'Badan Nasional Sertifikasi Profesi (BNSP)']);
         $unknown = new JourneyEntry(['source' => 'Unknown University']);
 
         $this->assertStringContainsString('images/issuer-logos/laracasts.svg', $laracasts->issuer_logo);
         $this->assertStringContainsString('images/issuer-logos/udemy.svg', $udemy->issuer_logo);
+        $this->assertStringContainsString('images/issuer-logos/dicoding.svg', $dicoding->issuer_logo);
+        $this->assertStringContainsString('images/issuer-logos/uin_malang.svg', $uin_malang->issuer_logo);
         $this->assertStringContainsString('images/issuer-logos/bnsp.svg', $bnsp->issuer_logo);
         $this->assertStringContainsString('images/issuer-logos/default.svg', $unknown->issuer_logo);
     }
