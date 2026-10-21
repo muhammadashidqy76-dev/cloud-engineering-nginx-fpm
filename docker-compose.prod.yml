@@ -1,0 +1,35 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      target: app
+    image: cv-app:1.0
+    env_file: .env.production
+    restart: unless-stopped
+    depends_on:
+      - db
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      target: web
+    image: cv-web:1.0
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  dbdata:
