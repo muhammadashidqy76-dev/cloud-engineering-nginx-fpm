@@ -12,11 +12,27 @@ class LearningLogEntry extends Model
 {
     use HasFactory;
 
+    public const CATEGORY_BACKEND = 'backend';
+    public const CATEGORY_CLOUD = 'cloud_engineering';
+    public const CATEGORY_LARAVEL = 'backend'; // Backward-compatibility alias
+
+    // Standard / Popular Tech Stack Tags
+    public const COMMON_TAGS = [
+        'Laravel',
+        'Docker',
+        'MySQL',
+        'Git/GitHub',
+        'Redis',
+        'Nginx',
+        'Linux',
+        'PostgreSQL',
+        'PHP',
+        'AWS',
+    ];
+
+    // Deprecated readiness constants retained for legacy safety
     public const TAG_EXPLORING = 'exploring';
     public const TAG_PRODUCTION_READY = 'production_ready';
-
-    public const CATEGORY_LARAVEL = 'laravel';
-    public const CATEGORY_CLOUD = 'cloud_engineering';
 
     protected $fillable = [
         'title',
@@ -64,19 +80,14 @@ class LearningLogEntry extends Model
         return $query->where('status', 'published');
     }
 
-    public function scopeExploring(Builder $query): Builder
+    public function scopeBackend(Builder $query): Builder
     {
-        return $query->where('tag', self::TAG_EXPLORING);
-    }
-
-    public function scopeProductionReady(Builder $query): Builder
-    {
-        return $query->where('tag', self::TAG_PRODUCTION_READY);
+        return $query->whereIn('category', [self::CATEGORY_BACKEND, 'laravel']);
     }
 
     public function scopeLaravel(Builder $query): Builder
     {
-        return $query->where('category', self::CATEGORY_LARAVEL);
+        return $this->scopeBackend($query);
     }
 
     public function scopeCloud(Builder $query): Builder
@@ -86,7 +97,26 @@ class LearningLogEntry extends Model
 
     public function scopeCategory(Builder $query, string $category): Builder
     {
+        if ($category === self::CATEGORY_BACKEND || $category === 'laravel') {
+            return $query->whereIn('category', [self::CATEGORY_BACKEND, 'laravel']);
+        }
+
         return $query->where('category', $category);
+    }
+
+    public function scopeTag(Builder $query, string $tag): Builder
+    {
+        return $query->where('tag', $tag);
+    }
+
+    public function scopeExploring(Builder $query): Builder
+    {
+        return $query->where('tag', self::TAG_EXPLORING);
+    }
+
+    public function scopeProductionReady(Builder $query): Builder
+    {
+        return $query->where('tag', self::TAG_PRODUCTION_READY);
     }
 
     /**

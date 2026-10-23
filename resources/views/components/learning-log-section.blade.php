@@ -12,23 +12,23 @@
             (object)[
                 'title' => 'Breeze vs Sanctum: Membedah State Cookie vs Stateless Token',
                 'content' => 'Eksperimen membedah arsitektur otentikasi di Laravel. Membandingkan kapan harus memakai session-based cookie dengan Breeze untuk web monolith vs API token stateless dengan Sanctum untuk SPA/Mobile.',
-                'tag' => 'production_ready',
-                'category' => 'laravel',
+                'tag' => 'Laravel',
+                'category' => 'backend',
                 'relatedProject' => (object)['title' => 'OrderSync API'],
                 'published_at' => \Carbon\Carbon::parse('2026-06-15'),
             ],
             (object)[
                 'title' => 'Penerapan Form Requests & API Resources untuk Clean Controller',
                 'content' => 'Catatan mengenai pemisahan tanggung jawab (Separation of Concerns). Memindahkan validasi rumit ke Form Requests dan formatting payload JSON ke API Resources agar controller tetap ramping.',
-                'tag' => 'production_ready',
-                'category' => 'laravel',
+                'tag' => 'Laravel',
+                'category' => 'backend',
                 'relatedProject' => (object)['title' => 'Portfolio CMS'],
                 'published_at' => \Carbon\Carbon::parse('2026-08-25'),
             ],
             (object)[
                 'title' => 'Eksplorasi Redis Caching untuk API Rate Limiting & Session Store',
                 'content' => 'Catatan pengujian latensi pemindahan driver session dan rate throttling dari MySQL ke Redis in-memory server lokal. Latensi throttling terpangkas dari 15ms menjadi kurang dari 2ms.',
-                'tag' => 'production_ready',
+                'tag' => 'Redis',
                 'category' => 'cloud_engineering',
                 'relatedProject' => (object)['title' => 'OrderSync API'],
                 'published_at' => \Carbon\Carbon::parse('2026-06-01'),
@@ -36,7 +36,7 @@
             (object)[
                 'title' => 'Containerization PHP 8.3 & Nginx dengan Docker Multi-Stage Build',
                 'content' => 'Bedah optimasi ukuran Docker image untuk Laravel. Memisahkan tahapan composer install dengan production image berbasis Alpine Linux, memangkas ukuran dari 800MB menjadi 135MB siap rilis.',
-                'tag' => 'exploring',
+                'tag' => 'Docker',
                 'category' => 'cloud_engineering',
                 'relatedProject' => (object)['title' => 'Portfolio CMS'],
                 'published_at' => \Carbon\Carbon::parse('2026-09-02'),
@@ -45,7 +45,7 @@
     }
 
     // Limit to latest 2 entries per track for a clean, focused homepage showcase
-    $laravelItems = $items->filter(fn($item) => ($item->category ?? 'laravel') === 'laravel')->take(2);
+    $backendItems = $items->filter(fn($item) => in_array($item->category ?? '', ['backend', 'laravel']))->take(2);
     $cloudItems = $items->filter(fn($item) => ($item->category ?? '') === 'cloud_engineering')->take(2);
 @endphp
 
@@ -78,12 +78,12 @@
                     <span class="text-[10px] opacity-70">({{ $cloudItems->count() }})</span>
                 </button>
                 <button type="button"
-                        @click="activeMobileTrack = 'laravel'"
+                        @click="activeMobileTrack = 'backend'"
                         class="flex-1 py-2 px-3 rounded-lg text-center font-medium transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
-                        :class="activeMobileTrack === 'laravel' ? 'bg-carbon-950 text-amber-400 border border-carbon-800 shadow-sm font-bold' : 'text-slate-400 hover:text-white'">
+                        :class="activeMobileTrack === 'backend' ? 'bg-carbon-950 text-amber-400 border border-carbon-800 shadow-sm font-bold' : 'text-slate-400 hover:text-white'">
                     <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                    <span>{{ __('log.tab_laravel') }}</span>
-                    <span class="text-[10px] opacity-70">({{ $laravelItems->count() }})</span>
+                    <span>Backend</span>
+                    <span class="text-[10px] opacity-70">({{ $backendItems->count() }})</span>
                 </button>
             </div>
         </div>
@@ -147,8 +147,12 @@
                                         <span class="w-2 h-2 rounded-full bg-rose-500/80"></span>
                                         <span class="w-2 h-2 rounded-full bg-amber-400/80"></span>
                                         <span class="w-2 h-2 rounded-full bg-emerald-400/80"></span>
-                                    </div>
-                                    <div>
+                                    <div class="flex items-center gap-2">
+                                        @if(!empty($log->tag))
+                                            <span class="font-mono text-[10px] font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded select-none">
+                                                #{{ $log->tag }}
+                                            </span>
+                                        @endif
                                         <!-- Medium-Style Reading Time Pill -->
                                         <span class="font-mono text-[10px] font-semibold text-slate-300 bg-carbon-900 border border-carbon-800 px-2 py-0.5 rounded inline-flex items-center gap-1.5 select-none">
                                             <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -207,9 +211,9 @@
                 </div>
             </div>
 
-            <!-- ═════ TRACK 2: SYSTEM ARCHITECTURE & RUNTIME ═════ -->
+            <!-- ═════ TRACK 2: BACKEND & SYSTEM ARCHITECTURE ═════ -->
             <div class="flex-col gap-5"
-                 :class="activeMobileTrack === 'laravel' ? 'flex' : 'hidden lg:flex'">
+                 :class="activeMobileTrack === 'backend' ? 'flex' : 'hidden lg:flex'">
                 <!-- Track Pillar Header -->
                 <div class="flex items-center justify-between p-4 rounded-xl bg-carbon-900/90 border border-carbon-800 backdrop-blur-sm">
                     <div class="flex items-center gap-3">
@@ -224,12 +228,12 @@
                                 <span class="font-mono text-[10px] uppercase font-bold text-amber-400 tracking-wider">// TRACK 02</span>
                             </div>
                             <h3 class="text-sm font-bold text-white tracking-tight">
-                                {{ __('log.track_laravel_title') }}
+                                Backend &amp; Arsitektur Sistem
                             </h3>
                         </div>
                     </div>
                     <span class="font-mono text-[10px] text-slate-400 bg-carbon-950 border border-carbon-800 px-2.5 py-1 rounded">
-                        {{ $laravelItems->count() }} {{ $laravelItems->count() === 1 ? 'entry' : 'entries' }}
+                        {{ $backendItems->count() }} {{ $backendItems->count() === 1 ? 'entry' : 'entries' }}
                     </span>
                 </div>
 
@@ -239,7 +243,7 @@
 
                 <!-- Cards List -->
                 <div class="flex flex-col gap-5">
-                    @forelse($laravelItems as $log)
+                    @forelse($backendItems as $log)
                         @php
                             $pubDate = null;
                             if (!empty($log->published_at)) {
@@ -264,7 +268,12 @@
                                         <span class="w-2 h-2 rounded-full bg-amber-400/80"></span>
                                         <span class="w-2 h-2 rounded-full bg-emerald-400/80"></span>
                                     </div>
-                                    <div>
+                                    <div class="flex items-center gap-2">
+                                        @if(!empty($log->tag))
+                                            <span class="font-mono text-[10px] font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded select-none">
+                                                #{{ $log->tag }}
+                                            </span>
+                                        @endif
                                         <!-- Medium-Style Reading Time Pill -->
                                         <span class="font-mono text-[10px] font-semibold text-slate-300 bg-carbon-900 border border-carbon-800 px-2 py-0.5 rounded inline-flex items-center gap-1.5 select-none">
                                             <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

@@ -82,28 +82,26 @@
                     <span class="text-[11px] font-mono text-slate-400">Catatan &amp; Eksperimen</span>
                 </div>
 
-                <!-- 2. Pilar Kategori -->
+                <!-- 2. Pilar Kategori (Filter Utama) -->
                 <div class="p-4 rounded-xl bg-carbon-900 border border-carbon-800 shadow-lg">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-[10px] font-mono uppercase tracking-wider text-slate-500">Pilar Utama</span>
                         <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
                     </div>
                     <div class="text-2xl font-bold font-mono text-white">
-                        <span class="text-vermilion-400">{{ $stats['laravel'] }}</span> <span class="text-slate-600 font-normal">/</span> <span class="text-cyan-400">{{ $stats['cloud'] }}</span>
+                        <span class="text-vermilion-400">{{ $stats['backend'] }}</span> <span class="text-slate-600 font-normal">/</span> <span class="text-cyan-400">{{ $stats['cloud'] }}</span>
                     </div>
-                    <span class="text-[11px] font-mono text-slate-400">Laravel / Cloud &amp; DevOps</span>
+                    <span class="text-[11px] font-mono text-slate-400">Backend / Cloud &amp; DevOps</span>
                 </div>
 
-                <!-- 3. Status Tag Kesiapan -->
+                <!-- 3. Tech Stack Tags (Subfilter) -->
                 <div class="p-4 rounded-xl bg-carbon-900 border border-carbon-800 shadow-lg">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-[10px] font-mono uppercase tracking-wider text-slate-500">Tingkat Kesiapan</span>
-                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span class="text-[10px] font-mono uppercase tracking-wider text-slate-500">Tech Stack Tags</span>
+                        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
                     </div>
-                    <div class="text-2xl font-bold font-mono text-white">
-                        <span class="text-emerald-400">{{ $stats['production_ready'] }}</span> <span class="text-slate-600 font-normal">/</span> <span class="text-amber-400">{{ $stats['exploring'] }}</span>
-                    </div>
-                    <span class="text-[11px] font-mono text-slate-400">Production-Ready / Exploring</span>
+                    <div class="text-2xl font-bold font-mono text-amber-400">{{ $stats['tags_count'] }}</div>
+                    <span class="text-[11px] font-mono text-slate-400">Subfilter Teknologi</span>
                 </div>
 
                 <!-- 4. Status Publikasi -->
@@ -118,32 +116,24 @@
 
             </div>
 
-            <!-- ─── TOOLBAR & FILTER TABS ──────────────────────────────────────── -->
+            <!-- ─── TOOLBAR & FILTER TABS (CATEGORY FILTER UTAMA & SUBFILTER TAG) ─── -->
             <div class="p-4 rounded-xl bg-carbon-900 border border-carbon-800 space-y-3">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
                     
-                    <!-- Filter Pills Kategori & Tag -->
+                    <!-- Filter Utama (Pilar Kategori) -->
                     <div class="flex items-center gap-1.5 flex-wrap">
-                        <a href="{{ route('learning-log.index') }}" 
-                           class="px-3 py-1.5 rounded-lg text-xs font-mono transition-colors {{ empty($selectedCategory) && empty($selectedTag) && empty($selectedStatus) ? 'bg-carbon-800 text-white font-semibold' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}">
+                        <span class="text-[11px] font-mono uppercase font-bold text-slate-400 mr-1">// PILAR:</span>
+                        <a href="{{ route('learning-log.index', array_filter(['tag' => $selectedTag, 'status' => $selectedStatus, 'q' => $search])) }}" 
+                           class="px-3 py-1.5 rounded-lg text-xs font-mono transition-colors {{ empty($selectedCategory) ? 'bg-carbon-800 text-white font-semibold' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}">
                             Semua ({{ $stats['total'] }})
                         </a>
-                        <a href="{{ route('learning-log.index', ['category' => 'laravel']) }}" 
-                           class="px-3 py-1.5 rounded-lg text-xs font-mono transition-colors {{ $selectedCategory === 'laravel' ? 'bg-vermilion-500/20 text-vermilion-400 font-semibold border border-vermilion-500/30' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}">
-                            Laravel ({{ $stats['laravel'] }})
+                        <a href="{{ route('learning-log.index', array_filter(['category' => 'backend', 'tag' => $selectedTag, 'status' => $selectedStatus, 'q' => $search])) }}" 
+                           class="px-3 py-1.5 rounded-lg text-xs font-mono transition-colors {{ $selectedCategory === 'backend' || $selectedCategory === 'laravel' ? 'bg-vermilion-500/20 text-vermilion-400 font-semibold border border-vermilion-500/30' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}">
+                            Backend ({{ $stats['backend'] }})
                         </a>
-                        <a href="{{ route('learning-log.index', ['category' => 'cloud_engineering']) }}" 
+                        <a href="{{ route('learning-log.index', array_filter(['category' => 'cloud_engineering', 'tag' => $selectedTag, 'status' => $selectedStatus, 'q' => $search])) }}" 
                            class="px-3 py-1.5 rounded-lg text-xs font-mono transition-colors {{ $selectedCategory === 'cloud_engineering' ? 'bg-cyan-500/20 text-cyan-400 font-semibold border border-cyan-500/30' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}">
                             Cloud &amp; DevOps ({{ $stats['cloud'] }})
-                        </a>
-                        <span class="text-slate-700 hidden sm:inline">|</span>
-                        <a href="{{ route('learning-log.index', ['tag' => 'production_ready']) }}" 
-                           class="px-3 py-1.5 rounded-lg text-xs font-mono transition-colors {{ $selectedTag === 'production_ready' ? 'bg-emerald-500/20 text-emerald-400 font-semibold border border-emerald-500/30' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}">
-                            Production-Ready ({{ $stats['production_ready'] }})
-                        </a>
-                        <a href="{{ route('learning-log.index', ['tag' => 'exploring']) }}" 
-                           class="px-3 py-1.5 rounded-lg text-xs font-mono transition-colors {{ $selectedTag === 'exploring' ? 'bg-amber-500/20 text-amber-400 font-semibold border border-amber-500/30' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}">
-                            Exploring ({{ $stats['exploring'] }})
                         </a>
                     </div>
 
@@ -157,7 +147,7 @@
                             <input type="text" 
                                    name="q" 
                                    value="{{ $search ?? '' }}" 
-                                   placeholder="Cari judul / konten..." 
+                                   placeholder="Cari judul / konten / tag..." 
                                    class="w-48 sm:w-64 bg-carbon-950 border border-carbon-800 text-xs font-mono text-slate-200 rounded-lg pl-8 pr-3 py-1.5 focus:border-vermilion-500 focus:ring-1 focus:ring-vermilion-500/30 placeholder-slate-600 transition-colors">
                             <svg class="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-2.5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -166,6 +156,39 @@
                     </form>
 
                 </div>
+
+                <!-- Subfilter: Tech Stack Tags -->
+                @if(isset($availableTags) && $availableTags->isNotEmpty())
+                    <div class="pt-2.5 border-t border-carbon-800/80 flex items-center gap-1.5 flex-wrap font-mono text-xs">
+                        <span class="text-[11px] font-bold text-amber-400 flex items-center gap-1 mr-1">
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                            </svg>
+                            SUBFILTER TAG:
+                        </span>
+
+                        <a href="{{ route('learning-log.index', array_filter(['category' => $selectedCategory, 'status' => $selectedStatus, 'q' => $search])) }}"
+                           class="px-2.5 py-1 rounded-md text-[11px] transition-colors {{ empty($selectedTag) ? 'bg-carbon-800 text-white font-semibold' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}">
+                            Semua Tag
+                        </a>
+
+                        @foreach($availableTags as $availTag)
+                            <a href="{{ route('learning-log.index', array_filter(['category' => $selectedCategory, 'tag' => $availTag, 'status' => $selectedStatus, 'q' => $search])) }}"
+                               class="px-2.5 py-1 rounded-md text-[11px] transition-all border {{ $selectedTag === $availTag ? 'bg-amber-500/20 text-amber-300 border-amber-500/40 font-bold shadow-sm' : 'text-slate-400 hover:text-amber-300 border-carbon-800 hover:bg-carbon-850' }}">
+                                #{{ $availTag }}
+                            </a>
+                        @endforeach
+
+                        @if(!empty($selectedTag))
+                            <a href="{{ route('learning-log.index', array_filter(['category' => $selectedCategory, 'status' => $selectedStatus, 'q' => $search])) }}"
+                               class="inline-flex items-center gap-1 text-[11px] text-rose-400 hover:text-rose-300 transition-colors ml-1"
+                               title="Hapus subfilter tag">
+                                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                                <span>Reset Tag</span>
+                            </a>
+                        @endif
+                    </div>
+                @endif
             </div>
 
             <!-- ─── ARTICLES LIST (RESPONSIVE GRID) ────────────────────────────── -->
@@ -174,8 +197,7 @@
                     @foreach ($entries as $item)
                         @php
                             $publishedFormatted = $item->published_at ? $item->published_at->format('d M Y') : 'Draft';
-                            $isLaravel = $item->category === 'laravel';
-                            $isProd = $item->tag === 'production_ready';
+                            $isCloud = ($item->category === 'cloud_engineering');
                         @endphp
 
                         <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden flex flex-col justify-between hover:border-carbon-700/80 transition-all duration-200">
@@ -190,14 +212,14 @@
                                             <span class="w-2 h-2 rounded-full bg-emerald-400/80"></span>
                                         </div>
                                         
-                                        <!-- Category Badge -->
-                                        <span class="font-mono text-[10px] font-semibold uppercase px-2 py-0.5 rounded border {{ $isLaravel ? 'text-vermilion-400 bg-vermilion-500/10 border-vermilion-500/20' : 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20' }}">
-                                            {{ $isLaravel ? 'Laravel' : 'Cloud & DevOps' }}
+                                        <!-- Category Badge (Filter Utama) -->
+                                        <span class="font-mono text-[10px] font-semibold uppercase px-2 py-0.5 rounded border {{ $isCloud ? 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20' : 'text-vermilion-400 bg-vermilion-500/10 border-vermilion-500/20' }}">
+                                            {{ $isCloud ? 'Cloud & DevOps' : 'Backend' }}
                                         </span>
 
-                                        <!-- Tag Badge -->
-                                        <span class="font-mono text-[10px] font-semibold uppercase px-2 py-0.5 rounded border {{ $isProd ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : 'text-amber-400 bg-amber-500/10 border-amber-500/20' }}">
-                                            {{ $isProd ? 'Production-Ready' : 'Exploring' }}
+                                        <!-- Tech Stack Tag Badge (Subfilter) -->
+                                        <span class="font-mono text-[10px] font-semibold px-2 py-0.5 rounded border text-amber-300 bg-amber-500/10 border-amber-500/20">
+                                            #{{ $item->tag }}
                                         </span>
                                     </div>
 
@@ -263,7 +285,7 @@
                                     </a>
 
                                     <button type="button" 
-                                            @click="openDeleteModal('{{ route('learning-log.destroy', $item) }}', '{{ addslashes($item->title) }}', '{{ addslashes($item->category) }}', '{{ $item->tag }}', '{{ $item->slug }}')"
+                                            @click="openDeleteModal('{{ route('learning-log.destroy', $item) }}', '{{ addslashes($item->title) }}', '{{ $isCloud ? 'Cloud & DevOps' : 'Backend' }}', '{{ addslashes($item->tag) }}', '{{ $item->slug }}')"
                                             class="px-2.5 py-1 rounded-md bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 border border-rose-500/20 transition-colors cursor-pointer">
                                         Hapus
                                     </button>
@@ -363,12 +385,8 @@
                     <div class="p-3.5 rounded-lg bg-carbon-950 border border-carbon-800 space-y-2 font-mono text-xs">
                         <div class="flex items-center justify-between text-[10px] text-slate-500 uppercase tracking-wider">
                             <span x-text="noteCategory || 'TECHNICAL_NOTE'"></span>
-                            <span class="px-1.5 py-0.5 rounded border text-[10px]"
-                                  :class="{
-                                      'text-emerald-400 bg-emerald-500/10 border-emerald-500/20': noteTag === 'Production-Ready',
-                                      'text-amber-400 bg-amber-500/10 border-amber-500/20': noteTag === 'Exploring'
-                                  }"
-                                  x-text="noteTag"></span>
+                            <span class="px-1.5 py-0.5 rounded border text-[10px] text-amber-300 bg-amber-500/10 border-amber-500/20"
+                                  x-text="'#' + (noteTag || 'Tag')"></span>
                         </div>
                         <div class="text-sm font-bold text-white" x-text="noteTitle"></div>
                         <div class="text-[11px] text-slate-500 flex items-center gap-1.5">

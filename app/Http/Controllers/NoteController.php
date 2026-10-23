@@ -15,30 +15,56 @@ class NoteController extends Controller
     public function index(Request $request): View
     {
         $category = $request->query('category');
+        $tag = $request->query('tag');
         $search = $request->query('q');
 
         $query = LearningLogEntry::published()
             ->with('relatedProject')
             ->latest('published_at');
 
-        if ($category && in_array($category, ['laravel', 'cloud_engineering'])) {
-            $query->where('category', $category);
+        if ($category && in_array($category, ['backend', 'laravel', 'cloud_engineering'])) {
+            if ($category === 'backend' || $category === 'laravel') {
+                $query->whereIn('category', [LearningLogEntry::CATEGORY_BACKEND, 'laravel']);
+            } else {
+                $query->where('category', $category);
+            }
+        }
+
+        if ($tag) {
+            $query->where('tag', $tag);
         }
 
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('content', 'like', "%{$search}%");
+                  ->orWhere('content', 'like', "%{$search}%")
+                  ->orWhere('tag', 'like', "%{$search}%");
             });
         }
 
         $notes = $query->paginate(9)->withQueryString();
 
-        $laravelCount = LearningLogEntry::published()->where('category', 'laravel')->count();
-        $cloudCount = LearningLogEntry::published()->where('category', 'cloud_engineering')->count();
-        $totalCount = $laravelCount + $cloudCount;
+        $backendCount = LearningLogEntry::published()->whereIn('category', [LearningLogEntry::CATEGORY_BACKEND, 'laravel'])->count();
+        $cloudCount = LearningLogEntry::published()->where('category', LearningLogEntry::CATEGORY_CLOUD)->count();
+        $totalCount = $backendCount + $cloudCount;
 
-        return view('notes.index', compact('notes', 'category', 'search', 'laravelCount', 'cloudCount', 'totalCount'));
+        // Available tech stack tags for subfiltering within current category
+        $tagQuery = LearningLogEntry::published();
+        if ($category && in_array($category, ['backend', 'laravel', 'cloud_engineering'])) {
+            if ($category === 'backend' || $category === 'laravel') {
+                $tagQuery->whereIn('category', [LearningLogEntry::CATEGORY_BACKEND, 'laravel']);
+            } else {
+                $tagQuery->where('category', $category);
+            }
+        }
+        $availableTags = $tagQuery->whereNotNull('tag')
+            ->where('tag', '!=', '')
+            ->distinct()
+            ->pluck('tag')
+            ->sort()
+            ->values();
+
+        return view('notes.index', compact('notes', 'category', 'tag', 'search', 'backendCount', 'cloudCount', 'totalCount', 'availableTags'));
     }
 
     /**
@@ -50,15 +76,17 @@ class NoteController extends Controller
         // Only published entries are accessible publicly
         abort_if($entry->status !== 'published', 404);
 
+        $categoryGroup = in_array($entry->category, ['backend', 'laravel']) ? ['backend', 'laravel'] : [$entry->category];
+
         // Adjacent entries for prev/next navigation (same category, published)
         $prevEntry = LearningLogEntry::published()
-            ->where('category', $entry->category)
+            ->whereIn('category', $categoryGroup)
             ->where('published_at', '<', $entry->published_at)
             ->orderBy('published_at', 'desc')
             ->first(['id', 'title', 'slug', 'category']);
 
         $nextEntry = LearningLogEntry::published()
-            ->where('category', $entry->category)
+            ->whereIn('category', $categoryGroup)
             ->where('published_at', '>', $entry->published_at)
             ->orderBy('published_at', 'asc')
             ->first(['id', 'title', 'slug', 'category']);

@@ -25,25 +25,30 @@
 
             <form method="POST" action="{{ route('learning-log.store') }}" class="space-y-6"
                   x-data="{
-                      title: '{{ addslashes(old('title', '')) }}',
-                      slug: '{{ addslashes(old('slug', '')) }}',
+                      entryTitle: @json(old('title', '')),
+                      entrySlug: @json(old('slug', '')),
+                      entryTag: @json(old('tag', 'Laravel')),
                       autoSlug: true,
-                      bodyText: `{{ addslashes(old('body', '')) }}`,
+                      bodyText: @json(old('body', '')),
                       wordCount: 0,
                       readingTime: '1 min read',
+                      setTag(val) {
+                          this.entryTag = val;
+                      },
                       init() {
                           this.updateMetrics();
                       },
                       generateSlug() {
                           if (this.autoSlug) {
-                              this.slug = this.title.toLowerCase()
+                              this.entrySlug = (this.entryTitle || '').toLowerCase()
                                   .replace(/[^a-z0-9 -]/g, '')
                                   .replace(/\s+/g, '-')
                                   .replace(/-+/g, '-');
                           }
                       },
                       updateMetrics() {
-                          const words = this.bodyText.trim() ? this.bodyText.trim().split(/\s+/).length : 0;
+                          const text = this.bodyText || '';
+                          const words = text.trim() ? text.trim().split(/\s+/).length : 0;
                           this.wordCount = words;
                           const mins = Math.max(1, Math.ceil(words / 180));
                           this.readingTime = `${mins} min read`;
@@ -86,7 +91,7 @@
                             <x-text-input id="title" 
                                           type="text" 
                                           name="title" 
-                                          x-model="title"
+                                          x-model="entryTitle"
                                           @input="generateSlug()"
                                           required 
                                           autofocus 
@@ -110,7 +115,7 @@
                                 <input id="slug" 
                                        type="text" 
                                        name="slug" 
-                                       x-model="slug"
+                                       x-model="entrySlug"
                                        @input="autoSlug = false"
                                        required
                                        placeholder="arsitektur-redis-caching-laravel" 
@@ -122,36 +127,39 @@
                     </div>
                 </div>
 
-                <!-- ─── CARD 2: Pilar Kategori & Status Kesiapan ───────────────────── -->
+                <!-- ─── CARD 2: Pilar Kategori & Tech Stack Tag ────────────────────── -->
                 <div class="rounded-xl bg-carbon-900 border border-carbon-800 shadow-xl overflow-hidden">
                     <div class="px-6 py-4 bg-carbon-950/80 border-b border-carbon-800 flex items-center justify-between">
                         <span class="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                            2 | Klasifikasi Pilar &amp; Tingkat Kesiapan
+                            2 | Klasifikasi Pilar &amp; Tech Stack
                         </span>
-                        <span class="text-[10px] font-mono text-slate-500">TAXONOMY</span>
+                        <span class="text-[10px] font-mono text-slate-500">FILTER_UTAMA // SUBFILTER</span>
                     </div>
 
                     <div class="p-6 space-y-6">
                         
-                        <!-- Pilar Kategori -->
+                        <!-- Pilar Utama (Category) -->
                         <div>
-                            <x-input-label :value="__('Pilar Utama (Category) *')" />
+                            <div class="flex items-center justify-between mb-1">
+                                <x-input-label :value="__('Pilar Utama (Category) *')" class="mb-0" />
+                                <span class="text-[10px] font-mono text-slate-500">FILTER UTAMA</span>
+                            </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1.5">
                                 
-                                <!-- Laravel Backend -->
+                                <!-- Backend -->
                                 <label class="flex items-start gap-3 p-3.5 rounded-lg bg-carbon-950 border border-carbon-800 hover:border-vermilion-500/40 cursor-pointer transition-colors has-[:checked]:border-vermilion-500 has-[:checked]:bg-vermilion-500/5">
                                     <input type="radio" 
                                            name="category" 
-                                           value="laravel" 
-                                           {{ old('category', 'laravel') === 'laravel' ? 'checked' : '' }}
+                                           value="backend" 
+                                           {{ old('category', 'backend') === 'backend' || old('category') === 'laravel' ? 'checked' : '' }}
                                            class="mt-0.5 text-vermilion-500 bg-carbon-900 border-carbon-800 focus:ring-vermilion-500/20">
                                     <div>
                                         <div class="flex items-center gap-2">
-                                            <span class="font-mono text-xs font-bold text-white">Laravel Backend</span>
+                                            <span class="font-mono text-xs font-bold text-white">Backend</span>
                                             <span class="w-1.5 h-1.5 rounded-full bg-vermilion-400"></span>
                                         </div>
                                         <span class="text-[11px] font-mono text-slate-400 block mt-0.5">
-                                            Membahas Eloquent, Form Requests, Sanctum, Queue, dan Service Container.
+                                            Membahas RESTful API, Eloquent ORM, Service Layer, Authentication, &amp; Database Design.
                                         </span>
                                     </div>
                                 </label>
@@ -165,11 +173,11 @@
                                            class="mt-0.5 text-cyan-500 bg-carbon-900 border-carbon-800 focus:ring-cyan-500/20">
                                     <div>
                                         <div class="flex items-center gap-2">
-                                            <span class="font-mono text-xs font-bold text-white">Cloud &amp; DevOps</span>
+                                            <span class="font-mono text-xs font-bold text-white">Cloud Engineering</span>
                                             <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                                         </div>
                                         <span class="text-[11px] font-mono text-slate-400 block mt-0.5">
-                                            Membahas Docker multi-stage, Linux Server, CI/CD, Nginx, dan AWS.
+                                            Membahas Docker containerization, Linux Server, CI/CD, Nginx, Redis Caching, &amp; AWS.
                                         </span>
                                     </div>
                                 </label>
@@ -178,47 +186,53 @@
                             <x-input-error :messages="$errors->get('category')" />
                         </div>
 
-                        <!-- Tag Kesiapan (Production-Ready vs Exploring) -->
+                        <!-- Tag Tech Stack (Subfilter) -->
                         <div>
-                            <x-input-label :value="__('Status Kesiapan / Tag *')" />
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1.5">
-                                
-                                <!-- Production-Ready -->
-                                <label class="flex items-start gap-3 p-3.5 rounded-lg bg-carbon-950 border border-carbon-800 hover:border-emerald-500/40 cursor-pointer transition-colors has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-500/5">
-                                    <input type="radio" 
-                                           name="tag" 
-                                           value="production_ready" 
-                                           {{ old('tag', 'production_ready') === 'production_ready' ? 'checked' : '' }}
-                                           class="mt-0.5 text-emerald-500 bg-carbon-900 border-carbon-800 focus:ring-emerald-500/20">
-                                    <div>
-                                        <div class="flex items-center gap-2">
-                                            <span class="font-mono text-xs font-bold text-white">Production-Ready</span>
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                                        </div>
-                                        <span class="text-[11px] font-mono text-slate-400 block mt-0.5">
-                                            Solusi teruji dan siap diimplementasikan langsung ke lingkungan production.
-                                        </span>
-                                    </div>
-                                </label>
+                            <div class="flex items-center justify-between mb-1">
+                                <x-input-label for="tag" :value="__('Tech Stack (Tag) *')" class="mb-0" />
+                                <span class="text-[10px] font-mono text-amber-400">SUBFILTER TECH STACK</span>
+                            </div>
+                            <p class="text-[11px] font-mono text-slate-400 mb-2">
+                                Pilih atau ketik teknologi utama yang dibahas (misal: Docker, Laravel, MySQL, Git/GitHub, Redis, Nginx).
+                            </p>
 
-                                <!-- Exploring -->
-                                <label class="flex items-start gap-3 p-3.5 rounded-lg bg-carbon-950 border border-carbon-800 hover:border-amber-500/40 cursor-pointer transition-colors has-[:checked]:border-amber-500 has-[:checked]:bg-amber-500/5">
-                                    <input type="radio" 
-                                           name="tag" 
-                                           value="exploring" 
-                                           {{ old('tag') === 'exploring' ? 'checked' : '' }}
-                                           class="mt-0.5 text-amber-500 bg-carbon-900 border-carbon-800 focus:ring-amber-500/20">
-                                    <div>
-                                        <div class="flex items-center gap-2">
-                                            <span class="font-mono text-xs font-bold text-white">Exploring</span>
-                                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                                        </div>
-                                        <span class="text-[11px] font-mono text-slate-400 block mt-0.5">
-                                            Eksperimen teknis, riset konsep, benchmark, atau pengujian arsitektur baru.
-                                        </span>
-                                    </div>
-                                </label>
+                            <!-- Quick Suggestion Chips -->
+                            <div class="flex items-center gap-1.5 flex-wrap mb-3">
+                                <span class="text-[10px] font-mono text-slate-500 uppercase mr-1">Rekomendasi:</span>
+                                @foreach(['Laravel', 'Docker', 'MySQL', 'Git/GitHub', 'Redis', 'Nginx', 'Linux', 'PostgreSQL', 'PHP', 'AWS'] as $quickTag)
+                                    <button type="button"
+                                            @click="setTag('{{ $quickTag }}')"
+                                            class="px-2.5 py-1 rounded-md text-xs font-mono transition-all border cursor-pointer"
+                                            :class="entryTag === '{{ $quickTag }}' 
+                                                ? 'bg-amber-500/20 text-amber-300 border-amber-500/40 font-bold shadow-sm' 
+                                                : 'bg-carbon-950 text-slate-400 border-carbon-800 hover:text-white hover:border-carbon-700'">
+                                        {{ $quickTag }}
+                                    </button>
+                                @endforeach
+                            </div>
 
+                            <!-- Custom Tag Input with Datalist -->
+                            <div class="relative">
+                                <x-text-input id="tag" 
+                                              type="text" 
+                                              name="tag" 
+                                              x-model="entryTag"
+                                              required 
+                                              list="tech-stack-datalist"
+                                              placeholder="mis. Docker, Laravel, MySQL, atau Git/GitHub" 
+                                              class="w-full font-mono text-xs" />
+                                <datalist id="tech-stack-datalist">
+                                    <option value="Laravel">
+                                    <option value="Docker">
+                                    <option value="MySQL">
+                                    <option value="Git/GitHub">
+                                    <option value="Redis">
+                                    <option value="Nginx">
+                                    <option value="Linux">
+                                    <option value="PostgreSQL">
+                                    <option value="PHP">
+                                    <option value="AWS">
+                                </datalist>
                             </div>
                             <x-input-error :messages="$errors->get('tag')" />
                         </div>
@@ -389,7 +403,7 @@
                                   @input="updateMetrics()"
                                   rows="18" 
                                   placeholder="# Judul Artikel&#10;&#10;Tuliskan penjelasan teknis Anda menggunakan format Markdown...&#10;&#10;## Mengapa Hal Ini Penting?&#10;&#10;Jelaskan konteks masalah dan solusinya...&#10;&#10;```php&#10;public function handle()&#10;{&#10;    // Kode implementasi&#10;}&#10;```"
-                                  class="w-full bg-carbon-950 border border-carbon-800 text-slate-100 text-xs font-mono rounded-lg focus:border-vermilion-500 focus:ring-1 focus:ring-vermilion-500/30 transition-colors shadow-sm block p-4 leading-relaxed font-mono resize-y"></textarea>
+                                  class="w-full bg-carbon-950 border border-carbon-800 text-slate-100 text-xs font-mono rounded-lg focus:border-vermilion-500 focus:ring-1 focus:ring-vermilion-500/30 transition-colors shadow-sm block p-4 leading-relaxed font-mono resize-y">{{ old('body', '') }}</textarea>
                         <x-input-error :messages="$errors->get('body')" />
                     </div>
                 </div>

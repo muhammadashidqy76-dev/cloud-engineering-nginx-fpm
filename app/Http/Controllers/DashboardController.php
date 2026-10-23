@@ -55,7 +55,8 @@ class DashboardController extends Controller
             'total' => LearningLogEntry::count(),
             'published' => LearningLogEntry::where('status', 'published')->count(),
             'draft' => LearningLogEntry::where('status', 'draft')->count(),
-            'laravel' => LearningLogEntry::where('category', LearningLogEntry::CATEGORY_LARAVEL)->count(),
+            'backend' => LearningLogEntry::whereIn('category', [LearningLogEntry::CATEGORY_BACKEND, 'laravel'])->count(),
+            'laravel' => LearningLogEntry::whereIn('category', [LearningLogEntry::CATEGORY_BACKEND, 'laravel'])->count(),
             'cloud' => LearningLogEntry::where('category', LearningLogEntry::CATEGORY_CLOUD)->count(),
         ];
         $recentNotes = LearningLogEntry::latest('published_at')

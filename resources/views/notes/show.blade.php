@@ -247,16 +247,22 @@
 
                 <!-- Right: Actions & Badges -->
                 <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
-                    <!-- Track Badge -->
-                    @if($entry->category === 'laravel')
-                        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20">
-                            <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
-                            Laravel
-                        </span>
-                    @else
+                    <!-- Track Badge & Tech Stack Tag -->
+                    @if($entry->category === 'cloud_engineering')
                         <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
                             <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
                             Cloud
+                        </span>
+                    @else
+                        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                            <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
+                            Backend
+                        </span>
+                    @endif
+
+                    @if(!empty($entry->tag))
+                        <span class="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[11px] font-mono font-medium bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                            #{{ $entry->tag }}
                         </span>
                     @endif
 
@@ -306,18 +312,28 @@
             <!-- Article header -->
             <header class="mb-10" id="article-header">
 
-                <!-- Status badge -->
-                @if($entry->tag === 'production_ready')
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4">
-                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                        Production Ready
-                    </span>
-                @else
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4">
-                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                        Exploring
-                    </span>
-                @endif
+                <!-- Category & Tech Stack Badge -->
+                <div class="flex items-center gap-2 mb-4 flex-wrap">
+                    @if($entry->category === 'cloud_engineering')
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                            Cloud Engineering
+                        </span>
+                    @else
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                            <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                            Backend Architecture
+                        </span>
+                    @endif
+
+                    @if(!empty($entry->tag))
+                        <a href="{{ route('notes.index', ['tag' => $entry->tag]) }}"
+                           class="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-mono font-medium bg-amber-500/10 text-amber-300 border border-amber-500/20 hover:bg-amber-500/20 transition-colors"
+                           title="Lihat semua catatan dengan tag #{{ $entry->tag }}">
+                            #{{ $entry->tag }}
+                        </a>
+                    @endif
+                </div>
 
                 <!-- Title -->
                 <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight mb-4" id="article-title">

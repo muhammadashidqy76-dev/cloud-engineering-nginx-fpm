@@ -119,7 +119,7 @@
                         </div>
                     </div>
                     <div class="mt-4 pt-3 border-t border-carbon-800/80 flex items-center justify-between text-xs font-mono">
-                        <span class="text-vermilion-400">{{ $noteStats['laravel'] }} Laravel</span>
+                        <span class="text-vermilion-400">{{ $noteStats['backend'] ?? $noteStats['laravel'] }} Backend</span>
                         <span class="text-cyan-400">{{ $noteStats['cloud'] }} Cloud</span>
                     </div>
                 </a>
@@ -149,14 +149,20 @@
                             @forelse ($recentNotes as $note)
                                 <div class="p-4 sm:p-5 hover:bg-carbon-950/40 transition-colors">
                                     <div class="flex items-center justify-between gap-2 mb-1.5">
-                                        <div class="flex items-center gap-2">
+                                        <div class="flex items-center gap-2 flex-wrap">
                                             @if ($note->category === 'cloud_engineering')
                                                 <span class="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
                                                     Cloud Engineering
                                                 </span>
                                             @else
                                                 <span class="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-vermilion-500/10 border border-vermilion-500/20 text-vermilion-400">
-                                                    Laravel Ecosystem
+                                                    Backend
+                                                </span>
+                                            @endif
+
+                                            @if ($note->tag)
+                                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-carbon-800 border border-carbon-700 text-slate-300">
+                                                    #{{ $note->tag }}
                                                 </span>
                                             @endif
 

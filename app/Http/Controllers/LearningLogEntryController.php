@@ -23,7 +23,11 @@ class LearningLogEntryController extends Controller
 
         $selectedCategory = $request->query('category');
         if (!empty($selectedCategory) && $selectedCategory !== 'all') {
-            $query->where('category', $selectedCategory);
+            if ($selectedCategory === 'backend' || $selectedCategory === 'laravel') {
+                $query->whereIn('category', [LearningLogEntry::CATEGORY_BACKEND, 'laravel']);
+            } else {
+                $query->where('category', $selectedCategory);
+            }
         }
 
         $selectedTag = $request->query('tag');
@@ -41,7 +45,8 @@ class LearningLogEntryController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
                   ->orWhere('content', 'like', "%{$search}%")
-                  ->orWhere('body', 'like', "%{$search}%");
+                  ->orWhere('body', 'like', "%{$search}%")
+                  ->orWhere('tag', 'like', "%{$search}%");
             });
         }
 
@@ -51,17 +56,36 @@ class LearningLogEntryController extends Controller
             return response()->json($entries);
         }
 
+        // Available tags within currently selected category (or all if not filtered) for subfilter
+        $tagQuery = LearningLogEntry::query();
+        if (!empty($selectedCategory) && $selectedCategory !== 'all') {
+            if ($selectedCategory === 'backend' || $selectedCategory === 'laravel') {
+                $tagQuery->whereIn('category', [LearningLogEntry::CATEGORY_BACKEND, 'laravel']);
+            } else {
+                $tagQuery->where('category', $selectedCategory);
+            }
+        }
+        $availableTags = $tagQuery->whereNotNull('tag')
+            ->where('tag', '!=', '')
+            ->distinct()
+            ->pluck('tag')
+            ->sort()
+            ->values();
+
+        $backendCount = LearningLogEntry::whereIn('category', [LearningLogEntry::CATEGORY_BACKEND, 'laravel'])->count();
+        $cloudCount   = LearningLogEntry::where('category', LearningLogEntry::CATEGORY_CLOUD)->count();
+
         $stats = [
-            'total'            => LearningLogEntry::count(),
-            'laravel'          => LearningLogEntry::where('category', LearningLogEntry::CATEGORY_LARAVEL)->count(),
-            'cloud'            => LearningLogEntry::where('category', LearningLogEntry::CATEGORY_CLOUD)->count(),
-            'production_ready' => LearningLogEntry::where('tag', LearningLogEntry::TAG_PRODUCTION_READY)->count(),
-            'exploring'        => LearningLogEntry::where('tag', LearningLogEntry::TAG_EXPLORING)->count(),
-            'published'        => LearningLogEntry::where('status', 'published')->count(),
-            'draft'            => LearningLogEntry::where('status', 'draft')->count(),
+            'total'       => LearningLogEntry::count(),
+            'backend'     => $backendCount,
+            'laravel'     => $backendCount, // Backward compatibility
+            'cloud'       => $cloudCount,
+            'tags_count'  => LearningLogEntry::whereNotNull('tag')->where('tag', '!=', '')->distinct()->count('tag'),
+            'published'   => LearningLogEntry::where('status', 'published')->count(),
+            'draft'       => LearningLogEntry::where('status', 'draft')->count(),
         ];
 
-        return view('learning-log.index', compact('entries', 'stats', 'selectedCategory', 'selectedTag', 'selectedStatus', 'search'));
+        return view('learning-log.index', compact('entries', 'stats', 'selectedCategory', 'selectedTag', 'selectedStatus', 'search', 'availableTags'));
     }
 
     /**

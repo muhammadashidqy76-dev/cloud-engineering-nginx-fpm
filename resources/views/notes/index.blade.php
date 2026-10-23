@@ -101,64 +101,103 @@
                         <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                         {{ $cloudCount }} Cloud Engineering
                     </span>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                        {{ $laravelCount }} Arsitektur Aplikasi
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                        {{ $backendCount }} Backend Architecture
                     </span>
                 </div>
             </div>
 
-            <!-- ── Filter & Search Toolbar ── -->
-            <div class="mb-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-2 rounded-2xl bg-carbon-900/60 border border-carbon-800/80 backdrop-blur-sm">
-                
-                <!-- Category Tabs -->
-                <div class="flex items-center gap-1 overflow-x-auto p-1 font-mono text-xs">
-                    <a href="{{ route('notes.index', array_filter(['q' => $search])) }}"
-                       class="px-3.5 py-2 rounded-xl transition-all whitespace-nowrap {{ empty($category) ? 'bg-carbon-950 text-white font-bold border border-carbon-800 shadow-sm' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}">
-                        Semua ({{ $totalCount }})
-                    </a>
+            <!-- ── Filter & Search Toolbar (Category Filter Utama + Subfilter Tech Stack) ── -->
+            <div class="mb-10 p-3 rounded-2xl bg-carbon-900/60 border border-carbon-800/80 backdrop-blur-sm space-y-3">
+                <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+                    
+                    <!-- Category Tabs (Filter Utama) -->
+                    <div class="flex items-center gap-1 overflow-x-auto p-1 font-mono text-xs">
+                        <a href="{{ route('notes.index', array_filter(['tag' => $tag, 'q' => $search])) }}"
+                           class="px-3.5 py-2 rounded-xl transition-all whitespace-nowrap {{ empty($category) ? 'bg-carbon-950 text-white font-bold border border-carbon-800 shadow-sm' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}">
+                            Semua ({{ $totalCount }})
+                        </a>
 
-                    <a href="{{ route('notes.index', array_filter(['category' => 'cloud_engineering', 'q' => $search])) }}"
-                       class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all whitespace-nowrap {{ $category === 'cloud_engineering' ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-bold shadow-sm' : 'text-slate-400 hover:text-cyan-400 hover:bg-carbon-850' }}">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                        Cloud Engineering ({{ $cloudCount }})
-                    </a>
+                        <a href="{{ route('notes.index', array_filter(['category' => 'cloud_engineering', 'tag' => $tag, 'q' => $search])) }}"
+                           class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all whitespace-nowrap {{ $category === 'cloud_engineering' ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-bold shadow-sm' : 'text-slate-400 hover:text-cyan-400 hover:bg-carbon-850' }}">
+                            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                            Cloud Engineering ({{ $cloudCount }})
+                        </a>
 
-                    <a href="{{ route('notes.index', array_filter(['category' => 'laravel', 'q' => $search])) }}"
-                       class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all whitespace-nowrap {{ $category === 'laravel' ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30 font-bold shadow-sm' : 'text-slate-400 hover:text-amber-400 hover:bg-carbon-850' }}">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-                        Arsitektur Aplikasi ({{ $laravelCount }})
-                    </a>
+                        <a href="{{ route('notes.index', array_filter(['category' => 'backend', 'tag' => $tag, 'q' => $search])) }}"
+                           class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all whitespace-nowrap {{ $category === 'backend' || $category === 'laravel' ? 'bg-rose-500/15 text-rose-300 border border-rose-500/30 font-bold shadow-sm' : 'text-slate-400 hover:text-rose-400 hover:bg-carbon-850' }}">
+                            <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                            Backend Architecture ({{ $backendCount }})
+                        </a>
+                    </div>
+
+                    <!-- Search Input Form -->
+                    <form action="{{ route('notes.index') }}" method="GET" class="relative w-full md:w-72 px-1">
+                        @if(!empty($category))
+                            <input type="hidden" name="category" value="{{ $category }}">
+                        @endif
+                        @if(!empty($tag))
+                            <input type="hidden" name="tag" value="{{ $tag }}">
+                        @endif
+
+                        <div class="relative">
+                            <input type="text"
+                                   name="q"
+                                   value="{{ $search ?? '' }}"
+                                   placeholder="Cari topik / judul / tag..."
+                                   class="w-full pl-9 pr-9 py-2 bg-carbon-950 border border-carbon-800 rounded-xl text-xs font-mono text-slate-200 placeholder-slate-500 focus:outline-none focus:border-vermilion-500/50 focus:ring-1 focus:ring-vermilion-500/30 transition-all">
+                            
+                            <svg class="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+
+                            @if(!empty($search))
+                                <a href="{{ route('notes.index', array_filter(['category' => $category, 'tag' => $tag])) }}"
+                                   class="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-500 hover:text-white transition-colors"
+                                   title="Hapus pencarian">
+                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </a>
+                            @endif
+                        </div>
+                    </form>
+
                 </div>
 
-                <!-- Search Input Form -->
-                <form action="{{ route('notes.index') }}" method="GET" class="relative w-full md:w-72 px-1">
-                    @if(!empty($category))
-                        <input type="hidden" name="category" value="{{ $category }}">
-                    @endif
+                <!-- Subfilter: Tech Stack Tags -->
+                @if(isset($availableTags) && $availableTags->isNotEmpty())
+                    <div class="pt-2 border-t border-carbon-800/80 flex items-center gap-1.5 flex-wrap font-mono text-xs px-1">
+                        <span class="text-[11px] font-bold text-amber-400 flex items-center gap-1 mr-1">
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                            </svg>
+                            SUBFILTER TAG:
+                        </span>
 
-                    <div class="relative">
-                        <input type="text"
-                               name="q"
-                               value="{{ $search ?? '' }}"
-                               placeholder="Cari topik / judul..."
-                               class="w-full pl-9 pr-9 py-2 bg-carbon-950 border border-carbon-800 rounded-xl text-xs font-mono text-slate-200 placeholder-slate-500 focus:outline-none focus:border-vermilion-500/50 focus:ring-1 focus:ring-vermilion-500/30 transition-all">
-                        
-                        <svg class="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+                        <a href="{{ route('notes.index', array_filter(['category' => $category, 'q' => $search])) }}"
+                           class="px-2.5 py-1 rounded-md text-[11px] transition-colors {{ empty($tag) ? 'bg-carbon-800 text-white font-semibold' : 'text-slate-400 hover:text-white hover:bg-carbon-850' }}">
+                            Semua
+                        </a>
 
-                        @if(!empty($search))
-                            <a href="{{ route('notes.index', array_filter(['category' => $category])) }}"
-                               class="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-500 hover:text-white transition-colors"
-                               title="Hapus pencarian">
-                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
+                        @foreach($availableTags as $availTag)
+                            <a href="{{ route('notes.index', array_filter(['category' => $category, 'tag' => $availTag, 'q' => $search])) }}"
+                               class="px-2.5 py-1 rounded-md text-[11px] transition-all border {{ $tag === $availTag ? 'bg-amber-500/20 text-amber-300 border-amber-500/40 font-bold shadow-sm' : 'text-slate-400 hover:text-amber-300 border-carbon-800 hover:bg-carbon-850' }}">
+                                #{{ $availTag }}
+                            </a>
+                        @endforeach
+
+                        @if(!empty($tag))
+                            <a href="{{ route('notes.index', array_filter(['category' => $category, 'q' => $search])) }}"
+                               class="inline-flex items-center gap-1 text-[11px] text-rose-400 hover:text-rose-300 transition-colors ml-1"
+                               title="Hapus subfilter tag">
+                                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                                <span>Reset Tag</span>
                             </a>
                         @endif
                     </div>
-                </form>
+                @endif
 
             </div>
 
@@ -167,10 +206,10 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
                     @foreach($notes as $note)
                         @php
-                            $isLaravel = ($note->category ?? 'laravel') === 'laravel';
-                            $trackBorder = $isLaravel ? 'hover:border-rose-500/40 hover:shadow-rose-500/5' : 'hover:border-cyan-500/40 hover:shadow-cyan-500/5';
-                            $titleHover  = $isLaravel ? 'group-hover:text-rose-400' : 'group-hover:text-cyan-400';
-                            $readLinkCol = $isLaravel ? 'text-rose-400 hover:text-rose-300' : 'text-cyan-400 hover:text-cyan-300';
+                            $isBackend = in_array($note->category ?? '', ['backend', 'laravel']);
+                            $trackBorder = $isBackend ? 'hover:border-rose-500/40 hover:shadow-rose-500/5' : 'hover:border-cyan-500/40 hover:shadow-cyan-500/5';
+                            $titleHover  = $isBackend ? 'group-hover:text-rose-400' : 'group-hover:text-cyan-400';
+                            $readLinkCol = $isBackend ? 'text-rose-400 hover:text-rose-300' : 'text-cyan-400 hover:text-cyan-300';
                             $dateStr     = $note->published_at ? $note->published_at->format('d M Y') : '—';
                         @endphp
 
@@ -179,13 +218,13 @@
                             <!-- Card Body -->
                             <div class="p-6">
                                 
-                                <!-- Card Header: Track + Status + Reading time -->
+                                <!-- Card Header: Track + Tech Stack Tag + Reading time -->
                                 <div class="flex items-center justify-between gap-2 mb-4">
-                                    <div class="flex items-center gap-1.5">
-                                        @if($isLaravel)
+                                    <div class="flex items-center gap-1.5 flex-wrap">
+                                        @if($isBackend)
                                             <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20">
                                                 <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
-                                                Laravel
+                                                Backend
                                             </span>
                                         @else
                                             <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
@@ -194,15 +233,9 @@
                                             </span>
                                         @endif
 
-                                        @if($note->tag === 'production_ready')
-                                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20" title="Production Ready">
-                                                <svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                                                Prod
-                                            </span>
-                                        @else
-                                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20" title="Exploring">
-                                                <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                                                Explore
+                                        @if(!empty($note->tag))
+                                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono text-amber-300 bg-amber-500/10 border border-amber-500/20">
+                                                #{{ $note->tag }}
                                             </span>
                                         @endif
                                     </div>

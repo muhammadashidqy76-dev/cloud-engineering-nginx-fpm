@@ -54,8 +54,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Pilihan antara Breeze dan Sanctum bukan soal mana yang lebih baik, tapi soal **konteks arsitektur aplikasi Anda**. Breeze untuk web Blade tradisional, Sanctum untuk API yang dikonsumsi klien eksternal.
 MD,
-                'tag'        => LearningLogEntry::TAG_PRODUCTION_READY,
-                'category'   => LearningLogEntry::CATEGORY_LARAVEL,
+                'tag'        => 'Laravel',
+                'category'   => LearningLogEntry::CATEGORY_BACKEND,
                 'related_project_id' => $headless?->id,
                 'published_at' => '2026-06-15',
                 'status'     => 'published',
@@ -117,8 +117,8 @@ Hasilnya controller menjadi sangat ramping dan setiap bagian punya tanggung jawa
 
 Separation of Concerns bukan hanya konsep abstrak — di Laravel, ia sudah disediakan alat konkretnya: `FormRequest` untuk input, `Resource` untuk output. Manfaatkan keduanya sejak awal.
 MD,
-                'tag'        => LearningLogEntry::TAG_PRODUCTION_READY,
-                'category'   => LearningLogEntry::CATEGORY_LARAVEL,
+                'tag'        => 'Laravel',
+                'category'   => LearningLogEntry::CATEGORY_BACKEND,
                 'related_project_id' => $cms?->id,
                 'published_at' => '2026-08-25',
                 'status'     => 'published',
@@ -173,7 +173,7 @@ Penurunan latensi hampir **90%** hanya dengan mengubah satu baris konfigurasi.
 
 Redis menyimpan data di memory — artinya data hilang jika server restart. Ini oke untuk cache dan session, tapi **jangan simpan data permanen di Redis tanpa backup**.
 MD,
-                'tag'        => LearningLogEntry::TAG_PRODUCTION_READY,
+                'tag'        => 'Redis',
                 'category'   => LearningLogEntry::CATEGORY_CLOUD,
                 'related_project_id' => $headless?->id,
                 'published_at' => '2026-06-01',
@@ -230,7 +230,7 @@ Penghematan ukuran hampir **84%**, yang berarti waktu push ke registry dan pull 
 
 Multi-stage build adalah praktik standar di industry untuk containerization. Kuncinya: pisahkan "alat untuk membangun" dari "hasil yang dijalankan". Hanya bawa yang benar-benar dibutuhkan saat runtime.
 MD,
-                'tag'        => LearningLogEntry::TAG_EXPLORING,
+                'tag'        => 'Docker',
                 'category'   => LearningLogEntry::CATEGORY_CLOUD,
                 'related_project_id' => $cms?->id,
                 'published_at' => '2026-09-02',

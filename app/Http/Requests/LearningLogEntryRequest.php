@@ -38,10 +38,20 @@ class LearningLogEntryRequest extends FormRequest
             $publishedAt = now()->toDateString();
         }
 
+        // Normalize category if submitted as legacy 'laravel'
+        $category = $this->input('category');
+        if ($category === 'laravel') {
+            $category = LearningLogEntry::CATEGORY_BACKEND;
+        }
+
+        $tag = $this->filled('tag') ? trim((string) $this->input('tag')) : null;
+
         $this->merge([
             'slug'         => $slug,
             'content'      => $content,
             'published_at' => $publishedAt,
+            'category'     => $category,
+            'tag'          => $tag,
         ]);
     }
 
@@ -67,20 +77,14 @@ class LearningLogEntryRequest extends FormRequest
             ],
             'content'            => ['nullable', 'string'],
             'body'               => ['nullable', 'string'],
-            'tag'                => [
-                'required',
-                'string',
-                Rule::in([
-                    LearningLogEntry::TAG_EXPLORING,
-                    LearningLogEntry::TAG_PRODUCTION_READY,
-                ]),
-            ],
+            'tag'                => ['required', 'string', 'max:50'],
             'category'           => [
                 'required',
                 'string',
                 Rule::in([
-                    LearningLogEntry::CATEGORY_LARAVEL,
+                    LearningLogEntry::CATEGORY_BACKEND,
                     LearningLogEntry::CATEGORY_CLOUD,
+                    'laravel',
                 ]),
             ],
             'related_project_id' => ['nullable', 'integer', 'exists:projects,id'],
@@ -95,8 +99,8 @@ class LearningLogEntryRequest extends FormRequest
             'title.required'    => 'Judul artikel catatan teknis wajib diisi.',
             'slug.required'     => 'Slug URL wajib diisi.',
             'slug.unique'       => 'Slug URL ini sudah digunakan oleh artikel lain. Gunakan slug yang berbeda.',
-            'tag.required'      => 'Status tag kesiapan wajib dipilih (Production-Ready atau Exploring).',
-            'category.required' => 'Pilar kategori wajib ditentukan (Laravel Backend atau Cloud Engineering).',
+            'tag.required'      => 'Tag tech stack wajib diisi (contoh: Docker, Laravel, MySQL, Git/GitHub).',
+            'category.required' => 'Pilar kategori wajib ditentukan (Backend Architecture atau Cloud Engineering).',
             'status.required'   => 'Status publikasi wajib dipilih (Published atau Draft).',
             'related_project_id.exists' => 'Proyek portofolio yang dipilih tidak ditemukan.',
         ];
