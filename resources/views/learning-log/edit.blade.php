@@ -36,55 +36,61 @@
     <div class="py-6 sm:py-8">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <form method="POST" action="{{ route('learning-log.update', $learningLogEntry) }}" class="space-y-6"
-                  x-data="{
-                      entryTitle: @json(old('title', $learningLogEntry->title)),
-                      entrySlug: @json(old('slug', $learningLogEntry->slug)),
-                      entryTag: @json(old('tag', $learningLogEntry->tag)),
-                      autoSlug: false,
-                      bodyText: @json(old('body', !empty($learningLogEntry->body) ? $learningLogEntry->body : $learningLogEntry->content)),
-                      wordCount: 0,
-                      readingTime: '1 min read',
-                      setTag(val) {
-                          this.entryTag = val;
-                      },
-                      init() {
-                          this.updateMetrics();
-                      },
-                      generateSlug() {
-                          if (this.autoSlug) {
-                              this.entrySlug = (this.entryTitle || '').toLowerCase()
-                                  .replace(/[^a-z0-9 -]/g, '')
-                                  .replace(/\s+/g, '-')
-                                  .replace(/-+/g, '-');
-                          }
-                      },
-                      updateMetrics() {
-                          const text = this.bodyText || '';
-                          const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-                          this.wordCount = words;
-                          const mins = Math.max(1, Math.ceil(words / 180));
-                          this.readingTime = `${mins} min read`;
-                      },
-                      insertMarkdown(syntax, placeholder = '') {
-                          const textarea = this.$refs.bodyEditor;
-                          const start = textarea.selectionStart;
-                          const end = textarea.selectionEnd;
-                          const selected = textarea.value.substring(start, end) || placeholder;
-                          let replacement = '';
-                          if (syntax === 'h2') replacement = `\n## ${selected}\n`;
-                          else if (syntax === 'h3') replacement = `\n### ${selected}\n`;
-                          else if (syntax === 'bold') replacement = `**${selected}**`;
-                          else if (syntax === 'code') replacement = `\n\`\`\`php\n${selected}\n\`\`\`\n`;
-                          else if (syntax === 'list') replacement = `\n- ${selected}\n`;
-                          else if (syntax === 'quote') replacement = `\n> ${selected}\n`;
-                          
-                          textarea.setRangeText(replacement, start, end, 'end');
-                          this.bodyText = textarea.value;
-                          this.updateMetrics();
-                          textarea.focus();
-                      }
-                  }">
+            <script>
+                function noteEditForm() {
+                    return {
+                        entryTitle: @json(old('title', $learningLogEntry->title)),
+                        entrySlug: @json(old('slug', $learningLogEntry->slug)),
+                        entryTag: @json(old('tag', $learningLogEntry->tag)),
+                        autoSlug: false,
+                        bodyText: @json(old('body', !empty($learningLogEntry->body) ? $learningLogEntry->body : $learningLogEntry->content)),
+                        wordCount: 0,
+                        readingTime: '1 min read',
+                        setTag(val) {
+                            this.entryTag = val;
+                        },
+                        init() {
+                            this.updateMetrics();
+                        },
+                        generateSlug() {
+                            if (this.autoSlug) {
+                                this.entrySlug = (this.entryTitle || '').toLowerCase()
+                                    .replace(/[^a-z0-9 -]/g, '')
+                                    .replace(/\s+/g, '-')
+                                    .replace(/-+/g, '-');
+                            }
+                        },
+                        updateMetrics() {
+                            const text = this.bodyText || '';
+                            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+                            this.wordCount = words;
+                            const mins = Math.max(1, Math.ceil(words / 180));
+                            this.readingTime = `${mins} min read`;
+                        },
+                        insertMarkdown(syntax, placeholder = '') {
+                            const textarea = this.$refs.bodyEditor;
+                            if (!textarea) return;
+                            const start = textarea.selectionStart;
+                            const end = textarea.selectionEnd;
+                            const selected = textarea.value.substring(start, end) || placeholder;
+                            let replacement = '';
+                            if (syntax === 'h2') replacement = `\n## ${selected}\n`;
+                            else if (syntax === 'h3') replacement = `\n### ${selected}\n`;
+                            else if (syntax === 'bold') replacement = `**${selected}**`;
+                            else if (syntax === 'code') replacement = `\n\`\`\`php\n${selected}\n\`\`\`\n`;
+                            else if (syntax === 'list') replacement = `\n- ${selected}\n`;
+                            else if (syntax === 'quote') replacement = `\n> ${selected}\n`;
+                            
+                            textarea.setRangeText(replacement, start, end, 'end');
+                            this.bodyText = textarea.value;
+                            this.updateMetrics();
+                            textarea.focus();
+                        }
+                    };
+                }
+            </script>
+
+            <form method="POST" action="{{ route('learning-log.update', $learningLogEntry) }}" class="space-y-6" x-data="noteEditForm()">
                 @csrf
                 @method('PUT')
 
