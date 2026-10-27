@@ -147,6 +147,7 @@
                                         <span class="w-2 h-2 rounded-full bg-rose-500/80"></span>
                                         <span class="w-2 h-2 rounded-full bg-amber-400/80"></span>
                                         <span class="w-2 h-2 rounded-full bg-emerald-400/80"></span>
+                                    </div>
                                     <div class="flex items-center gap-2">
                                         @if(!empty($log->tag))
                                             <span class="font-mono text-[10px] font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded select-none">
