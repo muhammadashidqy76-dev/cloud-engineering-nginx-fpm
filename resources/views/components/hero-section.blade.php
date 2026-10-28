@@ -62,13 +62,12 @@
     <!-- ─── Main Centered Hero Content (Base.org Inspired) ─── -->
     <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 flex flex-col items-center text-center">
         
-        <!-- 🌟 Engineering Telemetry Identity Badge Pill -> Triggers Bio Modal -->
-        <button type="button"
+       <button type="button"
                 @click="openBioModal()"
                 title="{{ __('hero.badge_title') }}"
                 class="group inline-flex items-center gap-2.5 p-1.5 pr-4 rounded-full bg-carbon-900/90 hover:bg-carbon-850 border border-carbon-800/90 hover:border-cyan-500/50 mb-8 sm:mb-10 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-500/40 shadow-lg shadow-black/40 hover:shadow-cyan-500/10 backdrop-blur-md">
             
-            <!-- Mini Avatar (30px) -->
+            
             <div class="relative w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden ring-1 ring-carbon-700 group-hover:ring-cyan-400 transition-all shrink-0 bg-carbon-950">
                 <img src="{{ asset('images/Siakad.jpg') }}"
                      alt="Moch Hasbi Ashidqy"
@@ -80,13 +79,7 @@
             <span class="text-xs sm:text-sm font-semibold text-slate-200 group-hover:text-white transition-colors">
                 Moch Hasbi Ashidqy
             </span>
-            
             <span class="w-1 h-1 rounded-full bg-slate-700"></span>
-
-            <span class="text-xs font-mono font-medium text-cyan-400 flex items-center gap-1.5 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-full">
-                Aspiring Cloud Engineer
-            </span>
-
             <span class="text-[11px] text-slate-400 group-hover:text-cyan-300 font-mono pl-1 border-l border-carbon-800 transition-colors hidden sm:inline-block">
                 {{ __('hero.bio_arrow') }}
             </span>
@@ -127,21 +120,24 @@
             </button>
         </div>
 
-        <!-- ☁️ Cloud & Infrastructure Capability Micro-Pills -->
         <div class="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 max-w-xl mx-auto font-mono text-[11px] text-slate-400">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-carbon-900/80 border border-carbon-800 backdrop-blur-sm">
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                Linux Systems
+                Docker (Basic)
             </span>
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-carbon-900/80 border border-carbon-800 backdrop-blur-sm">
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                Docker Multi-Stage
+                Linux (Basic)
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-carbon-900/80 border border-carbon-800 backdrop-blur-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                AWS
             </span>
         </div>
 
         <!-- Clean Social Links Bar Centered -->
         <div class="mt-10 pt-7 border-t border-carbon-800/80 flex items-center justify-center gap-3 w-full max-w-xs mx-auto">
-            <span class="text-[11px] font-mono uppercase tracking-widest text-slate-500 font-semibold mr-1">// {{ __('hero.connect') }}</span>
+            <span class="text-[11px] font-mono uppercase tracking-widest text-slate-500 font-semibold mr-1">{{ __('hero.connect') }}</span>
 
             <!-- GitHub -->
             <a href="https://github.com/muhammadashidqy76-dev" 
@@ -164,16 +160,6 @@
                title="LinkedIn Profile">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2z" />
-                </svg>
-            </a>
-
-            <!-- Email -->
-            <a href="mailto:contact@example.com" 
-               class="text-slate-400 hover:text-white p-2 rounded-full bg-carbon-900/80 border border-carbon-800 hover:border-slate-700 hover:bg-carbon-850 transition-all" 
-               aria-label="Email" 
-               title="Kirim Email">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
             </a>
         </div>
@@ -261,12 +247,12 @@
                     <p>{!! __('bio.intro_p1') !!}</p>
                     <p>{!! __('bio.intro_p2') !!}</p>
                     <div class="flex flex-wrap gap-1.5 pt-1">
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-carbon-900 text-cyan-300 border border-carbon-800">Linux / Bash</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-carbon-900 text-cyan-300 border border-carbon-800">Linux</span>
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-carbon-900 text-cyan-300 border border-carbon-800">Docker</span>
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-carbon-900 text-cyan-300 border border-carbon-800">Redis Cache</span>
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-carbon-900 text-cyan-300 border border-carbon-800">Nginx</span>
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-carbon-900 text-cyan-300 border border-carbon-800">Cloud Fundamentals</span>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-carbon-900 text-cyan-300 border border-carbon-800">Git &amp; CI/CD</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-carbon-900 text-cyan-300 border border-carbon-800">Git &amp; Github</span>
                     </div>
                 </div>
             </div>

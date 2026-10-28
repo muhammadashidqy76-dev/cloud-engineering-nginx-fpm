@@ -12,7 +12,7 @@
     "hero.connect": "Connect:",
     "hero.subtitle": "Fokus mendalami infrastruktur cloud, administrasi sistem Linux, containerization (Docker), dan arsitektur deployment yang reliabel.",
     "hero.badge_title": "Klik untuk melihat bio & profil lengkap",
-    "hero.bio_arrow": "Bio →",
+    "hero.bio_arrow": "Bio",
 
     "bio.close": "Tutup modal bio",
     "bio.open_to_work": "Open to Work",
@@ -39,7 +39,7 @@
     "cv.copied": "Tautan Disalin ke Clipboard!",
     "cv.note": "CV diperbarui secara berkala seiring perkembangan skill.",
 
-    "projects.title": "Featured Projects & Labs",
+    "projects.title": "PROJECT ME",
     "projects.headline": "Hands-on Labs & Implementasi Arsitektur",
     "projects.subtitle": "Eksplorasi deployment, optimasi performa caching in-memory, dan arsitektur sistem modular.",
     "projects.detail": "Detail",
@@ -57,7 +57,7 @@
     "projects.no_architecture": "Belum ada rincian arsitektur yang dicatat.",
     "projects.no_tech_stack": "Tech stack belum ditentukan.",
 
-    "tech.tag": "Tech Stack & Tools",
+    "tech.tag": "TECH STACK",
     "tech.title": "Teknologi & Tools Ekosistem",
     "tech.subtitle": "Dikelompokkan secara terstruktur untuk gambaran tools cloud/DevOps, database & in-memory cache, scripting/runtime, dan interface.",
     "tech.status.finished": "Finished",
@@ -69,7 +69,7 @@
     "tech.toggle_hide_roadmap": "Sembunyikan Not Started (:count)",
     "tech.roadmap_empty_state": "Teknologi dalam roadmap pembelajaran (klik tombol di atas untuk melihat)",
 
-    "journey.tag": "Learning Journey & Credentials",
+    "journey.tag": "LEARNING JOURNEY",
     "journey.title": "Kompetensi & Sertifikasi Teknis",
     "journey.subtitle": "Validasi keahlian melalui pelatihan terstruktur, sertifikasi profesi resmi, dan penerapan pada proyek nyata.",
     "journey.show": "Tampilkan Journey",
@@ -90,9 +90,9 @@
     "journey.doc": "Dokumen",
     "journey.verify": "Verifikasi",
 
-    "log.tag": "Learning Log & Technical Handbook",
+    "log.tag": "LEARNING LOG",
     "log.title": "Catatan Eksplorasi & Handbook Teknis",
-    "log.subtitle": "Kumpulan catatan bedah konsep dan eksperimentasi hands-on mengenai containerization, sistem Linux, performa caching, dan infrastruktur server.",
+    "log.subtitle": "Kumpulan catatan eksplorasi dan hasil eksperimen langsung di bidang cloud, Linux, dan infrastruktur server. Ditulis untuk merangkum proses belajar dan penerapan konsep secara praktis.",
     "log.show": "Tampilkan Learning Log",
     "log.hide": "Sembunyikan Learning Log",
     "log.tag_production_ready": "Production-Ready",
@@ -106,18 +106,18 @@
     "log.read_note": "Baca Catatan",
     "log.empty_track": "Belum ada catatan publik untuk pilar ini.",
 
-    "experience.tag": "Work Experience & Internships",
+    "experience.tag": "WORK",
     "experience.title": "Pengalaman Kerja & Magang",
     "experience.subtitle": "Rekam jejak kontribusi teknis dan pengalaman profesional dalam pengembangan sistem dan infrastruktur.",
     "experience.present": "Sekarang",
 
-    "footer.tagline": "Aspiring Cloud & Infrastructure Engineer — Fokus membangun pondasi infrastruktur server, containerization, dan sistem deployment yang terukur.",
+    "footer.tagline": "Aspiring Cloud & Infrastructure Engineer tertarik dan berminat di bidang tersebut.",
     "footer.built_with": "Built with",
     "footer.rights": "All rights reserved.",
 
-    "stage.show_journey": "Tampilkan Learning Journey & Credentials",
-    "stage.show_log": "Lanjut: Tampilkan Learning Log & Technical Notes",
-    "stage.close_all": "Tutup Riwayat & Catatan Teknis",
+    "stage.show_journey": "Tampilkan Learning Journey",
+    "stage.show_log": "Tampilkan Learning Log",
+    "stage.close_all": "Tutup Riwayat & Log",
 
     "lang.switch_to_en": "EN",
     "lang.switch_to_id": "ID",

@@ -16,7 +16,7 @@
 
     "bio.close": "Close bio modal",
     "bio.open_to_work": "Open to Work",
-    "bio.grad_badge": "🎓 IT Graduate, UIN Malang",
+    "bio.grad_badge": "IT Graduate, UIN Malang",
     "bio.role": "Aspiring Cloud & Infrastructure Engineer",
     "bio.intro_p1": "Hi! I'm <strong class=\"text-white font-semibold\">Moch Hasbi Ashidqy</strong>, a fresh graduate in <strong class=\"text-white font-semibold\">Informatics Engineering from UIN Maulana Malik Ibrahim Malang</strong>.",
     "bio.intro_p2": "As a <span class=\"text-slate-200 font-medium\">fresh graduate focusing on Cloud &amp; DevOps</span>, I explore core infrastructure fundamentals &mdash; containerization with <strong class=\"text-cyan-400 font-semibold\">Docker</strong>, <span class=\"text-slate-200 font-medium\">Linux</span> server administration, in-memory caching (<span class=\"text-slate-200 font-medium\">Redis</span>), Nginx web servers, and automated deployments alongside web runtime comprehension.",
@@ -39,7 +39,7 @@
     "cv.copied": "Link Copied to Clipboard!",
     "cv.note": "CV is updated regularly as skills grow.",
 
-    "projects.title": "Featured Projects & Labs",
+    "projects.title": "PROJECT ME",
     "projects.headline": "Hands-on Labs & Architecture Implementations",
     "projects.subtitle": "Explorations in containerized deployments, in-memory caching performance, and modular system architecture.",
     "projects.detail": "Detail",
@@ -57,7 +57,7 @@
     "projects.no_architecture": "No architecture details recorded yet.",
     "projects.no_tech_stack": "Tech stack not specified yet.",
 
-    "tech.tag": "Tech Stack & Tools",
+    "tech.tag": "TECH STACK",
     "tech.title": "Technologies & Ecosystem Tools",
     "tech.subtitle": "Structured by categories covering cloud/DevOps tools, database & in-memory cache, scripting/runtime, and interface.",
     "tech.status.finished": "Finished",
@@ -69,7 +69,7 @@
     "tech.toggle_hide_roadmap": "Hide Not Started (:count)",
     "tech.roadmap_empty_state": "Technologies in learning roadmap (click toggle above to reveal)",
 
-    "journey.tag": "Learning Journey & Credentials",
+    "journey.tag": "LEARNING JOURNEY",
     "journey.title": "Technical Skills & Certifications",
     "journey.subtitle": "Validate expertise through structured training, official professional certification, and application in real-world projects.",
     "journey.show": "Show Journey",
@@ -90,7 +90,7 @@
     "journey.doc": "Document",
     "journey.verify": "Verify",
 
-    "log.tag": "Learning Log & Technical Handbook",
+    "log.tag": "LEARNING LOG",
     "log.title": "Exploration Notes & Technical Handbook",
     "log.subtitle": "A collection of hands-on technical deep dives into containerization, Linux systems, caching performance, and server infrastructure.",
     "log.show": "Show Learning Log",
@@ -106,18 +106,18 @@
     "log.read_note": "Read Note",
     "log.empty_track": "No public notes in this pillar yet.",
 
-    "experience.tag": "Work Experience & Internships",
+    "experience.tag": "WORK",
     "experience.title": "Work Experience & Internships",
     "experience.subtitle": "Track record of technical contributions and professional experience in systems and infrastructure.",
     "experience.present": "Present",
 
-    "footer.tagline": "Aspiring Cloud & Infrastructure Engineer — Focused on server infrastructure, containerization, and reliable deployment systems.",
+    "footer.tagline": "Aspiring Cloud & Infrastructure Engineer interested and passionate about the field.",
     "footer.built_with": "Built with",
     "footer.rights": "All rights reserved.",
 
-    "stage.show_journey": "Show Learning Journey & Credentials",
-    "stage.show_log": "Next: Show Learning Log & Technical Notes",
-    "stage.close_all": "Collapse History & Technical Notes",
+    "stage.show_journey": "Show Learning Journey",
+    "stage.show_log": "Show Learning Log",
+    "stage.close_all": "Collapse Learning Journey & Log",
 
     "lang.switch_to_en": "EN",
     "lang.switch_to_id": "ID",

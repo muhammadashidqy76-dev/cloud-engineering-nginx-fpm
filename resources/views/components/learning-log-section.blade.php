@@ -105,7 +105,7 @@
                         </div>
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="font-mono text-[10px] uppercase font-bold text-cyan-400 tracking-wider">// TRACK 01</span>
+                                <span class="font-mono text-[10px] uppercase font-bold text-cyan-400 tracking-wider">Topik Utama</span>
                             </div>
                             <h3 class="text-sm font-bold text-white tracking-tight">
                                 {{ __('log.track_cloud_title') }}
@@ -226,10 +226,10 @@
                         </div>
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="font-mono text-[10px] uppercase font-bold text-amber-400 tracking-wider">// TRACK 02</span>
+                                <span class="font-mono text-[10px] uppercase font-bold text-amber-400 tracking-wider">Topik Utama</span>
                             </div>
                             <h3 class="text-sm font-bold text-white tracking-tight">
-                                Backend &amp; Arsitektur Sistem
+                                Backend Web
                             </h3>
                         </div>
                     </div>
